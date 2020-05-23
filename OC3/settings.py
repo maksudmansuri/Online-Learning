@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
+import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -61,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'accounts.LoginCheckMiddleWare.LoginCheckMiddleWare',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'OC3.urls'
@@ -168,6 +172,8 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 CRISPY_TEMPLATE_PACK="bootstrap4"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -186,3 +192,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'intellecttec@gmail.com'
 EMAIL_HOST_PASSWORD = 'Aot567@lk'
 EMAIL_PORT = 587
+
+django_heroku.settings(locals())
