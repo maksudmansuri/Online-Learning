@@ -1,0 +1,140 @@
+{% extends './in_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Instructor - Quizzes</title>
+{% endblock title %}
+
+{% block body %}
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="./">Home</a></li>
+                            <li class="breadcrumb-item active">Quizzes</li>
+                        </ol>
+
+                        <div class="media align-items-center mb-headings">
+                            <div class="media-body">
+                                <h1 class="h2">Quizzes</h1>
+                            </div>
+                            <div class="media-right d-flex align-items-center">
+                                <a href="instructor_quiz_edit" class="btn btn-success mr-2">Add quiz</a>
+                                <div class="dropdown">
+                                    <a href="#" data-toggle="dropdown" class="btn btn-white"><i class="material-icons">tune</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <div class="dropdown-item">
+                                            <form action="#">
+                                                <div class="form-group mb-0">
+                                                    <label class="form-label" for="custom-select">Category</label><br>
+                                                    <select id="custom-select" class="form-control custom-select" style="width: 200px;">
+                                                        <option selected>All categories</option>
+                                                        <option value="1">Vue.js</option>
+                                                        <option value="2">Node.js</option>
+                                                        <option value="3">GitHub</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="card-columns">
+
+                            <div class="card card-sm">
+                                <div class="card-body media">
+                                    <div class="media-left">
+                                        <a href="instructor_review_quiz" class="avatar avatar-lg avatar-4by3">
+                                            <img src="{% static 'student_lms/assets/images/vuejs.png' %} " alt="Card image cap" class="avatar-img rounded">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="card-title mb-0"><a href="instructor_review_quiz">Vue.js Deploy Quiz</a></h4>
+                                        <small class="text-muted">25 Completed</small>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <a href="instructor_review_quiz" class="btn btn-white btn-sm float-left"><i class="material-icons btn__icon--left">playlist_add_check</i> Review <span class="badge badge-dark ml-2">5</span></a>
+                                    <a href="instructor_quiz_edit" class="btn btn-default btn-sm float-right"><i class="material-icons btn__icon--left">edit</i> Edit </a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+                            <div class="card card-sm">
+                                <div class="card-body media">
+                                    <div class="media-left">
+                                        <a href="instructor_review_quiz" class="avatar avatar-lg avatar-4by3">
+                                            <img src="{% static 'student_lms/assets/images/github.png' %}" alt="Card image cap" class="avatar-img rounded">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="card-title mb-0"><a href="instructor_review_quiz">GitHub Basic Setup</a></h4>
+                                        <small class="text-muted">410 Completed</small>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <a href="instructor_review_quiz" class="btn btn-white btn-sm float-left"><i class="material-icons btn__icon--left">playlist_add_check</i> Review <span class="badge badge-dark ml-2">5</span></a>
+                                    <a href="instructor_quiz_edit" class="btn btn-default btn-sm float-right"><i class="material-icons btn__icon--left">edit</i> Edit </a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+                            <div class="card card-sm">
+                                <div class="card-body media">
+                                    <div class="media-left">
+                                        <a href="instructor_review_quiz" class="avatar avatar-lg avatar-4by3">
+                                            <img src="{% static 'student_lms/assets/images/gulp.png' %}" alt="Card image cap" class="avatar-img rounded">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="card-title mb-0"><a href="instructor_review_quiz">Gulp Front-End Boilerplate</a></h4>
+                                        <small class="text-muted">50 Completed</small>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <a href="instructor_review_quiz" class="btn btn-white btn-sm float-left"><i class="material-icons btn__icon--left">playlist_add_check</i> Review <span class="badge badge-dark ml-2">5</span></a>
+                                    <a href="instructor_quiz_edit" class="btn btn-default btn-sm float-right"><i class="material-icons btn__icon--left">edit</i> Edit </a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Pagination -->
+                        <ul class="pagination justify-content-center pagination-sm">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true" class="material-icons">chevron_left</span>
+                                    <span>Prev</span>
+                                </a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#" aria-label="1">
+                                    <span>1</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="1">
+                                    <span>2</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span>Next</span>
+                                    <span aria-hidden="true" class="material-icons">chevron_right</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+{% endblock body %}

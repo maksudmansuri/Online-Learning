@@ -1,0 +1,212 @@
+{% extends './in_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>{{request.user}} - Add course</title>
+{% endblock title %}
+
+{% block body %}
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+                        
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                    
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/instructor_lms">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/instructor_lms/instructor_courses">Courses</a></li>
+                            <li class="breadcrumb-item active">Add course</li>
+                        </ol>
+                        
+                            
+                        <div class="media align-items-center mb-headings">
+                            <div class="media-body">
+                                <h1 class="h2">Add Course</h1>
+                            </div>
+                            {% comment %} <div class="media-right">
+                                <a href="#" class="btn btn-success ">SAVE</a>
+                            </div> {% endcomment  %}
+                        </div>
+                        <form method="post" action="/instructor_lms/instructor_course_add" class="form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Basic Information</h4>
+                                    </div>
+                                    <div class="card-body">
+                                    <div class="form-group row">
+                                            {% if messages %}
+                                            {% for message in messages %}
+                                            {% if message.tags == 'error' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% if message.tags == 'success' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                           <label class="form-label" for="Course_Image">Course Display Image</label>
+                                                 <div class="media align-items-center">
+                                                 <div class="media-body">
+                                                        <div class="custom-file" style="width: auto;">
+                                                            <input  id="course_image" name="course_image" type="file" class="custom-file-input">
+                                                            <label for="Course_Image" class="custom-file-label">Choose file</label>
+                                                        </div>
+                                                 </div>
+                                                 </div>                                           
+                                        </div>
+                                        {% comment %} <div class="form-group">
+                                            <label class="form-label" for="category">Category</label>
+                                            <select id="category" name="course_category" class="custom-select form-control">
+                                                {% for i in allcat1 %}
+                                                <option value="#">{{i.category}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div> {% endcomment %}
+                                        <div class="form-group">
+                                            <label class="form-label" for="subcategory">Category</label>
+                                            <select id="subcategory"  name="subcategory" class="custom-select form-control">
+                                                {% for i in allsubcat1 %}
+                                                <option>{{i.subcategory}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="title">Course Title</label>
+                                            <input type="text" id="title"  name="course_name" class="form-control" placeholder="Write a Course Name" >
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="title">Course Fee</label>
+                                            <input type="text" id="title" name="course_fee" class="form-control" placeholder="Fees">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="duration">Duration</label>
+                                            <input type="text" id="course_duration"  name="course_duration" class="form-control" placeholder="Total Hours" >
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Basic Information</h4>
+                                    </div>
+                                    <div class="card-body">
+                                    <div class="form-group">
+                                    {% load crispy_forms_tags %}
+                                        <label class="form-label" for="course_video"></label>
+                                        {{form.media}}
+                                        {{ form |crispy }}
+
+                                    </div>
+                                    <div class="form-group">
+                                            <label class="form-label" for="course_video">Introducation Video</label>
+                                            <input type="text" id="course_video"  name="course_video" class="form-control" placeholder="add video link" >
+                                    </div>
+                                    <div class="form-group">
+                                            <label class="form-label" for="course_level">Course Level</label>
+                                            <select id="course_level"  name="course_level" class="custom-select form-control">
+                                                <option value="Beginners">Beginners</option>
+                                                <option value="Intermidiator">Intermidiator</option>
+                                                <option value="Expert">Expert</option>
+                                                
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {% comment %} <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Lessons</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><a href="instructor_lesson_add" class="btn btn-primary">Add Lesson <i class="material-icons">add</i></a></p>
+                                        <div class="nestable" id="nestable-handles-primary">
+                                            <ul class="nestable-list">
+                                                <li class="nestable-item nestable-item-handle" data-id="2">
+                                                    <div class="nestable-handle"><i class="material-icons">menu</i></div>
+                                                    <div class="nestable-content">
+                                                        <div class="media align-items-center">
+                                                            <div class="media-left">
+                                                                <img src="{% static 'instructor_lms/assets/images/vuejs.png' %} " alt="" width="100" class="rounded">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h5 class="card-title h6 mb-0">
+                                                                    <a href="instructor_lesson_add">Awesome Vue.js with SASS Processing</a>
+                                                                </h5>
+                                                                <small class="text-muted">updated 1 month ago</small>
+                                                            </div>
+                                                            <div class="media-right">
+                                                                <a href="instructor_lesson_add" class="btn btn-white btn-sm"><i class="material-icons">edit</i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="nestable-item nestable-item-handle" data-id="1">
+                                                    <div class="nestable-handle"><i class="material-icons">menu</i></div>
+                                                    <div class="nestable-content">
+                                                        <div class="media align-items-center">
+                                                            <div class="media-left">
+                                                                <img src="instructor_lms/assets/images/nodejs.png' %}" alt="" width="100" class="rounded">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h4 class="card-title h6 mb-0">
+                                                                    <a href="instructo_lesson_add">Github Webhooks for Beginners</a>
+                                                                </h4>
+                                                                <small class="text-muted">updated 1 month ago</small>
+                                                            </div>
+                                                            <div class="media-right">
+                                                                <a href="instructo_lesson_add" class="btn btn-white btn-sm"><i class="material-icons">edit</i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="nestable-item nestable-item-handle" data-id="2">
+                                                    <div class="nestable-handle"><i class="material-icons">menu</i></div>
+                                                    <div class="nestable-content">
+                                                        <div class="media align-items-center">
+                                                            <div class="media-left">
+                                                                <img src="{% static 'instructor_lms/assets/images/gulp.png' %}" alt="" width="100" class="rounded">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h4 class="card-title h6 mb-0">
+                                                                    <a href="instructo_lesson_add">Browserify: Writing Modular JavaScript</a>
+                                                                </h4>
+                                                                <small class="text-muted">updated 1 month ago</small>
+                                                            </div>
+                                                            <div class="media-right">
+                                                                <a href="instructo_lesson_add" class="btn btn-white btn-sm"><i class="material-icons">edit</i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div> {% endcomment %}
+                            </div>
+                        </div>
+                            
+                        <button type="submit" class="btn btn-primary">Save course</button>
+                    </form>
+                    </div>
+                </div>
+
+
+
+{% endblock body %}

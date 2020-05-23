@@ -1,0 +1,195 @@
+{% extends 'counsellor/cnslr_base.html' %}
+{% load static %}
+
+{% block title %}
+        <title>Manage Staff</title>
+{% endblock title %}
+
+
+{% block body %}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                        <ol class="breadcrumb d-print-none">
+                            <li class="breadcrumb-item"><a href="counsellor/">Home</a></li>
+                            <li class="breadcrumb-item active">Instructor Management</li>
+                        </ol>
+                        <h1 class="h2">Instructors</h1>
+                        <div class="card">
+                            <div class="card-header form-inline">
+                                <div class="form-group ml-auto">
+                                    <label for="flatpickrSample02" class="form-label mr-3">Date</label>
+                                    <input id="flatpickrSample02" type="text" class="form-control" placeholder="Select dates" data-toggle="flatpickr" data-flatpickr-mode="range" data-flatpickr-alt-input="false" value="2018-10-07 to 2018-10-15">
+                                </div>
+                            </div>
+
+                            <div data-toggle="lists" data-lists-values='[
+        "js-lists-values-course", 
+        "js-lists-values-document",
+        "js-lists-values-amount",
+        "js-lists-values-date"
+      ]' data-lists-sort-by="js-lists-values-date" data-lists-sort-desc="true" class="table-responsive">
+                                <table class="table table-nowrap m-0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th colspan="2">
+                                                <a href="javascript:void(0)" class="sort" data-sort="js-lists-values-course">By Name</a>
+                                                <a href="javascript:void(0)" class="sort" data-sort="js-lists-values-document">By Course</a>
+                                                <a href="javascript:void(0)" class="sort" data-sort="js-lists-values-amount">Amount</a>
+                                                <a href="javascript:void(0)" class="sort" data-sort="js-lists-values-date">Date</a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        {% comment %} <tr>
+                                            <td>
+                                                <div class="media align-items-center">
+                                                    <a href="instructor_course_edit" class="avatar avatar-4by3 avatar-sm mr-3">
+                                                        <img src="{% static 'stundet_lms/assets/images/nodejs.png' %} " alt="course" class="avatar-img rounded">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="text-body js-lists-values-course" href="instructor_course_edit"><strong>Angular Routing In-Depth</strong></a><br>
+                                                        <small class="text-muted mr-1">
+                                                            Invoice
+                                                            <a href="instructor_invoice" style="color: inherit;" class="js-lists-values-document">#8734</a> -
+                                                            &dollar;<span class="js-lists-values-amount">89</span> USD
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-right">
+                                                <small class="text-muted text-uppercase js-lists-values-date">12 Nov 2018</small>
+                                            </td>
+                                        </tr> {% endcomment %}
+                                        {% for i in stf %}
+                                        <tr>
+                                            <td>
+                                                <div class="media align-items-center">
+                                                    <a href="instructor_course_edit" class="avatar avatar-4by3 avatar-sm mr-3">
+                                                        <img src="{{i.instructor_photo}}" alt="Profile" class="avatar-img rounded">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="text-body js-lists-values-course" href="instructor_course_edit"><strong>{{i.admin.username}}</strong></a><br>
+                                                        <small class="text-muted mr-1">
+                                                            Invoice
+                                                            <a href="instructor_invoice" style="color: inherit;" class="js-lists-values-document">#8735</a> -
+                                                            &dollar;<span class="js-lists-values-amount">89</span> USD
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="media-body">
+                                                    <a class="text-body js-lists-values-course" href="instructor_course_edit"><strong>{{i.admin.email}}</strong></a><br>
+                                                </div>
+                                            </td>
+                                            {% if i.is_verified is not True %}
+                                            <td>
+                                                <a href="/counsellor/staff_activate/{{i.admin.id}}" class="btn-sm btn-primary">Activate</a>
+                                            </td>
+                                            {% endif %}
+                                            {% if i.is_verified is True %}
+                                            <td>
+                                                <a href="/counsellor/staff_deactivate/{{i.admin.id}}" class="btn-sm btn-secondary">Deactivate</a>
+                                            </td>
+                                            {%endif%}
+                                            <td class="text-right">
+                                                <small class="text-muted text-uppercase js-lists-values-date">{{i.admin.date_joined}}</small>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+{% comment %}
+                                        <tr>
+                                            <td>
+                                                <div class="media align-items-center">
+                                                    <a href="instructor_course_edit" class="avatar avatar-4by3 avatar-sm mr-3">
+                                                        <img src="{% static 'student_lms/assets/images/github.png' %} " alt="course" class="avatar-img rounded">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="text-body js-lists-values-course" href="instructor_course_edit"><strong>Introduction to TypeScript</strong></a><br>
+                                                        <small class="text-muted mr-1">
+                                                            Invoice
+                                                            <a href="instructor_invoice" style="color: inherit;" class="js-lists-values-document">#8736</a> -
+                                                            &dollar;<span class="js-lists-values-amount">89</span> USD
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-right">
+                                                <small class="text-muted text-uppercase js-lists-values-date">14 Nov 2018</small>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <div class="media align-items-center">
+                                                    <a href="instructor_course_edit" class="avatar avatar-4by3 avatar-sm mr-3">
+                                                        <img src="{% static 'student_lms/assets/images/gulp.png' %} " alt="course" class="avatar-img rounded">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="text-body js-lists-values-course" href="instructor_course_edit"><strong>Learn Angular Fundamentals</strong></a><br>
+                                                        <small class="text-muted mr-1">
+                                                            Invoice
+                                                            <a href="instructor_invoice" style="color: inherit;" class="js-lists-values-document">#8737</a> -
+                                                            &dollar;<span class="js-lists-values-amount">89</span> USD
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-right">
+                                                <small class="text-muted text-uppercase js-lists-values-date">15 Nov 2018</small>
+                                            </td>
+                                        </tr> {% endcomment %}
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                        <!-- Pagination -->
+                        <ul class="pagination justify-content-center pagination-sm">
+                            {% if stf.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{stf.previous_page_number}}" aria-label="Previous">
+                                    <span aria-hidden="false" class="material-icons">chevron_left</span>
+                                    <span>Prev</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% for num in stf.paginator.page_range %}
+                            {% if stf.number == num %}
+                                <li class="page-item active">
+                                <a class="page-link" href="?page={{num}}" aria-label="1">
+                                    <span>{{num}}</span>
+                                </a>
+                            </li>
+                             {% elif num > stf.number|add:'-2' and num < stf.number|add:'2' %}
+                             <li class="page-item">
+                                <a class="page-link" href="?page={{num}}" aria-label="1">
+                                    <span>{{num}}</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                                                       
+                            {%if stf.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ stf.next_page_number }}" aria-label="Next">
+                                    <span>Next</span>
+                                    <span aria-hidden="false" class="material-icons">chevron_right</span>
+                                </a>
+                            </li>
+                            {%endif%}
+                        </ul>
+
+                    </div>
+
+                </div>
+
+{% endblock body %}

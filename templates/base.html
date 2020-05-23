@@ -1,0 +1,309 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+  {% block title %}
+    <title>Online courses and Learning</title>
+  {% endblock title %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
+    
+	<!-- Favicon icon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'front/images/favicon.png' %}"/>	
+	
+	<!-- Bootstrap -->
+    <link href="{% static 'front/css/bootstrap.min.css' %}" rel="stylesheet">
+	<!-- Fontawsome -->
+    <link href="{% static 'front/fonts/css/fontawesome-all.min.css' %}" rel="stylesheet">
+    <!-- Animate CSS-->
+    <link href="{% static 'front/css/animate.css' %}" rel="stylesheet">
+    <!-- menu CSS-->
+    <link href="{% static 'front/css/bootstrap-4-navbar.css' %}" rel="stylesheet">
+    <!-- menu CSS-->
+    <link href="{% static 'front/slick/slick.css' %}" rel="stylesheet">
+	<!-- Lightbox Gallery -->
+    <link href="{% static 'front/inc/lightbox/css/jquery.fancybox.css' %}" rel="stylesheet">
+    <!-- Preloader CSS-->
+    <link href="{% static 'front/css/fakeLoader.css' %}" rel="stylesheet">
+    <!-- Video popup CSS-->
+    <link href="{% static 'front/css/magnific-popup.css' %}" rel="stylesheet">
+    <!-- Main CSS -->
+    <link href="{% static 'front/style.css' %}" rel="stylesheet">
+	{% comment %} <link href="{% static 'front/scss/style.scss' %}" rel="stylesheet"> {% endcomment %}
+    <!-- Color CSS --> 
+    <link rel="stylesheet" href="{% static 'front/color/color-switcher.css' %}">     
+	<!-- Responsive CSS -->
+    <link href="{% static 'front/css/responsive.css' %}" rel="stylesheet">  
+
+  </head>
+  <body>
+  
+    <!-- Preloader -->
+    <div id="fakeloader"></div>
+    
+    <div class="alertbox-1x">
+		<div class="alert alert-dismissible fade show" role="alert">
+			<div class="container">
+				<div class="row">				
+					<div class="col-md-12">
+					  <p>Unlimited online course & video tutorials downloads!<strong>Get 30% off</strong></p>
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+		  			</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<div class="main-menu-1x">	
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">		
+					<div class="main-menu">		
+						<nav class="navbar navbar-expand-lg navbar-light bg-light btco-hover-menu">
+							<a class="navbar-brand" href="#">
+								<img src="{% static 'front/images/logo.png' %}" class="d-inline-block align-top" alt="">						
+							</a>
+						  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						  </button>
+
+						  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+						  
+							<ul class="navbar-nav ml-auto main-menu-nav">
+
+							  <li class="nav-item dropdown active">
+									<a class="nav-link" href="/" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Home <span class="sr-only">(current)</span>
+									</a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+										<li><a class="dropdown-item" href="/" target="_blank">Home One</a></li>
+										<li><a class="dropdown-item" href="home_two" target="_blank">Home Two</a></li>
+									</ul>
+							  </li>
+
+							  <li class="nav-item">
+								<a class="nav-link" href="/about_us">About Us</a>
+							  </li>
+
+							  <li class="nav-item dropdown">
+									<a class="nav-link" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Pages
+									</a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                        
+										<li><a class="dropdown-item" href="learning-path.html">Learning Path</a></li>
+                                        <li><a class="dropdown-item dropdown-toggle" href="course_list">Course</a>
+											<ul class="dropdown-menu">
+												<li><a class="dropdown-item" href="course_list">All Course</a></li>
+												<li><a class="dropdown-item" href="course_details_1">Course Single One</a></li>
+												<li><a class="dropdown-item" href="course_details_2">Course Single Two</a></li>
+											</ul>
+										</li> 
+
+                                        <li><a class="dropdown-item dropdown-toggle" href="career.html">Carrer</a>
+											<ul class="dropdown-menu">
+												<li><a class="dropdown-item" href="career.html">Carrer</a></li>
+												<li><a class="dropdown-item" href="career-single.html">Carrer Single</a></li>
+											</ul>
+										</li>                                    
+                                        <li><a class="dropdown-item dropdown-toggle" href="our-team.html">Events </a>
+											<ul class="dropdown-menu">
+												<li><a class="dropdown-item" href="events.html"> Events</a></li>
+												<li><a class="dropdown-item" href="events-details.html">Events Details </a></li>
+											</ul>
+										</li>
+                                        <li><a class="dropdown-item" href="404.html">404 Page</a></li>
+                                        <li><a class="dropdown-item" href="comming-soon.html">Comming Soon</a></li>
+										<li><a class="dropdown-item" href="components.html">Components</a></li>                                        
+									</ul>
+							  </li>	
+
+							  <li class="nav-item dropdown">
+									<a class="nav-link" href="blog.html" id="navbarDropdownMenuLink4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Blog
+									</a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink4">
+										<li><a class="dropdown-item" href="blog.html">Grid View</a></li>
+										<li><a class="dropdown-item" href="blog-list.html">List View</a></li>
+										<li><a class="dropdown-item" href="blog-single.html">Blog Single</a></li>
+									</ul>
+							  </li>
+
+							  <li class="nav-item">
+								<a class="nav-link" href="contact-us.html">Contact Us</a>
+							  </li>
+							<!-- User is Authenticated or not-->
+							{% if request.user.is_authenticated %}
+								<li class="nav-item sign-in">
+								<a class="nav-link" href="/logout">Logout</a>
+							  </li>	
+							   <li class="nav-item">
+								<a class="btn-small" href="/accounts/dologin">{{request.user}}</a>
+							  </li>	
+							{% else %}
+
+							  <li class="nav-item sign-in">
+								<a class="nav-link" href="/accounts/dologin">Sign in</a>
+							  </li>	
+							  <li class="nav-item">
+								<a class="btn-small" href="#">Get Started</a>
+							  </li>	
+							{% endif %}
+
+							</ul>					
+							
+						  </div>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% block body %}
+
+
+{% endblock body %}
+	<footer class="footer-section-1x">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="footer-top">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="footer-top-right">														
+								   <img src="{% static 'front/images/logo.png' %}" alt="slide 1">
+								   	<p>All of our website templates are	<br>offered as is, we do not offer any <br> guarantee or warranty.</p>
+	                               <ul>
+	                               		<li>+91 258 458 754</li>
+	                               		<li>meditrust@info.com</li>																						
+									</ul>
+
+									<div class="footer-social-link">
+										<ul>
+											<li><a href="#"> <i class="fab fa-facebook-f"></i> </a></li>	
+											<li><a href="#"> <i class="fab fa-instagram"></i> </a></li>		
+											<li><a href="#"> <i class="fab fa-twitter"></i> </a></li>
+											<li><a href="#"> <i class="fab fa-google-plus-g"></i> </a></li>
+										</ul>					
+									</div>
+
+								</div>	
+							</div>
+
+							<div class="col-md-8">
+								<div class="footer-top-left">
+									<div class="row">
+										<div class="col-md-4">
+											<div class="single-link">
+												<h3>Company</h3>	
+												<ul>
+													<li><a href="#">  About Company </a></li>
+													<li><a href="#">  Feature Course </a></li>
+													<li><a href="#">  Careers </a></li>
+													<li><a href="#">  Contact Us </a></li>							
+												</ul>
+											</div>	
+										</div>
+										<div class="col-md-4">
+											<div class="single-link">
+												<h3>Help Links</h3>
+												<ul>
+													<li><a href="#">  Student Support </a></li>
+													<li><a href="#">  Course Policy </a></li>
+													<li><a href="#">  Register Activation Key </a></li>
+													<li><a href="#">  System Requirements </a></li>
+							
+												</ul>
+											</div>	
+										</div>
+										<div class="col-md-4">
+											<div class="single-link">
+												<h3>Course</h3>
+												<ul>
+													<li><a href="#">  Wordpress Development </a></li>
+													<li><a href="#">  Design & Photography </a></li>
+													<li><a href="#">  Learning English </a></li>
+													<li><a href="#">  Javascript Essential </a></li>								
+												</ul>
+											</div>	
+										</div>
+										<div class="col-md-8 offset-md-4">
+											<div class="footer-subscriber">
+												<div class="input-group">
+												  <input type="text" class="form-control" placeholder="Enter Your Email" aria-label="Recipient's username">
+												  <div class="input-group-append">
+												    <button class="btn btn-subscriber" type="button"> <i class="far fa-paper-plane"></i> </button>
+												  </div>
+												</div>
+											</div>
+										</div>	
+
+									</div>
+								</div>	
+							</div>
+
+						</div>
+					</div>	
+				</div>
+
+			</div>
+		</div>
+
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5">
+						<p>© <a href="#">BanyanTheme</a> All Rights Reserved </p>
+					</div>
+					<div class="col-md-7">
+						<ul>
+							<li><a href="#">  About Company </a></li>
+							<li><a href="#">  Privacy Policy </a></li>
+							<li><a href="#">  Help Center </a></li>
+							<li><a href="#">  Terms </a></li>
+							<li><a href="#">  Site Map </a></li>									
+						</ul>
+					</div>
+				</div>
+			</div>						
+		</div>	
+
+	</footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'front/js/jquery.min.js' %}"></script>
+	<script src="{% static 'front/js/popper.min.js' %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'front/js/bootstrap.min.js' %}"></script>
+	<!-- Wow Script -->
+	<script src="{% static 'front/js/wow.min.js' %}"></script>
+	<!-- Counter Script -->
+	<script src="{% static 'front/js/waypoints.min.js' %}"></script>
+	<script src="{% static 'front/js/jquery.counterup.min.js' %}"></script>
+	<!-- Masonry Portfolio Script -->
+    <script src="{% static 'front/js/jquery.mixitup.min.js' %}"></script>
+	<!-- Lightbox js -->
+	<script src="{% static 'front/inc/lightbox/js/jquery.fancybox.pack.js' %}"></script>
+	<script src="{% static 'front/inc/lightbox/js/lightbox.js' %}"></script>
+	<!-- loader js-->
+    <script src="{% static 'front/js/fakeLoader.min.js' %}"></script>
+	<!-- Scroll bottom to top -->
+	<script src="{% static 'front/js/scrolltopcontrol.js' %}"></script>
+	<!-- menu -->
+	<script src="{% static 'front/js/bootstrap-4-navbar.js' %}"></script>
+	<!-- youtube popup video -->
+	<script src="{% static 'front/js/jquery.magnific-popup.min.js' %}"></script> 	 
+	<!-- Testimonial slider Script -->
+	<script src="{% static 'front/slick/slick.min.js' %}"></script>
+	<!-- Color switcher js -->
+	<script src="{% static 'front/js/color-switcher.js' %}"></script> 
+    <!-- Color-switcher-active -->  
+    <script src="{% static 'front/js/color-switcher-active.js' %}"></script>
+	<!-- Custom script -->
+    <script src="{% static 'front/js/custom.js' %}"></script>
+	
+  </body>
+</html>       

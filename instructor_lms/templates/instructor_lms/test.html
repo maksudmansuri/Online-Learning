@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Video Upload</title>
+  </head>
+  <body>
+   <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="mb-3 mt-3">
+                    <h2 class="mb-3" style= "font-weight: 300">Upload Video</h2>
+                    <div class="form-group mb-3">
+
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="file_input" oninput="input_filename();">
+                            <label for="file_input" id="file_input_label" class=custom-file-label>Select File</label>
+                        </div>
+                    </div>
+
+                    <button onclick="upload('{{request.path}}')" id="upload_btn" class="btn btn-primary">Upload</button>
+
+                    <button class="btn btn-primary d-none" id="loading_btn" type="button" disabled >
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Uploading....
+                    </button>
+
+                    <button class="btn btn-secondary" id="cancel_btn" type="button" >Cancel Upload</button>
+
+
+                </div>
+                <div id="progress_wrapper" class="d-none">
+                    <label id="progress_status">Upload 50%</label>
+                    <div class="progress mb-3">
+                            <div id="progress" class="progress-bar" role="progressbar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="25"></div>
+
+                    </div>
+
+                </div>
+                <div id="alter_wrapper"></div>
+
+            </div>
+        </div>
+   </div>
+
+<script>
+    var progress = document.getElementById('progress');
+    var progress_wrapper = document.getElementById('progress_wrapper');
+    var progress_status = document.getElementById('progress_status');
+   
+    var upload_btn = document.getElementById('upload_btn');
+    var loading_btn = document.getElementById('loading_btn');
+    var cancel_btn = document.getElementById('cancel_btn');
+    
+    var alter_wrapper = document.getElementById('alter_wrapper');
+    
+    var input = document.getElementById('file_input');
+    var file_input_label = document.getElementById('file_input_label');
+
+    function show_alert(message,alert){
+
+        alert_wrapper.innerHTML =`
+            <div class="alert alert-${alert} alert-dismissible fade show" role="alert">  
+            <span>${message}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            `
+            ;
+
+    };
+    function input_filename(){
+
+        file_input_label.innerText=input.files[0].name;
+    }
+    
+
+
+</script>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

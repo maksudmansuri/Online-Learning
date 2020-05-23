@@ -1,0 +1,528 @@
+
+{% extends 'base.html' %}
+ 
+ {% load static %}
+ {% static 'front/' %}
+{% block title %}<title> Index 2</title>{% endblock title %}
+
+{% block body %}
+	<div class="main-banner main-banner-2">           			
+        <div class="hvrbox">
+            <img src="{% static 'front/images/banner-2.png' %}" alt="Mountains" class="hvrbox-layer_bottom">
+            <div class="hvrbox-layer_top">
+                <div class="container">
+                    <div class="overlay-text">                    
+						<div class="slider-feature">
+							<ul>
+								<li><img src="{% static 'front/images/book.png' %}" alt="Mountains"> 2502 Course</li>
+								<li><img src="{% static 'front/images/cap.png' %}" alt="Mountains"> 2502 Course</li>
+								<li><img src="{% static 'front/images/man.png' %}" alt="Mountains"> 2502 Course</li>
+							</ul>
+						</div>						
+                        <h3>The Future Begins Here!</h3>
+                        <p>Working collaboratively to ensure every student achieves academically,<br> socially, and emotionally.</p>			
+                    	<a href="#" class="btn-large">Read More</a>
+                    </div>
+            	</div>
+        	</div>
+        </div>	                     
+    </div>
+
+	<div class="feature-1x">
+		<div class="container">
+			<div class="col-md-12">
+				<div class="row">
+
+				<div class="col-md-4 no-padding">
+					<div class="single-feature violet">
+						<img src="{% static 'front/images/man-3.png' %}" alt="slide 1">
+						<h2>Expert Instructors</h2>
+						<p>We rigorously screen and train our instructors ensure that they meet.</p>
+					</div>
+				</div>
+				<div class="col-md-4 no-padding">
+					<div class="single-feature yellow">
+						<img src="{% static 'front/images/clock-3.png' %}" alt="slide 1">
+						<h2>Lifetime Access</h2>
+						<p>We rigorously screen and train our instructors ensure that they meet.</p>
+					</div>
+				</div>
+				<div class="col-md-4 no-padding">
+					<div class="single-feature pink">
+						<img src="{% static 'front/images/pc-3.png' %}" alt="slide 1">
+						<h2>Learn Anywhere</h2>
+						<p>We rigorously screen and train our instructors ensure that they meet.</p>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="about-us-1x">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="about-us-left">
+						<h2>Welcome To Courcity</h2>
+						<p>Education City is an initiative Qatar Foundation for Education, Science and Community Development. Located on the outskirts Doha, the user capital of Qatar.Take a look at the different ways.</p>
+						<p>CourseCity is an educational resource for children aged and teachers. Our curriculum-based classroom software is perfect school.</p>
+						<a href="#" class="btn-small"> Get Started</a>
+					</div>
+				</div>
+				<div class="col-md-5 offset-md-1">
+					<div class="about-us-right">
+						<img src="{% static 'front/images/students.png' %}" alt="slide 1">
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>	
+
+	<div class="course-1x course-bg-1x">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="title-middle">
+						<h2>Coursecity Top Courses</h2>
+					</div>
+				</div>
+
+				<div class="col-md-12">
+					<div id="filters" class="course-menu">
+					  <button class="filter active"  data-filter="all">All Courses</button>
+					  <button class="filter" data-rel="web" data-filter=".web">Websites</button>
+					  <button class="filter" data-rel="design" data-filter=".design">Design</button> 
+					  <button class="filter" data-rel="bcards" data-filter=".bcards">Business</button>
+					  <button class="filter" data-rel="photography" data-filter=".photography">Photography</button>
+					  <button class="filter" data-rel="marketing" data-filter=".marketing">Marketing</button>
+					</div>
+				</div>
+
+				<div class="col-md-12">	
+					<div class="all-course">
+						<div class="row">
+						  <div class="col-md-3 tile web">
+							<div class="single-course">
+								<div class="hvrbox">
+									<img src="{% static 'front/images/1.jpg' %}" alt="slide 1" class="hvrbox-layer_bottom">
+									<div class="hvrbox-layer_top hvrbox-text">
+										<div class="hvrbox-text">																	
+											<a href="https://www.youtube.com/watch?v=gwinFP8_qIM" class="btn-circle video"><i class="fas fa-play"></i></a>
+											<a href="course-single-one.html">Preview Course</a>	
+										</div>
+									</div>
+								</div>
+								<div class="single-course-content">
+									<a href="course-single-one.html">Learn Photoshop With Eyal Complete Course</a>
+									<p>Nir Eyal <span><del>$169</del> <b>$149</b></span></p>
+									<h3>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i> (4)
+										<span>Enroll: 128</span>
+									</h3>
+								</div>
+							</div>
+						  </div>
+						  <div class="col-md-3 tile design">
+							<div class="single-course">
+								<div class="hvrbox">
+									<img src="{% static 'front/images/2.jpg' %}" alt="slide 1" class="hvrbox-layer_bottom">
+									<div class="hvrbox-layer_top hvrbox-text">
+										<div class="hvrbox-text">																	
+											<a href="https://www.youtube.com/watch?v=gwinFP8_qIM" class="btn-circle video"><i class="fas fa-play"></i></a>
+											<a href="course-single.html">Preview Course</a>	
+										</div>
+									</div>
+								</div>
+								<div class="single-course-content">
+									<a href="course-single-one.html">Visual Basic Essential Training</a>
+									<p>Nir Eyal <span><del>$169</del> <b>$149</b></span></p>
+									<h3>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i> (4)
+										<span>Enroll: 128</span>
+									</h3>
+								</div>
+							</div>
+						  </div>
+
+						  <div class="col-md-3 tile marketing">
+							<div class="single-course">
+								<div class="hvrbox">
+									<img src="{% static 'front/images/3.jpg' %}" alt="slide 1" class="hvrbox-layer_bottom">
+									<div class="hvrbox-layer_top hvrbox-text">
+										<div class="hvrbox-text">																	
+											<a href="https://www.youtube.com/watch?v=gwinFP8_qIM" class="btn-circle video"><i class="fas fa-play"></i></a>
+											<a href="course-single-one.html">Preview Course</a>	
+										</div>
+									</div>
+								</div>
+								<div class="single-course-content">
+									<a href="course-single-one.html">The Complete Developer Web Course</a>
+									<p>Nir Eyal <span><del>$169</del> <b>$149</b></span></p>
+									<h3>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i> (4)
+										<span>Enroll: 128</span>
+									</h3>
+								</div>
+							</div>
+						  </div>
+
+						  <div class="col-md-3 tile design">
+							<div class="single-course">
+								<div class="hvrbox">
+									<img src="{% static 'front/images/4.jpg' %}" alt="slide 1" class="hvrbox-layer_bottom">
+									<div class="hvrbox-layer_top hvrbox-text">
+										<div class="hvrbox-text">																	
+											<a href="https://www.youtube.com/watch?v=gwinFP8_qIM" class="btn-circle video"><i class="fas fa-play"></i></a>
+											<a href="course-single-one.html">Preview Course</a>	
+										</div>
+									</div>
+								</div>
+								<div class="single-course-content">
+									<a href="course-single-one.html">Creating 3D environment in Blender</a>
+									<p>Nir Eyal <span><del>$169</del> <b>$149</b></span></p>
+									<h3>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i> (4)
+										<span>Enroll: 128</span>
+									</h3>
+								</div>
+							</div>
+						  </div>
+
+						  <div class="col-md-3 tile marketing">
+							<div class="single-course">
+								<div class="hvrbox">
+									<img src="{% static 'front/images/5.jpg' %}" alt="slide 1" class="hvrbox-layer_bottom">
+									<div class="hvrbox-layer_top hvrbox-text">
+										<div class="hvrbox-text">																	
+											<a href="https://www.youtube.com/watch?v=gwinFP8_qIM" class="btn-circle video"><i class="fas fa-play"></i></a>
+											<a href="course-single-one.html">Preview Course</a>	
+										</div>
+									</div>
+								</div>
+								<div class="single-course-content">
+									<a href="course-single-one.html">Advanced CSS and Sass Flexbox Grid</a>
+									<p>Nir Eyal <span><del>$169</del> <b>$149</b></span></p>
+									<h3>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i> (4)
+										<span>Enroll: 128</span>
+									</h3>
+								</div>
+							</div>
+						  </div>
+
+						  <div class="col-md-3 tile photography">
+							<div class="single-course">
+								<div class="hvrbox">
+									<img src="{% static 'front/images/6.jpg' %}" alt="slide 1" class="hvrbox-layer_bottom">
+									<div class="hvrbox-layer_top hvrbox-text">
+										<div class="hvrbox-text">																	
+											<a href="https://www.youtube.com/watch?v=gwinFP8_qIM" class="btn-circle video"><i class="fas fa-play"></i></a>
+											<a href="course-single-one.html">Preview Course</a>	
+										</div>
+									</div>
+								</div>
+								<div class="single-course-content">
+									<a href="course-single-one.html">Complete Cyber Security Course Hackers</a>
+									<p>Nir Eyal <span><del>$169</del> <b>$149</b></span></p>
+									<h3>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i> (4)
+										<span>Enroll: 128</span>
+									</h3>
+								</div>
+							</div>
+						  </div>
+
+						  <div class="col-md-3 tile bcards">
+							<div class="single-course">
+								<div class="hvrbox">
+									<img src="{% static 'front/images/7.jpg' %}" alt="slide 1" class="hvrbox-layer_bottom">
+									<div class="hvrbox-layer_top hvrbox-text">
+										<div class="hvrbox-text">																	
+											<a href="https://www.youtube.com/watch?v=gwinFP8_qIM" class="btn-circle video"><i class="fas fa-play"></i></a>
+											<a href="course-single-one.html">Preview Course</a>	
+										</div>
+									</div>
+								</div>
+								<div class="single-course-content">
+									<a href="course-single-one.html">Introduction To Python Programming</a>
+									<p>Nir Eyal <span><del>$169</del> <b>$149</b></span></p>
+									<h3>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i> (4)
+										<span>Enroll: 128</span>
+									</h3>
+								</div>
+							</div>
+						  </div>
+
+						  <div class="col-md-3 tile photography">
+							<div class="single-course">
+								<div class="hvrbox">
+									<img src="{% static 'front/images/8.jpg' %}" alt="slide 1" class="hvrbox-layer_bottom">
+									<div class="hvrbox-layer_top hvrbox-text">
+										<div class="hvrbox-text">																	
+											<a href="https://www.youtube.com/watch?v=gwinFP8_qIM" class="btn-circle video"><i class="fas fa-play"></i></a>
+											<a href="course-single-one.html">Preview Course</a>	
+										</div>
+									</div>
+								</div>
+								<div class="single-course-content">
+									<a href="course-single-one.html">Certificate Early Education Leadership</a>
+									<p>Nir Eyal <span><del>$169</del> <b>$149</b></span></p>
+									<h3>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i> (4)
+										<span>Enroll: 128</span>
+									</h3>
+								</div>
+							</div>
+						  </div>
+
+							<div class="col-md-12 text-center">
+								<a href="course-list.html" class="btn-small"> View more </a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="video-1x">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="video-content">
+						<a href="https://www.youtube.com/watch?v=gwinFP8_qIM" class="btn-circle video"><i class="fas fa-play"></i></a>
+						<h3>Watch Coursecity Campus Video</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="events-1x">
+		<div class="container">	
+			<div class="row">
+				<div class="col-md-12">
+					<div class="title-left">
+						<h2>Upcoming Events</h2>
+					</div>
+				</div>			
+				<div class="col-md-6">
+					<div class="events-single">
+						<img src="{% static 'front/images/event-1.png' %}" alt="slide 1">
+						<b>8 <br> July</b>
+						<div class="events-single-content">
+							<a href="events-details.html"> Creating 3D environment with Blender solution Method in Oxford, UK</a>
+							<p>CourseCity educational resource for children aged and the teachers. Our curriculum-based classroom.</p>
+							<ul>
+								<li><i class="far fa-calendar-check"></i> 8 July, 2018</li>
+								<li><i class="far fa-clock"></i> 5.00 pm - 7 pm</li>
+								<li><i class="fas fa-map-marker-alt"></i> Trump Tower, Newyork</li>
+							</ul>
+							<a href="events-details.html" class="btn-small"> Event Going </a>
+						</div>
+					</div>
+				</div>			
+				<div class="col-md-6">
+					<div class="events-single">
+						<img src="{% static 'front/images/event-2.png' %}" alt="slide 1">
+						<b>8 <br> July</b>
+						<div class="events-single-content">
+							<a href="events-details.html"> Complete Cyber Security Course for Hackers in Harvard University, USA</a>
+							<p>CourseCity educational resource for children aged and theteachers. Our curriculum-based classroom.</p>
+							<ul>
+								<li><i class="far fa-calendar-check"></i> 8 July, 2018</li>
+								<li><i class="far fa-clock"></i> 5.00 pm - 7 pm</li>
+								<li><i class="fas fa-map-marker-alt"></i> Trump Tower, Newyork</li>
+							</ul>
+							<a href="events-details.html" class="btn-small"> Event Going </a>
+						</div>
+					</div>
+				</div>			
+
+			</div>
+		</div>
+	</div>
+
+	<div class="blog-1x">
+		<div class="container">	
+			<div class="row">
+				<div class="col-md-12">
+					<div class="title-middle">
+						<h2>Latest News</h2>
+					</div>
+				</div>		
+				<div class="col-md-4">
+					<div class="blog-single">
+						<img src="{% static 'front/images/2.jpg' %}" alt="slide 1">
+
+						<div class="blog-single-content">
+							<a href="blog-single.html"> Why coursecity is the best online learning institute? </a>
+							<p>Coursecity is an educational resource for children the teachers. curriculum classroom software is perfect.</p>
+							
+							<h3>
+								<i class="far fa-calendar-check"></i> 8 July, 2018
+								<span><i class="far fa-heart"></i> 8 </span>
+							</h3>							
+						</div>
+					</div>
+				</div>			
+				<div class="col-md-4">
+					<div class="blog-single">
+						<img src="{% static 'front/images/blog-2.png' %}" alt="slide 1">
+
+						<div class="blog-single-content">
+							<a href="blog-single.html"> Advanced CSS and Sass Flexbox Grid with bootstrap</a>
+							<p>Coursecity is an educational resource for children the teachers. curriculum classroom software is perfect.</p>
+							
+							<h3>
+								<i class="far fa-calendar-check"></i> 8 July, 2018
+								<span><i class="far fa-heart"></i> 8 </span>
+							</h3>							
+						</div>
+					</div>
+				</div>			
+				<div class="col-md-4">
+					<div class="blog-single">
+						<img src="{% static 'front/images/blog-3.png' %}" alt="slide 1">
+
+						<div class="blog-single-content">
+							<a href="blog-single.html"> The Complete Developer Web Course for beginer</a>
+							<p>Coursecity is an educational resource for children the teachers. curriculum classroom software is perfect.</p>
+							
+							<h3>
+								<i class="far fa-calendar-check"></i> 8 July, 2018
+								<span><i class="far fa-heart"></i> 8 </span>
+							</h3>							
+						</div>
+					</div>
+				</div>		
+
+			</div>
+		</div>
+	</div>
+
+	<div class="tesimonial-1x">
+		<div class="container">			
+			<div class="col-md-10 offset-md-1">
+				<div class="testimonial">
+					<div class="single-testimonial text-center">
+						<img src="{% static 'front/images/testimonial-1.jpg' %}" alt="slide 1">
+						<p><i class="fas fa-quote-left"></i> Before Coursecity, I was working two minimum wage jobs. Now, I have a new job, a new mindset,<br> and new life!"I learned most of my programming skills and database management skills <br>  through self-study and the material available on Coursecity.</p>
+						<h3>Stephanie Magion</h3>
+						<h4>Manager at Doltef</h4>
+					</div>
+
+					<div class="single-testimonial text-center">
+						<img src="{% static 'front/images/testimonial-2.jpg' %}" alt="slide 1">
+						<p><i class="fas fa-quote-left"></i> Before Coursecity, I was working two minimum wage jobs. Now, I have a new job, a new mindset,<br> and new life!"I learned most of my programming skills and database management skills <br>  through self-study and the material available on Coursecity.</p>
+						<h3>Jhon Alex</h3>
+						<h4>Chairman at Doltef</h4>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="client-1x">
+		<div class="container">			
+			<div class="col-md-12">
+				<div class="title-middle">
+					<h2>Train Your Company Member</h2>
+					<p>Find subjects you're passionate about by browsing our online course categories. Start <br> learning with top courses Built With Industry Experts</p>
+				</div>
+			</div>
+
+			<div class="col-md-8 offset-md-2">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="single-client">
+							<a href="#"><img src="{% static 'front/images/client/1.png' %}" alt="slide 1"></a>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="single-client">
+							<a href="#"><img src="{% static 'front/images/client/2.png' %}" alt="slide 1"></a>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="single-client">
+							<a href="#"><img src="{% static 'front/images/client/5.png' %}" alt="slide 1"></a>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="single-client">
+							<a href="#"><img src="{% static 'front/images/client/4.png' %}" alt="slide 1"></a>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="single-client">
+							<a href="#"><img src="{% static 'front/images/client/4.png' %}" alt="slide 1"></a>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="single-client">
+							<a href="#"><img src="{% static 'front/images/client/1.png' %}" alt="slide 1"></a>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="single-client">
+							<a href="#"><img src="{% static 'front/images/client/2.png' %}" alt="slide 1"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="cta-1x">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="cta-content">
+						<h3>Ready to Begin?</h3>
+						<p>Find subjects you're passionate about by browsing our online course categories. Start <br> learning with top courses Built With Industry Experts.</p>
+						<a href="#" class="btn-small">Start Teaching</a>
+						<a href="#" class="btn-small">Start Learning</a>
+					</div>
+				</div>					
+			</div>
+		</div>
+	</div>
+{% endblock body %}

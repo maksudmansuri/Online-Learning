@@ -1,0 +1,74 @@
+
+{% extends './lms_base.html' %}
+ {% load static %}
+
+{% block title %}
+    <title>{{request.user}} - Take course</title>
+{% endblock title %}
+
+{% block body %}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container ">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/student_lms">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/student_lms/student_browse_courses">Courses</a></li>
+                            <li class="breadcrumb-item active"><a href="/student_lms/student_take_course/{{crs1.course_slug}}">{{crs1.course_name}}</a></li>
+                        </ol>
+                        <h1 class="h2">{{crssn2.session_name}}</h1>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="card">
+                                    <div id="session" class="embed-responsive embed-responsive-16by9">
+                                        <iframe width="853" height="480" src="{{crssn2.video_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <div class="card-body">
+                                            {{crssn2.session_desc|slice:"0:125 "}}
+                                    </div>
+                                </div>
+                                <!-- Lessons -->
+                                
+                               
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="card list-group list-group-fit">
+                                {% for i in crssn1 %}
+                                {% if i.id == crssn2.id %}
+                                    <li class="list-group-item active">
+                                {% endif %}
+                                {% if i.id != crssn2.id %}    
+                                    <li class="list-group-item">
+                                {% endif %}
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="text-muted">{{forloop.counter}}</div>
+                                            </div>
+                                            <div class="media-body">
+                                            {% if i.id == crssn2.id %}
+                                                <a class="text-white" href="/student_lms/student_take_course_session/{{crs1.course_slug}}/{{i.course_slug}}">{{i.session_name}}</a>
+                                            {% endif %}
+                                            {% if i.id != crssn2.id %}
+                                                <a href="/student_lms/student_take_course_session/{{crs1.course_slug}}/{{i.course_slug}}">{{i.session_name}}</a>
+                                            {% endif %}
+                                            </div>
+                                            <div class="media-right">
+                                                <small class="text-muted-light">{{i.session_duration}}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                           
+                        </div>
+                       
+                    </div>
+
+                </div>
+
+{% endblock body %} 

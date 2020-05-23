@@ -1,0 +1,713 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="online course in hindi" content="noindex">
+   
+   
+{% block title %}
+<title>Student - Dashboard</title>{% endblock title %} 
+
+    <!-- Prevent the demo from appearing in search engines (REMOVE THIS) -->
+
+    <!-- Perfect Scrollbar -->
+    <link type="text/css" href="{% static 'student_lms/assets/vendor/perfect-scrollbar.css' %}" rel="stylesheet">
+
+    <!-- Material Design Icons -->
+    <link type="text/css" href="{% static 'student_lms/assets/css/material-icons.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'student_lms/assets/css/material-icons.rtl.css' %}" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link type="text/css" href="{% static 'student_lms/assets/css/fontawesome.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'student_lms/assets/css/fontawesome.rtl.css' %}" rel="stylesheet">
+
+    <!-- App CSS -->
+    <link type="text/css" href="{% static 'student_lms/assets/css/app.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'student_lms/assets/css/app.rtl.css' %}" rel="stylesheet">
+
+    <!-- Required by summernote -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Summernote WYSIWYG -->
+    <link rel="stylesheet" href="{% static 'student_lms/assets/css/summernote.css' %} ">
+    <link rel="stylesheet" href="{% static 'student_lms/assets/css/summernote.rtl.css' %}">
+
+</head>
+
+<body class=" layout-fluid">
+    <div class="preloader">
+        <div class="sk-double-bounce">
+            <div class="sk-child sk-double-bounce1"></div>
+            <div class="sk-child sk-double-bounce2"></div>
+        </div>
+    </div>
+
+    <!-- Header Layout -->
+    <div class="mdk-header-layout js-mdk-header-layout">
+
+        <!-- Header -->
+
+        <div id="header" data-fixed class="mdk-header js-mdk-header mb-0">
+            <div class="mdk-header__content">
+
+                <!-- Navbar -->
+                <nav id="default-navbar" class="navbar navbar-expand navbar-dark bg-primary m-0">
+                    <div class="container-fluid">
+                        <!-- Toggle sidebar -->
+                        <button class="navbar-toggler d-block" data-toggle="sidebar" type="button">
+                            <span class="material-icons">menu</span>
+                        </button>
+
+                        <!-- Brand -->
+                        <a href="" class="navbar-brand">
+                            <img src="{% static 'student_lms/assets/images/logo/white.svg' %}" class="mr-2" alt="LearnPlus" />
+                            <span class="d-none d-xs-md-block">LearnPlus</span>
+                        </a>
+
+                        <!-- Search -->
+                        <form class="search-form d-none d-md-flex">
+                            <input type="text" class="form-control" placeholder="Search">
+                            <button class="btn" type="button"><i class="material-icons font-size-24pt">search</i></button>
+                        </form>
+                        <!-- // END Search -->
+
+                        <div class="flex"></div>
+
+                        <!-- Menu -->
+                        <ul class="nav navbar-nav flex-nowrap d-none d-lg-flex">
+                            <li class="nav-item">
+                                <a class="nav-link" href="student_forum">Forum</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href='student_help_center'>Get Help</a>
+                            </li>
+                        </ul>
+
+                        <!-- Menu -->
+                        <ul class="nav navbar-nav flex-nowrap">
+
+                            <li class="nav-item d-none d-md-flex">
+                                <a href="student_cart" class="nav-link">
+                                    <i class="material-icons">shopping_cart</i>
+                                </a>
+                            </li>
+
+
+
+
+
+                            <!-- Notifications dropdown -->
+                            <li class="nav-item dropdown dropdown-notifications dropdown-menu-sm-full">
+                                <button class="nav-link btn-flush dropdown-toggle" type="button" data-toggle="dropdown" data-dropdown-disable-document-scroll data-caret="false">
+                                    <i class="material-icons">notifications</i>
+                                    <span class="badge badge-notifications badge-danger">2</span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <div data-perfect-scrollbar class="position-relative">
+                                        <div class="dropdown-header"><strong>Messages</strong></div>
+                                        <div class="list-group list-group-flush mb-0">
+
+                                            <a href="student_messages" class="list-group-item list-group-item-action unread">
+                                                <span class="d-flex align-items-center mb-1">
+                                                    <small class="text-muted">5 minutes ago</small>
+
+                                                    <span class="ml-auto unread-indicator bg-primary"></span>
+
+                                                </span>
+                                                <span class="d-flex">
+                                                    <span class="avatar avatar-xs mr-2">
+                                                        <img src="{% static 'student_lms/assets/images/people/110/woman-5.jpg' %}" alt="people" class="avatar-img rounded-circle">
+                                                    </span>
+                                                    <span class="flex d-flex flex-column">
+                                                        <strong>Michelle</strong>
+                                                        <span class="text-black-70">Clients loved the new design.</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+
+                                            <a href="student_messages" class="list-group-item list-group-item-action unread">
+                                                <span class="d-flex align-items-center mb-1">
+                                                    <small class="text-muted">5 minutes ago</small>
+
+                                                    <span class="ml-auto unread-indicator bg-primary"></span>
+
+                                                </span>
+                                                <span class="d-flex">
+                                                    <span class="avatar avatar-xs mr-2">
+                                                        <img src="{% static 'student_lms/assets/images/people/110/woman-5.jpg' %}" alt="people" class="avatar-img rounded-circle">
+                                                    </span>
+                                                    <span class="flex d-flex flex-column">
+                                                        <strong>Michelle</strong>
+                                                        <span class="text-black-70">🔥 Superb job..</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+
+                                        </div>
+
+                                        <div class="dropdown-header"><strong>System notifications</strong></div>
+                                        <div class="list-group list-group-flush mb-0">
+
+                                            <a href="student_messages" class="list-group-item list-group-item-action border-left-3 border-left-danger">
+                                                <span class="d-flex align-items-center mb-1">
+                                                    <small class="text-muted">3 minutes ago</small>
+
+                                                </span>
+                                                <span class="d-flex">
+                                                    <span class="avatar avatar-xs mr-2">
+                                                        <span class="avatar-title rounded-circle bg-light">
+                                                            <i class="material-icons font-size-16pt text-danger">account_circle</i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="flex d-flex flex-column">
+
+                                                        <span class="text-black-70">Your profile information has not been synced correctly.</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+
+                                            <a href="student_messages" class="list-group-item list-group-item-action">
+                                                <span class="d-flex align-items-center mb-1">
+                                                    <small class="text-muted">5 hours ago</small>
+
+                                                </span>
+                                                <span class="d-flex">
+                                                    <span class="avatar avatar-xs mr-2">
+                                                        <span class="avatar-title rounded-circle bg-light">
+                                                            <i class="material-icons font-size-16pt text-success">group_add</i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="flex d-flex flex-column">
+                                                        <strong>Adrian. D</strong>
+                                                        <span class="text-black-70">Wants to join your private group.</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+
+                                            <a href="counsellor_messages" class="list-group-item list-group-item-action">
+                                                <span class="d-flex align-items-center mb-1">
+                                                    <small class="text-muted">1 day ago</small>
+
+                                                </span>
+                                                <span class="d-flex">
+                                                    <span class="avatar avatar-xs mr-2">
+                                                        <span class="avatar-title rounded-circle bg-light">
+                                                            <i class="material-icons font-size-16pt text-warning">storage</i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="flex d-flex flex-column">
+
+                                                        <span class="text-black-70">Your deploy was successful.</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- // END Notifications dropdown -->
+                            <!-- User dropdown -->
+                            <li class="nav-item dropdown ml-1 ml-md-3">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="counsellor_profile" role="button"><img src="/media/{{std1.counsellor_photo}}" alt="Avatar" class="rounded-circle" width="40"></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="counsellor_profile_edit">
+                                        <i class="material-icons"></i> {{ request.user }}
+                                    </a>
+                                    <a class="dropdown-item" href="counsellor_account_edit">
+                                        <i class="material-icons">edit</i> Edit Account
+                                    </a>
+                                    <a class="dropdown-item" href="counsellor_profile">
+                                        <i class="material-icons">person</i> Public Profile
+                                    </a>
+                                    <a class="dropdown-item" href="/counsellor/counsellor_logout">
+                                        <i class="material-icons">lock</i> Logout
+                                    </a>
+                                </div>
+                            </li>
+                            <!-- // END User dropdown -->
+
+                        </ul>
+                        <!-- // END Menu -->
+                    </div>
+                </nav>
+                <!-- // END Navbar -->
+
+            </div>
+        </div>
+
+        <!-- // END Header -->
+
+
+{% block body %}
+{% endblock body %}
+
+
+                <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
+                    <div class="mdk-drawer__content ">
+                        <div class="sidebar sidebar-left sidebar-dark bg-dark o-hidden" data-perfect-scrollbar>
+                            <div class="sidebar-p-y">
+                                <div class="sidebar-heading">APPLICATIONS</div>
+                                <ul class="sidebar-menu sm-active-button-bg">
+                                    <li class="sidebar-menu-item active">
+                                        <a class="sidebar-menu-button" href="./">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_box</i> {{ request.user.username }}
+                                        </a>
+                                    </li>
+                                    {% comment %} <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button" href="instructor_dashboard">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">school</i> Instructor
+                                        </a>
+                                    </li> {% endcomment %}
+                                </ul>
+                                <!-- Account menu -->
+                                <div class="sidebar-heading">Account</div>
+                                <ul class="sidebar-menu">
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button sidebar-js-collapse" data-toggle="collapse" href="#">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">person_outline</i>
+                                            Account
+                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                        </a>
+                                        <ul class="sidebar-submenu sm-indent collapse" id="account_menu">
+                                            {% comment %} <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="/student_login">
+                                                    <span class="sidebar-menu-text">Login</span>
+                                                </a>
+                                            </li> {% endcomment %}
+                                            {% comment %} <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="student_singup">
+                                                    <span class="sidebar-menu-text">Sign Up</span>
+                                                </a>
+                                            </li> {% endcomment %}
+                                            {% comment %} <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="student_forgot_password">
+                                                    <span class="sidebar-menu-text">Forgot Password</span>
+                                                </a>
+                                            </li> {% endcomment %}
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_edit">
+                                                    <span class="sidebar-menu-text">Edit Account</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_edit_basic">
+                                                    <span class="sidebar-menu-text">Basic Information</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_edit_profile">
+                                                    <span class="sidebar-menu-text">Profile &amp; Privacy</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_subscription">
+                                                    <span class="sidebar-menu-text">Subscription</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_upgrade">
+                                                    <span class="sidebar-menu-text">Upgrade Account</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_payment_information">
+                                                    <span class="sidebar-menu-text">Payment Information</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_billing">
+                                                    <span class="sidebar-menu-text">Payment History</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_invoice">
+                                                    <span class="sidebar-menu-text">counsellor Invoice</span>
+                                                </a>
+                                            </li>
+                                            {% comment %} <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="instructor_invoice">
+                                                    <span class="sidebar-menu-text">Instructor Invoice</span>
+                                                </a>
+                                            </li> {% endcomment %}
+                                            {% comment %} <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="instructor_edit_invoice">
+                                                    <span class="sidebar-menu-text">Edit Invoice</span>
+                                                </a>
+                                            </li> {% endcomment %}
+                                        </ul>
+                                    </li>
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button" data-toggle="collapse" href="#messages_menu">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">comment</i> Messages
+                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                        </a>
+                                        <ul class="sidebar-submenu sm-indent collapse" id="messages_menu">
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_messages">
+                                                    <span class="sidebar-menu-text">Conversation</span>
+                                                    <span class="sidebar-menu-badge badge badge-primary badge-notifications ml-auto">2</span>
+                                                </a>
+                                            </li>
+                                            {% comment %} <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="student_messages_2">
+                                                    <span class="sidebar-menu-text">Conversation - 2</span>
+                                                </a>
+                                            </li> {% endcomment %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="sidebar-heading">Your rights</div>
+                                <ul class="sidebar-menu">
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button sidebar-js-collapse" data-toggle="collapse" href="#account_menu_teacher">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">person_outline</i>
+                                            Manage Teachers
+                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                        </a>
+                                        <ul class="sidebar-submenu sm-indent collapse" id="account_menu_teacher">
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="/counsellor/manage_staff">
+                                                    <span class="sidebar-menu-text">Teachers Appoval</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor/add_instructor">
+                                                    <span class="sidebar-menu-text">Add Teachers</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor/edit_instructor">
+                                                    <span class="sidebar-menu-text"> Edit Teacher</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor/delete_instructor">
+                                                    <span class="sidebar-menu-text">Delete Teacher</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor/payment_instructor">
+                                                    <span class="sidebar-menu-text">Teachers Payments</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor/feedback_instructor">
+                                                    <span class="sidebar-menu-text">Teachers Feedback</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor/leave_instructor">
+                                                    <span class="sidebar-menu-text">Teacher Leave</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button sidebar-js-collapse" data-toggle="collapse" href="#account_menu_student">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">person_outline</i>
+                                            Manage Students
+                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                        </a>
+                                        <ul class="sidebar-submenu sm-indent collapse" id="account_menu_student">
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="/counsellor/manage_student">
+                                                    <span class="sidebar-menu-text">Students Appoval</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_edit_basic">
+                                                    <span class="sidebar-menu-text">Add Students</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_upgrade">
+                                                    <span class="sidebar-menu-text"> Edit Students</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_upgrade">
+                                                    <span class="sidebar-menu-text">Delete Students</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_edit_profile">
+                                                    <span class="sidebar-menu-text">Students Payments</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_subscription">
+                                                    <span class="sidebar-menu-text">Students Feedback</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_upgrade">
+                                                    <span class="sidebar-menu-text">Students Leave</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button sidebar-js-collapse" data-toggle="collapse" href="#account_menu_course">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">person_outline</i>
+                                            Manage Courses
+                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                        </a>
+                                        <ul class="sidebar-submenu sm-indent collapse" id="account_menu_course">
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="/counsellor/manage_course">
+                                                    <span class="sidebar-menu-text">Course Appoval</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_edit_basic">
+                                                    <span class="sidebar-menu-text">Add Course</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_upgrade">
+                                                    <span class="sidebar-menu-text"> Edit Course</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_upgrade">
+                                                    <span class="sidebar-menu-text">Delete Course</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_edit_profile">
+                                                    <span class="sidebar-menu-text">Course Payments</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_subscription">
+                                                    <span class="sidebar-menu-text">Course Feedback</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_upgrade">
+                                                    <span class="sidebar-menu-text">Manage Category</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    {% comment %} <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button sidebar-js-collapse" data-toggle="collapse" href="#account_menu">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">person_outline</i>
+                                            Manage Students
+                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                        </a>
+                                        <ul class="sidebar-submenu sm-indent collapse" id="account_menu">
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_edit">
+                                                    <span class="sidebar-menu-text">Students Appoval</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_edit_basic">
+                                                    <span class="sidebar-menu-text">Add Students</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_upgrade">
+                                                    <span class="sidebar-menu-text"> Edit Students</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_upgrade">
+                                                    <span class="sidebar-menu-text">Delete Students</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_edit_profile">
+                                                    <span class="sidebar-menu-text">Students Payments</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_subscription">
+                                                    <span class="sidebar-menu-text">Students Feedback</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_account_billing_upgrade">
+                                                    <span class="sidebar-menu-text">Students Leave</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li> {% endcomment %}
+                                </ul>
+                                <div class="sidebar-heading">Studen Viewst</div>
+                                <ul class="sidebar-menu sm-active-button-bg">
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button" href="counsellor_browse_courses">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">search</i> Browse Courses
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button" href="counsellor_view_course">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">import_contacts</i> View Course
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button" href="counsellor_take_course">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">class</i> Take Course
+                                            <span class="sidebar-menu-badge badge badge-primary ml-auto">PRO</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button" href="counsellor_take_quiz">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i> Take a Quiz
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button" href="counsellor_quiz_results">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">poll</i> Quiz Results
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button" href="counsellor_my_courses">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">school</i> My Courses
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button" data-toggle="collapse" href="#forum_menu">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">chat_bubble_outline</i>
+                                            Community
+                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                        </a>
+                                        <ul class="sidebar-submenu sm-indent collapse" id="forum_menu">
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_forum">
+                                                    <span class="sidebar-menu-text">Forum</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_forum_thread">
+                                                    <span class="sidebar-menu-text">Discussion</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_forum_ask">
+                                                    <span class="sidebar-menu-text">Ask Question</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_profile">
+                                                    <span class="sidebar-menu-text">counsellor Profile - Courses</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="counsellor_profile_posts">
+                                                    <span class="sidebar-menu-text">counsellor Profile - Posts</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-menu-item">
+                                                <a class="sidebar-menu-button" href="instructor_profile">
+                                                    <span class="sidebar-menu-text">Instructor Profile</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button" href="counsellor_help_center">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">live_help</i> Get Help
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button" href="/counsellor_login">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">lock_open</i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> 
+
+            <!-- App Settings FAB -->
+            {% comment %} <div id="app-settings">
+                <app-settings layout-active="default" :layout-location="{
+      'fixed': 'fixed-counsellor-dashboard.html',
+      'default': 'counsellor-dashboard.html'
+    }" sidebar-variant="bg-transparent border-0"></app-settings>{% endcomment %}
+            </div> 
+
+        </div>
+    </div>
+
+
+
+    <!-- jQuery -->
+    <script src="{% static 'student_lms/assets/vendor/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'student_lms/assets/vendor/popper.min.js' %}"></script>
+    <script src="{% static 'student_lms/assets/vendor/bootstrap.min.js' %}"></script>
+
+    <!-- Perfect Scrollbar -->
+    <script src="{% static 'student_lms/assets/vendor/perfect-scrollbar.min.js' %}"></script>
+
+    <!-- MDK -->
+    <script src="{% static 'student_lms/assets/vendor/dom-factory.js' %}"></script>
+    <script src="{% static 'student_lms/assets/vendor/material-design-kit.js' %}"></script>
+
+    <!-- App JS -->
+    <script src="{% static 'student_lms/assets/js/app.js' %}"></script>
+
+    <!-- Highlight.js -->
+    <script src="{% static 'student_lms/assets/js/hljs.js' %}"></script>
+
+    <!-- App Settings (safe to remove) -->
+    <script src="{% static 'student_lms/assets/js/app-settings.js' %}"></script>
+
+
+
+
+
+
+    <!-- Global Settings -->
+    <script src="{% static 'student_lms/assets/js/settings.js' %}"></script>
+
+    <!-- Moment.js -->
+    <script src="{% static 'student_lms/assets/vendor/moment.min.js' %}"></script>
+    <script src="{% static 'student_lms/assets/vendor/moment-range.min.js' %}"></script>
+
+    <!-- Chart.js -->
+    <script src="{% static 'student_lms/assets/vendor/Chart.min.js' %}"></script>
+
+    <!-- UI Charts Page JS -->
+    <script src="{% static 'student_lms/assets/js/chartjs-rounded-bar.js' %}"></script>
+    <script src="{% static 'student_lms/assets/js/chartjs.js' %}"></script>
+
+    <!-- Chart.js Samples -->
+    <script src="{% static 'student_lms/assets/js/page.student-dashboard.js' %}"></script>
+
+    <!-- List.js -->
+    <script src="{% static 'student_lms/assets/vendor/list.min.js' %} "></script>
+    <script src="{% static 'student_lms/assets/js/list.js' %} "></script>
+
+    <script src="{% static 'student_lms/assets/vendor/summernote.min.js' %} "></script>
+    <script src="{% static 'student_lms/assets/js/summernote.js' %}"></script>
+
+    <!-- Required by countdown -->
+    <script src="{% static 'student_lms/assets/vendor/moment.min.js' %} "></script>
+    <!-- Easy Countdown -->
+    <script src="{% static 'student_lms/assets/vendor/jquery.countdown.min.js' %}"></script>
+
+    <!-- Init -->
+    <script src="{% static 'student_lms/assets/js/countdown.js' %}"></script>
+
+    {% block script  %}
+    
+    {% endblock script %}
+</body>
+
+</html>

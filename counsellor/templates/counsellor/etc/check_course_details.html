@@ -1,0 +1,164 @@
+
+{% extends './cnslr_base.html' %}
+ {% load static %}
+
+{% block title %}
+    <title>{{request.user}} - Course Verification</title>
+{% endblock title %}
+
+{% block body %}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/counsellor">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Courses</a></li>
+                        </ol>
+                        <h1 class="h2">{{crs1.course_name}}</h1>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="card">
+                                   <section id="view123/">
+                                    <div id="session" class="embed-responsive embed-responsive-16by9">
+                                        <iframe width="853" height="480" src="{{crs1.course_video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div></section>
+                                    <div class="card-body">
+                                            {{crs1.course_desc|striptags| slice:"0:125 "}}
+                                    </div>
+                                </div>
+                                <!--testing   page-->
+                                {% for crssn1,ml in crssn  %}
+                                <div class="accordion" id="accordionExample{{forloop.counter}}">
+                                    <div class="card">
+                                                <div class="card-header" id="headingOne">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree{{ml.id}}" aria-expanded="false" aria-controls="collapseThree">
+                                                    {{ml.module}}
+                                                    </button>
+                                                   
+                                                </h2>
+                                                </div>
+                                    {% for i in crssn1|slice:"1:" %}
+                                        <div id="collapseThree{{ml.id}}" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample{{forloop.parentloop.counter}}">
+                                                {% if i.is_verified != True %}
+                                                    {% if i.is_appiled == True %}
+                                                <div class="card-body">
+                                                 <a class="text-dark" href="/counsellor/check_course_session/{{crs1.course_slug}}/{{ml.slug}}/{{i.course_slug}}">{{i.session_name}}</a>
+                                                </div>
+                                                <div class="card-body">
+                                                
+                                                    <a href="/counsellor/check_course_session_activate/{{crs1.course_slug}}/{{ml.slug}}/{{i.course_slug}}" class="btn btn-primary">verify</a>
+                                                    </div>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <div class="card-body">
+                                                    <a class="text-dark" href="/counsellor/check_course_session/{{crs1.course_slug}}/{{ml.slug}}/{{i.course_slug}}">{{i.session_name}}</a>
+                                                    </div>
+                                                    <div class="card-body">
+                                                    <a href="/counsellor/check_course_session_deactivate/{{crs1.course_slug}}/{{ml.slug}}/{{i.course_slug}}" class="btn btn-secondary">verified</a> 
+                                                    <div>
+                                                {% endif %}
+                                                
+                                                
+                                                </div>
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %} 
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="card">
+                                    <div class="card-body text-center">
+                                        <p>
+                                            <a href="/student_lms/student_cart/{{crs1.course_slug}}" class="btn btn-success btn-block flex-column">
+                                                Get All Courses 
+                                                <strong>&#8377;500 / month</strong>
+                                            </a>
+                                        </p>
+                                        <div class="page-separator">
+                                            <div class="page-separator__text">or</div>
+                                        </div>
+                                        <a href="/student_lms/student_cart/{{crs1.course_slug}}" class="btn btn-white btn-block flex-column">
+                                            Purchase Course
+                                            <strong>&#8377;{{crs1.course_fee}} INR</strong>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="media align-items-center">
+                                            <div class="media-left">
+                                                <img src="/media/{{crs1.teacher.instructor_photo}}" alt="About Adrian" width="50" class="rounded-circle">
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="card-title"><a href="/instructor_profile">{{crs1.teacher.first_name}}{{crs1.teacher.last_name}}</a></h4>
+                                                <p class="card-subtitle">{{crs1.teacher.specialist}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>{{crs1.teacher.working_with}}</p>
+                                        <a href="" class="btn btn-light"><i class="fab fa-facebook"></i></a>
+                                        <a href="" class="btn btn-light"><i class="fab fa-twitter"></i></a>
+                                        <a href="" class="btn btn-light"><i class="fab fa-github"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <ul class="list-group list-group-fit">
+                                        <li class="list-group-item">
+                                            <div class="media align-items-center">
+                                                <div class="media-left">
+                                                    <i class="material-icons text-muted-light">schedule</i>
+                                                </div>
+                                                <div class="media-body">
+                                                    2 <small class="text-muted">hrs</small> &nbsp; 26 <small class="text-muted">min</small>&nbsp;&nbsp;
+                                                    Total:{{ crs1.course_duration }}<small class="text-muted"></small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="media align-items-center">
+                                                <div class="media-left">
+                                                    <i class="material-icons text-muted-light">assessment</i>
+                                                </div>
+                                                <div class="media-body">{{crs1.course_level}}</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Ratings</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="rating">
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star_border</i>
+                                        </div>
+                                        <small class="text-muted">{{crs1.course_ratting}}</small>
+                                    </div>
+                                </div>
+
+                                <a href="/student_lms/student_help_center" class="btn btn-default btn-block">
+                                    <i class="material-icons btn__icon--left">help</i> Get Help
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+{% endblock body %}

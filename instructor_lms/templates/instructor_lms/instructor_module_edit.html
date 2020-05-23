@@ -1,0 +1,167 @@
+{% extends './in_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>{{request.user}} - Add lesson</title>
+{% endblock title %}
+
+{% block body %}
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/instructor_lms">Home</a></li>
+                            <li class="breadcrumb-item active">{{fcrs.course_name}}</li>
+                            <li class="breadcrumb-item active">{{crssn.module}}</li>
+                        </ol>
+                        <h1 class="h2">Add Session</h1>
+                        <form action="/instructor_lms/instructor_module_edit_save/{{fcrs.course_slug}}" method="POST" class="form-horizontal" enctype="multipart/form-data" >
+                            {% csrf_token %}      
+                        <div class="card">
+                            <div class="card-body">
+                            <div class="form-group row">
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>{{message}}</strong> 
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endif %}
+                            {% if message.tags == 'success' %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>{{message}}</strong> 
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                                    <div class="form-group row">
+                                        <label for="course_name" class="col-md-3 col-form-label form-label">Course Name</label>
+                                        <div class="col-md-6">
+                                            <input id="course_name" type="text" class="form-control" placeholder="Write an awesome  name" name="course_name" value="{{fcrs.course_name}}"Disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="module" class="col-md-3 col-form-label form-label">Module Name</label>
+                                        <div class="col-md-6">
+                                            <input id="session_name" type="text" class="form-control" placeholder="Write an awesome session name " name="module" value="{{crssn.module}}">
+                                            <input type="hidden" id="ssnid" name="ssnid" value="{{crssn.id}}" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="session_desc" class="col-md-3 col-form-label form-label">Module Description</label>
+                                        <div class="col-md-6">
+                                            <textarea id="module_desc" type="text" class="form-control" placeholder="Write an awesome session Desc" name="module_desc">{{crssn.module_desc}}</textarea>
+                                        </div>
+                                        
+                                    </div>
+                         </div>
+                           <button type="submit" class="btn btn-primary">Save course</button>
+                            
+                        </div>
+                        </form>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Files</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <!-- Lessons -->
+                                    <ul class="card list-group list-group-fit">
+                                    {% for i in allssn %}
+                                        {% if i.id == crssn.id %}
+                                            <li class="list-group-item active">
+                                        {% endif %}
+                                        {% if i.id != crssn.id %}    
+                                            <li class="list-group-item">
+                                        {% endif %}
+                                        <div class="media">
+                                            {% if i.id == crssn.id %}
+                                            <div class="media-left ">
+                                                <div class="text-white">{{forloop.counter}}</div>
+                                            </div>
+                                            {%endif%}
+                                             {% if i.id != crssn.id %}
+                                            <div class="media-left ">
+                                                <div class="text-muted">{{forloop.counter}}</div>
+                                            </div>
+                                            {%endif%}
+                                            
+                                            <div class="media-body">
+
+                                            {% if i.id == crssn.id %}
+                                                 <a class="text-white" href="/instructor_lms/instructor_lesson_add/{{fcrs.course_slug}}/{{i.slug}}">{{i.module}}</a>
+                                            {% endif %}
+                                            {% if i.id != crssn.id %}
+                                                 <a href="/instructor_lms/instructor_lesson_add/{{fcrs.course_slug}}/{{i.slug}}">{{i.module}}</a>
+                                            {% endif %}
+                                                
+                                            </div>
+                                             
+
+                                            
+                                            {% if i.id == crssn.id %}
+                                                <div class="media-right">
+                                                <small> <a  class="btn btn-sm btn-primary" href="/instructor_lms/instructor_module_edit/{{fcrs.course_slug}}/{{i.slug}}">Edit</a></small>
+                                            </div>
+                                            <div class="media-right">
+                                                <small> <a  class="btn btn-sm btn-primary" href="/instructor_lms/delete_module/{{fcrs.course_slug}}/{{i.slug}}">Delete</a></small>
+                                            </div>
+                                            {% endif %}
+                                            {% if i.id != crssn.id %}
+                                                <div class="media-right">
+                                                <small> <a  class="btn btn-sm btn-primary" href="/instructor_lms/instructor_module_edit/{{fcrs.course_slug}}/{{i.slug}}">Edit</a></small>
+                                            </div>
+                                            <div class="media-right">
+                                                <small> <a  class="btn btn-sm btn-primary" href="/instructor_lms/delete_module/{{fcrs.course_slug}}/{{i.slug}}">Delete</a></small>
+                                            </div>
+                                            {% endif %}
+                                        </div>    
+                                            
+                                        
+                                    </li>
+                                    {% endfor %}
+
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form id="my-awesome-dropzone" action="/target" class="dropzone"></form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div data-toggle="tree">
+                                            <ul style="display: none;">
+                                                <li class="folder expanded">
+                                                    lesson files
+                                                    <ul>
+                                                        <li>lesson-1-install.zip</li>
+                                                        <li>lesson-1-steps.zip</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+{% endblock body %}

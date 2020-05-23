@@ -1,0 +1,98 @@
+{% extends './lms_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>{{request.user}} - Browse courses</title>
+{% endblock title %}
+
+{% block body %}
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/student_lms">Home</a></li>
+                            <li class="breadcrumb-item active">Courses</li>
+                        </ol>
+                        <div class="media align-items-center mb-headings">
+                            <div class="media-body">
+                                <h1 class="h2">Courses</h1>
+                            </div>
+                            <div class="media-right">
+                                <div class="btn-group btn-group-sm">
+                                    <a href="#" class="btn btn-white active"><i class="material-icons">list</i></a>
+                                    <a href="#" class="btn btn-white"><i class="material-icons">dashboard</i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="card-columns"> 
+                        {% for i in crs %}
+                            <div class="card">
+                                <div class="card-header text-center">
+                                    <h4 class="card-title mb-0"><a href="student_take_course/{{i.course_slug}}">{{i.course_name|slice:"0:30"}}</a></h4>
+                                    <div class="rating">
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star_border</i>
+                                    </div>
+                                </div>
+                                <a href="student_take_course/{{i.course_slug}}">
+                                    <img src="{{i.course_image}}" alt="Card image cap" style="width:100%;">
+                                </a>
+                                <div class="card-body">
+                                    <small class="text-muted">{{i.course_level}}</small><br>
+                                   {{i.course_desc|striptags|slice:"0:25"}}<br>
+                                    <span class="badge badge-primary ">Propular</span>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            
+                        </div>
+
+                        <!-- Pagination -->
+                       <ul class="pagination justify-content-center pagination-sm">
+                            {% if crss.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{crss.previous_page_number}}" aria-label="Previous">
+                                    <span aria-hidden="false" class="material-icons">chevron_left</span>
+                                    <span>Prev</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% for num in crss.paginator.page_range %}
+                            {% if crss.number == num %}
+                                <li class="page-item active">
+                                <a class="page-link" href="?page={{num}}" aria-label="1">
+                                    <span>{{num}}</span>
+                                </a>
+                            </li>
+                             {% elif num > crss.number|add:'-2' and num < crss.number|add:'2' %}
+                             <li class="page-item">
+                                <a class="page-link" href="?page={{num}}" aria-label="1">
+                                    <span>{{num}}</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                                                       
+                            {%if crss.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ crss.next_page_number }}" aria-label="Next">
+                                    <span>Next</span>
+                                    <span aria-hidden="false" class="material-icons">chevron_right</span>
+                                </a>
+                            </li>
+                            {%endif%}
+                        </ul>
+                    </div>
+
+                </div>
+
+
+{% endblock body %}      

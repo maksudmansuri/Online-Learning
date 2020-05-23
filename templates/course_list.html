@@ -1,0 +1,325 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}<title>Course List</title>{% endblock title %}
+ {% block body %}
+
+	<div class="main-banner course-list-banner">           			
+        <div class="hvrbox">
+            <img src="{% static 'front/images/banner-1.png' %} " alt="Mountains" class="hvrbox-layer_bottom">
+        	 <div class="hvrbox-layer_top">
+                <div class="container">
+                    <div class="overlay-text text-center">						
+                        <h3><b>2,579</b> Online Course & Video Tutorials!</h3>
+                        <div class="col-md-8 offset-md-2">
+							<div class="input-group">
+							  <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Enter Your Search Here">
+							  <div class="input-group-append">
+							    <button class="btn btn-search" type="button"><i class="fas fa-search"></i></button>
+							  </div>
+							</div>
+						</div>			
+                    </div>
+            	</div>
+        	</div>
+        </div>	                     
+    </div>
+	
+	<div class="course-header-1x">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="course-header-left-top">
+					<p><img src="{% static 'front/images/cross.png' %}" alt="Image"> Remove Filter</p>
+					</div>
+					<div class="course-header-left">
+						<div id="accordion">
+						  <div class="card">
+						    <div class="card-header" id="headingOne">
+						        <a href="#" class="icon-right" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						          <h3>Category</h3>
+						        </a>
+						    </div>
+
+						    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+						      <div class="card-body">
+									<div class="category">				
+										<ul>
+											<li><a href="#"><img src="{% static 'front/images/arrow-right.png' %}" alt="Image"> All Categories <span>45</span></a></li>
+										{% for i in allcat  %}
+											<li><a href="#"><img src="{% static 'front/images/arrow-right.png' %}" alt="Image">{{i}} <span>45</span></a></li>
+											{% for j in allsubcat  %}
+											
+											{% endfor %}
+										{% endfor %}
+
+											
+										</ul>
+									</div>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="card">
+						    <div class="card-header" id="headingTwo">
+						        <a href="#" class="icon-right" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+						          <h3>Filter Product</h3>
+						        </a>        
+						    </div>
+						    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+						      <div class="card-body">						        
+									<div class="filter-product">
+										<label class="container">Feature Products
+										  <input type="checkbox" checked="checked">
+										  <span class="checkmark"></span>
+										</label>
+										<label class="container">Latest Products
+										  <input type="checkbox">
+										  <span class="checkmark"></span>
+										</label>
+										<label class="container">Newest Products
+										  <input type="checkbox">
+										  <span class="checkmark"></span>
+										</label>
+										<label class="container">Popular Products
+										  <input type="checkbox">
+										  <span class="checkmark"></span>
+										</label>
+										<label class="container">Trending Products
+										  <input type="checkbox">
+										  <span class="checkmark"></span>
+										</label>
+										<label class="container">Best Sellers
+										  <input type="checkbox">
+										  <span class="checkmark"></span>
+										</label>
+										<label class="container">Best Rated
+										  <input type="checkbox">
+										  <span class="checkmark"></span>
+										</label>																					
+									</div>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="card">
+						    <div class="card-header" id="headingThree">
+						        <a href="#" class="icon-right" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+						          <h3>Price</h3>
+						        </a>
+						    </div>
+						    <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+						      <div class="card-body">
+						        
+									<div class="price-filter">		
+										<div class="single-select d-flex flex-row">
+											<div class="form-group ">
+												<select class="form-control" id="exampleFormControlSelect1">
+												  <option>$10</option>
+												  <option>$20</option>
+												  <option>$30</option>
+												  <option>$40</option>
+												  <option>$50</option>
+												</select>
+											</div>
+											<p>-</p>
+											<div class="form-group">
+												<select class="form-control" id="exampleFormControlSelect1">
+												  <option>$10</option>
+												  <option>$20</option>
+												  <option>$30</option>
+												  <option>$40</option>
+												  <option>$50</option>
+												</select>
+											</div>	
+										</div>				
+									</div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="course-header-right">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="search-box d-flex flex-row">
+								  <p>Sort by : </p>	
+								  <select class="form-control styleSelect">
+								    <option selected="">All Categories</option>
+								  {% for i in allcat %}
+								    <option value="{{i}}">{{i}}</option>
+								  {% endfor %}
+								    
+								  </select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="course-tab">
+									<p>All prices are in INR</p>
+									<ul class="nav nav-tabs" id="myTab" role="tablist">
+									  <li class="nav-item">
+									    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-list"></i></a>
+									  </li>
+									  <li class="nav-item">
+									    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-th"></i></a>
+									  </li>
+									</ul>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="course-grid-list">
+						<div class="tab-content" id="myTabContent">
+						  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+								<div class="all-course-list">
+								
+								{% for i in courses1 %}
+									<div class="media {{i.course_category}}">
+										<div class="media-left-image">
+											<div class="hvrbox">
+												<img src="{{i.course_image}}" alt="slide 1" class="hvrbox-layer_bottom">
+												<div class="hvrbox-layer_top hvrbox-text">
+													<div class="hvrbox-text">																	
+														<a href="{{i.course_video}}" class="btn-circle video"><i class="fas fa-play"></i></a><br>
+														<a href="course_details/{{i.course_slug}}">Preview Course</a>	
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="media-body">
+											<h2><a href="course_details/{{i.course_slug}}"> {{i.course_name}} </a></h2>
+											<h5>{{i.teacher.admin.first_name}} {{i.teacher.admin.last_name}}</h5>
+											<h4>${{i.course_fee}} <del>${{i.course_fee}}</del></h4>
+											<a href="course_details/{{i.course_slug}}" class="btn-bordered"> View Course </a>
+											<h3>
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i> {{i.ratting}}
+												<span>Enroll: 128 <i class="far fa-heart"></i></span>
+											</h3>											
+										</div>
+									</div>
+									{% comment %} {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
+									<div class="media">
+									{% endif %} {% endcomment %}
+								{%endfor%}
+									
+								</div>	
+								<div class="course-pagination">
+										 <!-- Pagination -->
+                        				<ul class="pagination justify-content-center pagination-sm">
+                            			
+                            				{% if courses1.has_previous %}
+											<li class="page-item"><a class="page-link" href="?page={{courses1.previous_page_number}}"><i class="fas fa-angle-left"></i></a></li>
+                            				{% endif %}
+
+											{% for num in courses1.paginator.page_range %}
+                            				{% if courses1.number == num %}
+											<li class="page-item active"><a class="page-link" href="?page={{num}}"><span class="page-link">{{num}}</span></a></li>
+											{% elif num > courses1.number|add:'-2' and num < courses1.number|add:'2' %}	
+											<li class="page-item"><a class="page-link" href="?page={{num}}	"><span class="page-link">{{num}}</span></a></li>
+											{% endif %}
+											{% endfor %}			
+                            				{%if courses1.has_next %}
+											<li class="page-item"><a class="page-link" href="?page={{ courses1.next_page_number }}"><i class="fas fa-angle-right"></i></a></li>
+											{% endif %}
+										</ul>
+									</div>
+						  </div>
+			    		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+							<div class="course-1x all-course-grid">
+								<div class="container">
+									<div class="row">
+										<div class="all-course">
+											<div class="row">
+											   
+										{% for i in courses1 %}
+										<div class="col-md-4 tile {{i.course_category}}">
+											<div class="single-course">
+												<div class="hvrbox">
+													<img src="{{i.course_image}}" alt="slide why" class="hvrbox-layer_bottom">
+													<div class="hvrbox-layer_top hvrbox-text">
+														<div class="hvrbox-text">																	
+															<a href="{{i.course_video}}" class="btn-circle video"><i class="fas fa-play"></i></a>
+															<a href="course_details/{{i.course_slug}}">Preview Course</a>	
+														</div>
+													</div>
+												</div>
+												<div class="single-course-content">
+													<a href="course_details/{{i.course_slug}}">{{i.course_name}}</a>
+													<p>{{i.teacher.admin.first_name}} {{i.teacher.admin.last_name}} <span><del>${{i.course_fee}}</del> <b>${{i.course_fee}}</b></span></p>
+													<h3>
+														<i class="fas fa-star"></i>
+														<i class="fas fa-star"></i>
+														<i class="fas fa-star"></i>
+														<i class="fas fa-star"></i>
+														<i class="fas fa-star"></i> {{i.ratting}}
+														<span>Enroll: 128</span>
+													</h3>
+												</div>
+											</div>
+										</div>
+											{% comment %} {% if forloop.counter and forloop.counter > 0 and not forloop.last %}
+												<div class="col-md-4 tile {{i.course_category}}"></div>
+											{% endif %} {% endcomment %}
+										{% endfor %}
+																		
+									</div>
+ 					      			<div class="col-md-12">
+									<div class="course-pagination">
+										 <!-- Pagination -->
+                        				<ul class="pagination justify-content-center pagination-sm">
+                            			
+                            				{% if courses1.has_previous %}
+											<li class="page-item"><a class="page-link" href="?page={{courses1.previous_page_number}}"><i class="fas fa-angle-left"></i></a></li>
+                            				{% endif %}
+
+											{% for num in courses1.paginator.page_range %}
+                            				{% if courses1.number == num %}
+											<li class="page-item active"><a class="page-link" href="?page={{num}}"><span class="page-link">{{num}}</span></a></li>
+											{% elif num > courses1.number|add:'-2' and num < courses1.number|add:'2' %}	
+											<li class="page-item"><a class="page-link" href="?page={{num}}	"><span class="page-link">{{num}}</span></a></li>
+											{% endif %}
+											{% endfor %}			
+                            				{%if courses1.has_next %}
+											<li class="page-item"><a class="page-link" href="?page={{ courses1.next_page_number }}"><i class="fas fa-angle-right"></i></a></li>
+											{% endif %}
+										</ul>
+									</div>
+													</div>
+
+												</div>
+											</div>
+
+
+									</div>
+								</div>
+							</div>					  	
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="cta-1x">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="cta-content">
+						<h3>Ready to Begin?</h3>
+						<p>Find subjects you're passionate about by browsing our online course categories. Start <br> learning with top courses Built With Industry Experts.</p>
+						<a href="#" class="btn-small">Start Teaching</a>
+						<a href="#" class="btn-small">Start Learning</a>
+					</div>
+				</div>					
+			</div>
+		</div>
+	</div>
+
+ {% endblock body %}
+	

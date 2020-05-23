@@ -1,0 +1,306 @@
+{% extends './in_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>{{request.user}} - Add lesson</title>
+{% endblock title %}
+
+{% block body %}
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/instructor_lms">Home</a></li>
+                            <li class="breadcrumb-item">{{fcrs.course_name}}</li>
+                            <li class="breadcrumb-item active">{{mdl.module}}</li>
+                        </ol>
+                        <h1 class="h2">Add Session</h1>
+                        <form action="/instructor_lms/instructor_lesson_add/{{fcrs.course_slug}}/{{mdl.slug}}" method="POST" class="form-horizontal" enctype="multipart/form-data" >
+                            {% csrf_token %}      
+                        <div class="card">
+                         
+                            <div class="card-body">
+                            <div class="form-group row">
+                                            {% if messages %}
+                                            {% for message in messages %}
+                                            {% if message.tags == 'error' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% if message.tags == 'success' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    <div class="form-group row">
+                                        <label for="session_name" class="col-md-3 col-form-label form-label">Course Name</label>
+                                        <div class="col-md-6">
+                                            <input id="course_name" type="text" class="form-control" placeholder="Write an awesome  name" name="course_name" value="{{fcrs.course_name}}"Disabled>
+                                        </div>
+
+                                    </div>
+                                         <div class="form-group row">
+                                        <label for="module" class="col-md-3 col-form-label form-label">Module Name</label>
+                                        <div class="col-md-6">
+                                            <input id="module" type="text" class="form-control" placeholder="Write an awesome  name" name="module" value="{{mdl.module}}"Disabled>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="session_name" class="col-md-3 col-form-label form-label">Seesion Name</label>
+                                        <div class="col-md-6">
+                                            <input id="session_name" type="text" class="form-control" placeholder="Write an awesome session name " name="session_name" value="{{crssn.session_name}}">
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="session_desc" class="col-md-3 col-form-label form-label">Seesion Description</label>
+                                        <div class="col-md-6">
+                                            <textarea id="session_desc" type="text" class="form-control" placeholder="Write an awesome session Desc" name="session_desc" value="{{crssn.session_desc}}"></textarea>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="session_duration" class="col-md-3 col-form-label form-label">Seesion Duration</label>
+                                        <div class="col-md-6">
+                                            <input id="session_duration" type="text" class="form-control" placeholder="Write a Duratiion for this session" name="session_duration" value="{{crssn.session_duration}}">
+                                           
+                                        </div>
+                                        
+                                    </div>
+                                   <div class="form-group row">
+                                        <label for="video_link" class="col-sm-3 col-form-label form-label">Upload Video</label>
+                                        <div class="col-sm-9">
+                                        
+                                                <div class="media-body">
+                                                    <div class="custom-file" style="width: 66%  ">
+                                                        <input type="file" id="video_link" class="custom-file-input" name="video_link">
+                                                        <label for="video_link" class="custom-file-label" id="video-video_link_label">Choose file</label>
+                                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                            {% comment %} <button onclick="upload('{{request.path}}')" id="upload_btn" class="btn btn-primary" name="upload_video">Upload</bottun>
+                                            <button class="btn btn-primary d-none" id="loading_btn" type="button"  disabled>
+                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            Uploading...
+                                            </button>
+                                            <button class="btn btn-secondary d-none" id="cancel_btn" type="button">Cancel Upload</button> {% endcomment %}
+{% comment %}                                        
+                                    <div  id="progress_wrapper" class="form-group row d-none">
+                                        <label id="prograss_status" class="col-sm-3 col-form-label form-label">25% Uploaded</label>
+                                        <div class="col-sm-6 ">
+                                        <div class="progress" style="height: 20px;">
+                                            <div id="progress" class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" Disabled>25%</div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div  id="alert_wrapper" class="form-group row">
+                                        
+                                    </div>
+                                </div> {% endcomment %}
+                                </div>
+                            <button type="submit" class="btn btn-primary" name="submit">Save course</button>                            
+                        </div>
+                        </form>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Files</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <!-- Lessons -->
+                                <ul class="card list-group list-group-fit">
+                                {% for i in crssn %}
+                                    <li class="list-group-item">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="text-muted">{{forloop.counter}}</div>
+                                            </div>
+                                            
+                                            <div class="media-body">
+                                                {{i.session_name}}
+                                            </div>
+                                            <div class="media-body">
+                                                <small class="text-muted-light">{{i.session_duration}}</small>
+                                                <input type="hidden" id="ssnid" name="ssnid" value="{{i.id}}" />
+                                            </div>
+                                            <div class="media-right">
+                                                <small> <a  class="btn btn-sm btn-primary" href="/instructor_lms/instructor_lesson_edit/{{fcrs.course_slug}}/{{mdl.slug}}/{{i.course_slug}}">Edit Lesson</a></small>
+                                            </div>
+                                            <div class="media-right">
+                                                <small> <a  class="btn btn-sm btn-primary" href="/instructor_lms/delete_session/{{fcrs.course_slug}}/{{mdl.slug}}/{{i.course_slug}}">Delete</a></small>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form id="my-awesome-dropzone" action="/target" class="dropzone"></form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div data-toggle="tree">
+                                            <ul style="display: none;">
+                                                <li class="folder expanded">
+                                                    lesson files
+                                                    <ul>
+                                                        <li>lesson-1-install.zip</li>
+                                                        <li>lesson-1-steps.zip</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+<script>
+
+    var video_link = document.getElementById("video_link");
+    var file_input_label = document.getElementById("file_input_label");
+
+    function input_filename(){
+       video_link_label.innerText = video_link.files[0].name;
+    }
+
+</script>
+{% comment %}<script>
+     
+    var progress_wrapper = document.getElementById("progress_wrapper");
+    var progress_status = document.getElementById("progress_status");
+
+    var upload_btn = document.getElementById("upload_btn");
+    var loading_btn = document.getElementById("loading_btn");
+    var cancel_btn = document.getElementById("cancel_btn");
+    
+    var alert_wrapper = document.getElementById("alert_wrapper");
+
+    var input = document.getElementById("file_input");
+    var file_input_label = document.getElementById("file_input_label");
+
+    function show_alter(message,alter){
+
+        alert_wrapper.innerHTMl =`
+        <div class="alert alert-${alert} alert-dismissible fade show" role="alert">
+            <span> ${message}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        `;
+    };
+    
+    function input_filename(){
+       file_input_label.innerText = input.files[0].name;
+    }
+
+    function upload(url) {
+
+            if (!input.value){
+              
+                show_alter("no file selected","warning");
+                return;
+
+            }
+            var data = new FormData();
+            var request = new XMLHttpRequest();
+            request.responseType = "json";
+            alert_wrapper.innerHTML = "";
+            input.disabled = true;
+            upload_btn.classList.add("d-none");
+            loading_btn.classList.remove("d-none");
+            cancel_btn.classList.remove("d-none");
+            progress_wrapper.classList.remove("d-none"); 
+            var file = input.files[0];
+            var filname = file.name;
+            var filesize =  file.size;
+
+            document.cookie = `filesize=${filesize}`;
+
+            data.append("file",file);
+
+            request.upload.addEventListener("progress", function(e){
+
+                var loaded=e.loaded;
+                var total=e.total;
+                var percentage_complete = (loaded/total)*100;
+
+                progess.setAttibute("style",`width : ${Math.floor(percentage_complete)}%`);
+                progress_status.innerText = `${Math.floor(percentage_complete)}% uploaded`;
+
+            } )
+            request.addEventListener("load",function(e){
+
+                if(request.status == 200){
+                    show_alter(`${request.response.message}`,"success");
+                }
+                else{
+                    show_alter(`Error in Uploading file`,"danger");
+                }
+                reset();
+            })
+
+            request.addEventListener("error",function(e){
+
+                reset();
+                show_alter("Error Uploading file","danger");
+            })
+
+            request.addEventListener("abort",function(e){
+
+                reset();
+                show_alter(" Upload Cancel","primary");
+            })
+
+            request.open("post", url);
+            request.send(data);
+
+            cancel_btn.addEventListener("click",function(){
+
+                request.abort();
+            })
+    }//upload end
+
+    function reset() {
+
+        input.value = null;
+        input.disabled = false;
+        cancel_btn.classList.add("d-none");
+        loading_btn.classList.add("d-none");
+        upload_btn.classList.remove("d-none");
+        progress_wrapper.classList.add("d-none");
+        progress.setAttribute("style","width: 0%");
+        file_input_label.innerText = "Select File";
+
+    }
+
+</script> {% endcomment %}
+
+{% endblock body %}

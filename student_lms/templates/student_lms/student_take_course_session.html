@@ -1,0 +1,179 @@
+
+{% extends './lms_base.html' %}
+ {% load static %}
+
+{% block title %}
+    <title>{{request.user}} - Take course</title>
+{% endblock title %}
+
+{% block body %}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="1080px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid ">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/student_lms">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/student_lms/student_browse_courses">Courses</a></li>
+                            <li class="breadcrumb-item active"><a href="/student_lms/student_take_course/{{crs1.course_slug}}">{{crs1.course_name}}</a></li>
+                        </ol>
+                        <h1 class="h2">{{crssn2.session_name}}</h1>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="card">
+                                    <div id="session" class="embed-responsive embed-responsive-16by9">
+                                    
+                                    <video controls loop width="620" autoPictureInPicture>
+                                        {% comment %} <source src="/media/examples/flower.webm" type="video/webm"> {% endcomment %}
+                                        <source src="{{crssn2.video_link}}" type="video/mp4">
+                                            Sorry, your browser doesn't support embedded videos.
+                                    </video>
+                                        {% comment %} <iframe width="853" height="480" src="{{crssn2.video_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> {% endcomment %}
+                                    </div>
+                                    <div class="card-body">
+                                            {{crssn2.session_desc|slice:"0:125 "}}
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a href="/media/{{crssn2.course_in_pdf}}" class="btn btn-primary btn-block flex-column">
+                                            <i class="material-icons">get_app</i> Download Files
+                                        </a>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="media align-items-center">
+                                            <div class="media-left">
+                                                <img src="/media/{{crs1.teacher.instructor_photo}}" alt="About Adrian" width="50" class="rounded-circle">
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="card-title"><a href="/instrutor/instructor_profile">{{crs1.teacher.first_name}}{{crs1.teacher.last_name}}</a></h4>
+                                                <p class="card-subtitle">{{crs1.teacher.specialist}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>{{crs1.teacher.working_with}}</p>
+                                        <a href="" class="btn btn-light"><i class="fab fa-facebook"></i></a>
+                                        <a href="" class="btn btn-light"><i class="fab fa-twitter"></i></a>
+                                        <a href="" class="btn btn-light"><i class="fab fa-github"></i></a>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-md-3">
+                                <div class="card">
+                                    <ul class="list-group list-group-fit">
+                                        <li class="list-group-item">
+                                            <div class="media align-items-center">
+                                                <div class="media-left">
+                                                    <i class="material-icons text-muted-light">schedule</i>
+                                                </div>
+                                                <div class="media-body">
+                                                    2 <small class="text-muted">hrs</small> &nbsp; 26 <small class="text-muted">min</small>&nbsp;&nbsp;
+                                                    Total:{{ crs1.course_duration }}<small class="text-muted"></small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="media align-items-center">
+                                                <div class="media-left">
+                                                    <i class="material-icons text-muted-light">assessment</i>
+                                                </div>
+                                                <div class="media-body">{{crs1.course_level}}</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                </div>
+                                <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Ratings</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="rating">
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star</i>
+                                            <i class="material-icons">star_border</i>
+                                        </div>
+                                        <small class="text-muted">{{crs1.course_ratting}}</small>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                {% comment %} <ul class="card list-group list-group-fit">
+                                {% for i in crssn1 %}
+                                {% if i.id == crssn2.id %}
+                                    <li class="list-group-item active">
+                                {% endif %}
+                                {% if i.id != crssn2.id %}    
+                                    <li class="list-group-item">
+                                {% endif %}
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="text-muted">{{forloop.counter}}</div>
+                                            </div>
+                                            <div class="media-body">
+                                            {% if i.id == crssn2.id %}
+                                                <a class="text-white" href="/student_lms/student_take_course_session/{{crs1.course_slug}}/{{i.course_slug}}">{{i.session_name}}</a>
+                                            {% endif %}
+                                            {% if i.id != crssn2.id %}
+                                                <a href="/student_lms/student_take_course_session/{{crs1.course_slug}}/{{i.course_slug}}">{{i.session_name}}</a>
+                                            {% endif %}
+                                            </div>
+                                            <div class="media-right">
+                                                <small class="text-muted-light">{{i.session_duration}}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul> {% endcomment %}
+                               
+                            </div>
+                            <div class="col-md-3">
+<!-- Lessons -->
+                                <!--testing   page-->
+                                {% for mlcrssn,ml in crssn1  %}
+                                <div class="accordion" id="accordionExample{{forloop.counter}}">
+                                    <div class="card">
+                                                <div class="card-header" id="headingOne">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree{{ml.id}}" aria-expanded="false" aria-controls="collapseThree">
+                                                    {{ml.module}}
+                                                    </button>
+                                                   
+                                                </h2>
+                                                </div>
+                                    {% for i in mlcrssn|slice:"0:" %}
+                                        <div id="collapseThree{{ml.id}}" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample{{forloop.parentloop.counter}}">
+                                                <div class="card-body">
+                                                    <a class="text-dark" href="/student_lms/student_take_course_session/{{crs1.course_slug}}/{{ml.slug}}/{{i.course_slug}}">{{i.session_name}}</a>
+                                                </div>
+                                               
+                                                </div>
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %} 
+
+                                <a href="/student_lms/student_help_center" class="btn btn-default btn-block">
+                                    <i class="material-icons btn__icon--left">help</i> Get Help
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+{% endblock body %}

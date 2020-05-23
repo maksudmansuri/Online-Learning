@@ -1,0 +1,175 @@
+{% extends 'counsellor/cnslr_base.html' %}
+{% load static %}
+
+{% block title %}
+        <title>Manage Course</title>
+{% endblock title %}
+
+
+{% block body %}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                        <ol class="breadcrumb d-print-none">
+                            <li class="breadcrumb-item"><a href="counsellor/">Home</a></li>
+                            <li class="breadcrumb-item active">Course Management</li>
+                        </ol>
+                        <h1 class="h2">Courses</h1>
+                        <div class="card">
+                            <div class="card-header form-inline">
+                                <div class="form-group ml-auto">
+                                    <label for="flatpickrSample02" class="form-label mr-3">Date</label>
+                                    <input id="flatpickrSample02" type="text" class="form-control" placeholder="Select dates" data-toggle="flatpickr" data-flatpickr-mode="range" data-flatpickr-alt-input="false" value="2018-10-07 to 2018-10-15">
+                                </div>
+                            </div>
+
+                            <div data-toggle="lists" data-lists-values='[
+        "js-lists-values-course", 
+        "js-lists-values-document",
+        "js-lists-values-amount",
+        "js-lists-values-date"
+      ]' data-lists-sort-by="js-lists-values-date" data-lists-sort-desc="true" class="table-responsive">
+                                <table class="table table-nowrap m-0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th colspan="2">
+                                                <a href="javascript:void(0)" class="sort" data-sort="js-lists-values-course">By Name</a>
+                                                <a href="javascript:void(0)" class="sort" data-sort="js-lists-values-document">By Teacher</a>
+                                                <a href="javascript:void(0)" class="sort" data-sort="js-lists-values-amount">Amount</a>
+                                                <a href="javascript:void(0)" class="sort" data-sort="js-lists-values-date">Date</a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                    {% for cnt,i in crs1 %}
+                                        <tr> 
+                                        {% if i.is_verified is not True %}
+                                            {% if i.is_appiled is True %}
+                                            <td>
+                                                <div class="media align-items-center">
+                                                    <a href="/counsellor/check_course_details/{{i.course_slug}}" class="avatar avatar-4by3 avatar-sm mr-3">
+                                                        <img src="{{i.course_image}}" alt="Profile" class="avatar-img rounded">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="text-body js-lists-values-course" href="/counsellor/check_course_details/{{i.course_slug}}"><strong>{{i.course_name}}</strong></a><br>
+                                                        <small class="text-muted mr-1">
+                                                            Invoice
+                                                            <a href="instructor_invoice" style="color: inherit;" class="js-lists-values-document">#8735</a> -
+                                                            &dollar;<span class="js-lists-values-amount">89</span> USD
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="media-body">
+                                                    <a class="text-body js-lists-values-course" href="instructor_course_edit"><strong>{{i.course_subcategory.subcategory}}</strong></a><br>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="media-body">
+                                                    <a class="text-body js-lists-values-course" href="instructor_course_edit"><strong>{{i.course_fee}}</strong></a><br>
+                                                </div>
+                                            </td>
+                                            {% if cnt != 0 %}
+                                                <td>
+                                                <a href="/counsellor/check_course_details/{{i.course_slug}}" class="btn-sm btn-primary">{{cnt}} - Pending </a>
+                                            </td>
+                                            {% else %}
+                                                <td>
+                                                <a  href="/counsellor/course_activate/{{i.course_slug}}" class="btn-sm btn-primary">Activate</a>
+                                                </td>
+                                            {% endif %}
+                                           <td class="text-right">
+                                                 <small class="text-muted text-uppercase js-lists-values-date">{{i.admin.date_joined}}</small>
+                                                </td>
+                                            {% endif %}
+                                        {% else %}
+                                                <td>
+                                                <div class="media align-items-center">
+                                                    <a href="/counsellor/check_course_details/{{i.course_slug}}" class="avatar avatar-4by3 avatar-sm mr-3">
+                                                        <img src="{{i.course_image}}" alt="Profile" class="avatar-img rounded">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="text-body js-lists-values-course" href="/counsellor/check_course_details/{{i.course_slug}}"><strong>{{i.course_name}}</strong></a><br>
+                                                        <small class="text-muted mr-1">
+                                                            Invoice
+                                                            <a href="instructor_invoice" style="color: inherit;" class="js-lists-values-document">#8735</a> -
+                                                            &dollar;<span class="js-lists-values-amount">89</span> USD
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="media-body">
+                                                    <a class="text-body js-lists-values-course" href="instructor_course_edit"><strong>{{i.course_subcategory.subcategory}}</strong></a><br>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="media-body">
+                                                    <a class="text-body js-lists-values-course" href="instructor_course_edit"><strong>{{i.course_fee}}</strong></a><br>
+                                                </div>
+                                            </td>
+                                                <td>
+                                                    <a  href="/counsellor/course_deactivate/{{i.course_slug}}" class="btn-sm btn-secondary">Activated</a>
+                                                </td>
+                                                
+                                                <td class="text-right">
+                                                    <small class="text-muted text-uppercase js-lists-values-date">{{i.admin.date_joined}}</small>
+                                                </td>
+                                    
+                                        {% endif %}
+                                        </tr>
+                                    {% endfor %}
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <!-- Pagination -->
+                        <ul class="pagination justify-content-center pagination-sm">
+                            {% if crs1.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{crs1.previous_page_number}}" aria-label="Previous">
+                                    <span aria-hidden="false" class="material-icons">chevron_left</span>
+                                    <span>Prev</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% for num in crs1.paginator.page_range %}
+                            {% if crs1.number == num %}
+                                <li class="page-item active">
+                                <a class="page-link" href="?page={{num}}" aria-label="1">
+                                    <span>{{num}}</span>
+                                </a>
+                            </li>
+                             {% elif num > crs1.number|add:'-2' and num < crs1.number|add:'2' %}
+                             <li class="page-item">
+                                <a class="page-link" href="?page={{num}}" aria-label="1">
+                                    <span>{{num}}</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                                                         
+                            {%if crs1.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ crs1.next_page_number }}" aria-label="Next">
+                                    <span>Next</span>
+                                    <span aria-hidden="false" class="material-icons">chevron_right</span>
+                                </a>
+                            </li>
+                            {%endif%}
+                        </ul>
+
+                    </div>
+
+                </div>
+
+{% endblock body %}

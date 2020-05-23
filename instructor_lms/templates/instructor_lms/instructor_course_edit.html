@@ -1,0 +1,178 @@
+{% extends './in_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Instructor - Edit course</title>
+{% endblock title %}
+
+{% block body %}
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/instructor_lms">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/instructor_lms/instructor_courses">Courses</a></li>
+                            <li class="breadcrumb-item active">Edit course</li>
+                        </ol>
+                        <div class="media align-items-center mb-headings">
+                            <div class="media-body">
+                                <h1 class="h2">Edit Course</h1>
+                            </div>
+                        </div>
+                        <form method="post" action="/instructor_lms/instructor_course_edit/{{crs.course_slug}}" class="form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Edit {{crs.course_name}}</h4>
+                                    </div>
+                                    <div class="card-body">
+                                    <div class="form-group row">
+                                            {% if messages %}
+                                            {% for message in messages %}
+                                            {% if message.tags == 'error' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% if message.tags == 'success' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                           <label class="form-label" for="Course_Image">Course Display Image</label>
+                                                 <div class="media align-items-center">
+                                                 <div class="media-body">
+                                                        <div class="custom-file" style="width: auto;">
+                                                            <input  id="course_image" name="course_image" type="file" class="custom-file-input">
+                                                            <label for="Course_Image" class="custom-file-label">Choose file</label>
+                                                        </div>
+                                                        <div class="media align-items-center">
+                                                            <div class="media-left">
+                                                                <div>
+                                                                {{crs.course_image.name|slice:"13:20"}}
+                                                                </div>
+                                                            </div>
+                                                         </div>
+                                                 </div>
+                                                 </div>                                           
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="form-label" for="category">Sub Category</label>
+                                            <select id="subcategory"  name="subcategory" class="custom-select form-control">
+                                                {% for i in allsubcat %}
+                                                {% if crs.course_subcategory == i %}
+                                                    <option selected>{{i.subcategory}}</option>
+                                                {% endif %}
+                                                <option >{{i.subcategory}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="title">Course Title</label>
+                                            <input type="text" id="title"  name="course_name" class="form-control" placeholder="Write a Course Name" value="{{crs.course_name}}" >
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="title">Course Fee</label>
+                                            <input type="text" id="title" name="course_fee" class="form-control" placeholder="Fees" value="{{crs.course_fee}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="duration">Duration</label>
+                                            <input type="text" id="course_duration"  name="course_duration" class="form-control" placeholder="Total Hours" value="{{crs.course_duration}}" >
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            {% comment %} <div class="col-md-4">
+                                <div class="card">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item" src="{{crs.course_video}}" allowfullscreen=""></iframe>
+                                    </div>
+                                    <div class="card-body">
+                                        <input type="text" class="form-control" value="{{crs.course_video}}" />
+                                    </div>
+                                </div>
+                                {% comment %} <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Others</h5>
+                                    </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="category">Category</label>
+                                            <select id="course_category" name="course_category" class="custom-select form-control">
+                                                {% for i in allcat %}
+                                                <option value="{{crs.course_category}}">{{i.category}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="duration">Duration</label>
+                                            <input type="text" id="course_duration" class="form-control" placeholder="No. of Days" value="{{crs.course_duration}}">
+                                        </div>
+                                </div> 
+                            </div> {% endcomment %}
+                            <div class="col-md-12">
+                                  <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Basic Information</h4>
+                                    </div>
+                                    <div class="card-body">
+                                    {% load crispy_forms_tags %}
+                                    <div class="form-group">
+                                        <label class="form-label" for="course_video"></label>
+                                        {{form.media}}
+                                        {{ form |crispy }}
+
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                            <label class="form-label" for="course_video">Introducation Video</label>
+                                            <input type="text" id="course_video"  name="course_video" class="form-control" placeholder="add video link" value="{{crs.course_video}}">
+                                    </div>
+                                    <div class="form-group">
+                                            <label class="form-label" for="course_level">Course Level</label>
+                                            <select id="course_level"  name="course_level" class="custom-select form-control">
+                                                <option {% if crs.course_level == 'Beginner' %} selected{% endif %}>Beginners</option>
+                                                <option {% if crs.course_level == 'Intermidiator' %} selected {%endif%}>Intermidiator</option>
+                                                <option {% if crs.course_level == 'Expert' %} selected{%endif%}>Expert</option>
+                                                
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save course</button>
+                        </form>
+                    </div>
+
+                    <div class="modal fade" id="editLesson">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                // Edit Lesson
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+{% endblock body %}

@@ -1,0 +1,17 @@
+@mixin transition-time($transition){
+    -webkit-transition: all $transition ease;
+     -o-transition: all $transition ease;
+      transition: all $transition ease;
+}
+@mixin transform-value($value1,$value2){
+        -moz-transform: translate($value1,$value2);
+        -webkit-transform: translate($value1,$value2);
+        -ms-transform: translate($value1,$value2);
+        transform: translate($value1,$value2);
+}
+@mixin transform-angle-value($value1){
+      -webkit-transform: rotate($value1) translate3d(0, 0, 0);
+      -moz-transform: rotate($value1) translate3d(0, 0, 0);
+      -ms-transform: rotate($value1) translate3d(0, 0, 0);
+      -o-transform: rotate($value1) translate3d(0, 0, 0);
+}

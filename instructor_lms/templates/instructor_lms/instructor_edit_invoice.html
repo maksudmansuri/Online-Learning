@@ -1,0 +1,168 @@
+{% extends './in_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Edit Invoice</title>
+{% endblock title %}
+
+{% block body %}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container p-0">
+                        <div class="row m-0">
+                            <div class="col-lg container-fluid page__container">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="./">Home</a></li>
+                                    <li class="breadcrumb-item active">Edit Account</li>
+                                </ol>
+
+                                <h1 class="h2">Edit Invoice</h1>
+
+                                <form action="">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="form-row align-items-center">
+                                                <div class="col-md-6">
+                                                    <div class="form-group m-0" role="group" aria-labelledby="label-number">
+                                                        <label id="label-number" for="number" class="form-label">Invoice Number</label>
+                                                        <input id="number" type="text" placeholder="Invoice number ..." value="10003578" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group m-0" role="group" aria-labelledby="label-date">
+                                                        <label id="label-date" for="date" class="form-label">Invoice Date</label>
+                                                        <input id="date" type="text" class="form-control" placeholder="Invoice Date" data-toggle="flatpickr" value="today">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card table-responsive">
+                                        <table class="table mb-0 table--elevated" id="table">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th style="width: 18px;">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input js-toggle-check-all" data-target="#table" id="customCheckAll">
+                                                            <label class="custom-control-label" for="customCheckAll"><span class="sr-only">Toggle all</span></label>
+                                                        </div>
+                                                    </th>
+                                                    <th class="border-top-0">Description</th>
+                                                    <th class="border-top-0 text-right" style="width: 120px;">Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input js-check-selected-row" id="customCheck1_1">
+                                                            <label class="custom-control-label" for="customCheck1_1"><span class="sr-only">Check</span></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <a href="instructor_view_course" class="avatar avatar-4by3 avatar-sm mr-3">
+                                                                <img src="{% static 'student_lms/assets/images/gulp.png' %} " alt="Learn Angular Fundamentals" class="avatar-img rounded">
+                                                            </a>
+                                                            <div class="flex">
+                                                                <a href="instructor_view_course" class="text-body">
+                                                                    <strong>Learn Angular Fundamentals</strong>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right"><strong>&dollar;89.00 USD</strong></td>
+                                                </tr>
+
+                                                <!-- <tr>
+          <td>
+            <p class="mb-1"><strong>Basic Plan - Monthly Subscription</strong></p>
+            <p class="text-black-50 mb-0 small">For the period of June 20, 2018 to July 20, 2018</p>
+          </td>
+          <td class="text-right"><strong>&dollar;9 USD</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Credit discount</strong></td>
+          <td class="text-right"><strong>-&dollar;5 USD</strong></td>
+        </tr> -->
+                                            </tbody>
+                                        </table>
+
+                                        <table class="table mb-0">
+                                            <tfoot>
+                                                <tr>
+                                                    <td style="width: 18px;" class="align-middle">
+                                                        <div class="custom-control custom-checkbox disabled">
+                                                            <input type="checkbox" class="custom-control-input js-check-selected-row" id="customCheck1_new">
+                                                            <label class="custom-control-label" for="customCheck1_new"><span class="sr-only">Check</span></label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <input type="text" class="form-control form-control-flush" placeholder="Enter item ...">
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="form-row align-items-center">
+                                                <div class="col-md-6">
+                                                    <div class="form-group m-0" role="group" aria-labelledby="label-discount">
+                                                        <label id="label-discount" for="discount" class="form-label">Discount</label>
+                                                        <input id="number" type="text" placeholder="Enter amount i.e. 12.5% or 12.50" value="5.00" class="form-control">
+                                                        <small id="description-discount" class="form-text text-muted">Enter amount i.e. 12.5% or 12.50</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table mb-0 table-borderless">
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td class="text-right text-black-70"><strong>Subtotal</strong></td>
+                                                                <td style="width: 120px;" class="text-right"><strong>&dollar;89.00 USD</strong></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right text-black-70"><strong>Discount</strong></td>
+                                                                <td style="width: 120px;" class="text-right"><strong>-&dollar;5.00 USD</strong></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right text-black-70"><strong>Total</strong></td>
+                                                                <td style="width: 120px;" class="text-right"><strong>&dollar;84.00 USD</strong></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="page-nav" class="col-lg-auto page-nav">
+                                <div data-perfect-scrollbar>
+                                    <div class="page-section pt-lg-32pt">
+                                        <nav class="nav page-nav__menu">
+                                            <a href="instructor_invoice" class="nav-link">View Invoice</a>
+                                            <a href="instructor_edit_invoice" class="nav-link active">Edit Invoice</a>
+                                            <a href="instructor_invoice_settings" class="disabled nav-link">Invoice Settings</a>
+                                        </nav>
+
+                                        <div class="page-nav__content">
+                                            <button class="btn btn-success">Save Changes</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+{% endblock body %}

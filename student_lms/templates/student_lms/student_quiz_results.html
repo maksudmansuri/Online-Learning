@@ -1,0 +1,110 @@
+{% extends './lms_base.html' %}
+ {% load static %}
+
+{% block title %}
+    <title>Student - Quiz results</title>
+{% endblock title %}
+
+{% block body %}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="./">Home</a></li>
+                            <li class="breadcrumb-item active">Quiz Results</li>
+                        </ol>
+                        <div class="media mb-headings align-items-center">
+                            <div class="media-left">
+                                <img src="{% static 'student_lms/assets/images/vuejs.png' %} " alt="" width="80" class="rounded">
+                            </div>
+                            <div class="media-body">
+                                <h1 class="h2">Vue.js Deploy Quiz</h1>
+                                <p class="text-muted">submited on 2nd Feb 2016</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Result</h4>
+                            </div>
+                            <div class="card-body media align-items-center">
+                                <div class="media-body">
+                                    <h4 class="mb-0">5.8</h4>
+                                    <span class="text-muted-light">Good</span>
+                                </div>
+                                <div class="media-right">
+                                    <a href="student_take_quiz" class="btn btn-primary">Restart <i class="material-icons btn__icon--right">refresh</i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Questions</h4>
+                            </div>
+                            <ul class="list-group list-group-fit mb-0">
+                                <li class="list-group-item">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <div class="text-muted-light">1.</div>
+                                        </div>
+                                        <div class="media-body">Installation</div>
+                                        <div class="media-right"><span class="badge badge-success ">Correct</span></div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <div class="text-muted-light">2.</div>
+                                        </div>
+                                        <div class="media-body">The MVC architectural pattern</div>
+                                        <div class="media-right"><span class="badge badge-success ">Correct</span></div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <div class="text-muted-light">3.</div>
+                                        </div>
+                                        <div class="media-body">Database Models</div>
+                                        <div class="media-right"><span class="badge badge-success ">Correct</span></div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <div class="text-muted-light">4.</div>
+                                        </div>
+                                        <div class="media-body">Database Access</div>
+                                        <div class="media-right"><span class="badge badge-danger ">Wrong</span></div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <div class="text-muted-light">5.</div>
+                                        </div>
+                                        <div class="media-body">Eloquent Basics</div>
+                                        <div class="media-right"><span class="badge badge-primary ">Pending Review</span></div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <div class="text-muted-light">6.</div>
+                                        </div>
+                                        <div class="media-body">Take Quiz</div>
+                                        <div class="media-right"><span class="badge badge-success ">Correct</span></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+
+{% endblock body %}              

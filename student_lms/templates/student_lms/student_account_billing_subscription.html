@@ -1,0 +1,101 @@
+{% extends './lms_base.html' %}
+
+{% load static %}
+{% block title %}
+    <title>Subscription</title>
+{% endblock title %}
+
+{% block body %}
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container p-0">
+                        <div class="row m-0">
+                            <div class="col-lg container-fluid page__container">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="./">Home</a></li>
+                                    <li class="breadcrumb-item active">Edit Account</li>
+                                </ol>
+
+                                <h1 class="h2">Subscription</h1>
+
+                                <div class="card">
+                                    <div class="list-group list-group-fit">
+                                        <div class="list-group-item">
+                                            <div class="form-group row mb-0">
+                                                <label class="col-form-label form-label col-sm-3">Your current plan</label>
+                                                <div class="col-sm-9 d-flex align-items-center">
+                                                    <div class="flex">Basic, &dollar;9 per month</div>
+                                                    <a href="student_account_billing_upgrade" class="text-secondary">Change plan</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="form-group row mb-0">
+                                                <label class="col-form-label form-label col-sm-3">Billing cycle</label>
+                                                <div class="col-sm-9">
+                                                    <p class="mb-1">You will be charged $9 on Aug 20, 2018</p>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" checked id="customCheck1">
+                                                        <label class="custom-control-label" for="customCheck1">
+                                                            <strong>Enable automatic renewal</strong>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="form-group row mb-0">
+                                                <label class="col-form-label form-label col-sm-3">Payment information</label>
+                                                <div class="col-sm-9 d-flex align-items-center">
+                                                    <img src="{% static 'student_lms/assets/images/visa.svg' %} " alt="visa" width="40" class="mr-16pt">
+                                                    <div class="flex">Visa ending with 2819</div>
+                                                    <a href="student_account_billing_payment_information" class="text-secondary">Change method</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="form-group row mb-0">
+                                                <label class="col-form-label form-label col-sm-3">Cancel</label>
+                                                <div class="col-sm-9">
+                                                    <a href="#" class="btn btn-outline-secondary">Cancel subscription</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="page-nav" class="col-lg-auto page-nav">
+                                <div data-perfect-scrollbar>
+                                    <div class="page-section pt-lg-32pt">
+                                        <ul class="nav page-nav__menu">
+                                            <li class="nav-item">
+                                                <a href="student_account_billing_subscription" class="nav-link active">Subscription</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="student_account_billing_upgrade" class="nav-link">Upgrade Account</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="student_account_billing_payment_information" class="nav-link">Payment Information</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="student_billing" class="nav-link">Payment History</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="student_invoice" class="nav-link">Invoice</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+{% endblock body %}
+

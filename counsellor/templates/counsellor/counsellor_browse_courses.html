@@ -1,0 +1,149 @@
+{% extends './lms_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Student - Browse courses</title>
+{% endblock title %}
+
+{% block body %}
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="./">Home</a></li>
+                            <li class="breadcrumb-item active">Courses</li>
+                        </ol>
+                        <div class="media align-items-center mb-headings">
+                            <div class="media-body">
+                                <h1 class="h2">Courses</h1>
+                            </div>
+                            <div class="media-right">
+                                <div class="btn-group btn-group-sm">
+                                    <a href="#" class="btn btn-white active"><i class="material-icons">list</i></a>
+                                    <a href="#" class="btn btn-white"><i class="material-icons">dashboard</i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="card-columns">
+                        {% for crs, range in allcourse %}
+							{% for i in crs %}
+                            <div class="card">
+                                <div class="card-header text-center">
+                                    <h4 class="card-title mb-0"><a href="student_take_course/{{i.course_slug}}">{{i.course_name|slice:"0:30"}}</a></h4>
+                                    <div class="rating">
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star_border</i>
+                                    </div>
+                                </div>
+                                <a href="student_take_course/{{i.course_slug}}">
+                                    <img src="/media/{{i.course_image}}" alt="Card image cap" style="width:100%;">
+                                </a>
+                                <div class="card-body">
+                                    <small class="text-muted">{{i.course_level}}</small><br>
+                                   {{i.course_desc|slice:"0:123"}}<br>
+                                    <span class="badge badge-primary ">VUEJS</span>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            {%endfor%}
+                            {% comment %} <div class="card">
+                                <div class="card-header text-center">
+                                    <h4 class="card-title mb-0"><a href="student_take_course">Npm &amp; Gulp Advanced Workflow</a></h4>
+                                    <div class="rating">
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star_half</i>
+                                        <i class="material-icons">star_border</i>
+                                    </div>
+                                </div>
+                                <a href="student_take_course">
+                                    <img src="{% static 'student_lms/assets/images/nodejs.png' %}" alt="Card image cap" style="width:100%;">
+                                </a>
+                                <div class="card-body">
+                                    <small class="text-muted">BEGINNER</small><br>
+                                    Developing static website with fast and advanced gulp setup by managing all parts...<br>
+                                    <small class="badge badge-primary ">GULP</small>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header text-center">
+                                    <h4 class="card-title mb-0"><a href="student_take_course">Github Webhooks for Beginners</a></h4>
+                                    <div class="rating">
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star_border</i>
+                                        <i class="material-icons">star_border</i>
+                                        <i class="material-icons">star_border</i>
+                                    </div>
+                                </div>
+                                <a href="student_take_course">
+                                    <img src="{% static 'student_lms/assets/images/github.png' %}" alt="" style="width:100%;">
+                                </a>
+                                <div class="card-body">
+                                    <small class="text-muted">INTERMEDIATE</small><br>
+                                    Learn the basics of Github and become a power Github developer.<br>
+                                    <small class="badge badge-primary ">GULP</small>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header text-center">
+                                    <h4 class="card-title mb-0"><a href="student_take_course">Gulp & Slush Workflows</a></h4>
+                                    <div class="rating">
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star</i>
+                                        <i class="material-icons">star_border</i>
+                                    </div>
+                                </div>
+                                <a href="student_take_course">
+                                    <img src="{% static 'student_lms/assets/images/gulp.png' %}" alt="Card image cap" style="width:100%;">
+                                </a>
+                                <div class="card-body">
+                                    <small class="text-muted">ADVANCED</small><br>
+                                    Let’s start with a quick tour of Vue’s data binding features. If you are more interested in ...<br>
+                                    <span class="badge badge-primary ">GULP</span> <span class="badge badge-primary ">SLUSH</span>
+                                </div>
+                            </div> {% endcomment %}
+                        </div>
+
+                        <!-- Pagination -->
+                        <ul class="pagination justify-content-center pagination-sm">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true" class="material-icons">chevron_left</span>
+                                    <span>Prev</span>
+                                </a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#" aria-label="1">
+                                    <span>1</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="1">
+                                    <span>2</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span>Next</span>
+                                    <span aria-hidden="true" class="material-icons">chevron_right</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+{% endblock body %}      

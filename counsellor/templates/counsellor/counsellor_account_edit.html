@@ -1,0 +1,284 @@
+{% extends './lms_base.html' %}
+{% load static %}
+
+{% block title %}
+        <title>Student - Edit account</title>
+{% endblock title %}
+
+{% block body %}
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="./">Home</a></li>
+                            <li class="breadcrumb-item active">Edit Account</li>
+                        </ol>
+                        <h1 class="h2">Edit Account</h1>
+
+                        <div class="card">
+                            <ul class="nav nav-tabs nav-tabs-card">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#first" data-toggle="tab">Account {{std1.fisrt_name}}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#second" data-toggle="tab">Billing {{std1.last_name}}</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content card-body">
+                                <div class="tab-pane active" id="first">
+                                    <form method="POST" action="./student_account_edit" class="form-horizontal">
+                                    {% csrf_token %}
+                                        <div class="form-group row">
+                                            <label for="avatar" class="col-sm-3 col-form-label form-label">Avatar</label>
+                                            <div class="col-sm-9">
+                                                <div class="media align-items-center">
+                                                    <div class="media-left">
+                                                        <div class="icon-block rounded">
+                                                            <i class="material-icons text-muted-light md-36">photo</i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="custom-file" style="width: auto;">
+                                                            <input  id="student_photo" name="student_photo" type="file" class="custom-file-input">
+                                                            <label for="avatar" class="custom-file-label">Choose file</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="name" class="col-sm-3 col-form-label form-label">Full Name</label>
+                                            <div class="col-sm-8">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input id="fisrt_name" type="text" class="form-control" placeholder="First Name" name="fisrt_name" value={{std1.fisrt_name}}>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input id="last_name" type="text" class="form-control" placeholder="Last Name" name="last_name" value={{std1.last_name}}>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="email" class="col-sm-3 col-form-label form-label">Email</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">mail</i>
+                                                        </div>
+                                                    </div>
+                                                    <input  type="email" id="email" name="email" class="form-control" placeholder="Email Address" value={{std1.student_email}}>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="date" class="col-sm-3 col-form-label form-label">Date of Birth</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">date_range</i>
+                                                        </div>
+                                                    </div>
+                                                    <input  type="date" id="student_dob" name="student_dob" class="form-control" placeholder=" Date of Birth" datevalue={{std1.student_dob}}>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="Mobile Number" class="col-sm-3 col-form-label form-label">Mobile Number</label>
+                                            <div class="col-sm-6 col-md-6 ">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">phone</i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="tel" id="student_phone" class="form-control" placeholder="+91" name="student_phone" value={{std1.student_phone}}>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="qualification" class="col-sm-3 col-form-label form-label">Qualification</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">school</i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" id="student_qualification" name="student_qualification" class="form-control" placeholder="Ex:-BE/MCA/Diploma" value={{std1.student_qualification}}>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% comment %} <div class="form-group row">
+                                            <label for="name_on_invoice" class="col-sm-3 col-form-label form-label">Name on Invoice</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <input id="student_name" type="text" name="student_name" class="form-control" value="{{std.fisrt_name}}| {{std.last_name}}" disabled>
+                                            </div>
+                                        </div> {% endcomment %}
+                                        
+                                        <div class="form-group row">
+                                            <label for="billing_address" class="col-sm-3 col-form-label form-label">Address</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <input id="student_address" type="text" class="form-control" name="student_address" placeholder="Enter you Address" value={{std1.student_address}}>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="city" class="col-sm-3 col-form-label form-label">City</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <input id="student_city" type="text" class="form-control" name="student_city"  placeholder="Enter you City" value={{std1.student_city}}>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="state" class="col-sm-3 col-form-label form-label">state</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <input id="student_state" type="text" class="form-control" name="student_state"  placeholder="Enter you State" value={{std1.student_state}}>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="billing_country" class="col-sm-3 col-form-label form-label">Country</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <select id="student_country" name="student_country" class="custom-control custom-select form-control">
+                                                    <option value="1" >USA</option>
+                                                    <option value="2" selected>India</option>
+                                                    <option value="3">United Kingdom</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        {% comment %} <div class="form-group row">
+                                            <label for="password" class="col-sm-3 col-form-label form-label">Change Password</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">lock</i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="password" id="password" class="form-control" placeholder="Enter new password">
+                                                </div>
+                                            </div>
+                                        </div> {% endcomment %}
+                                        <div class="form-group row">
+                                            <div class="col-sm-8 offset-sm-3">
+                                                <div class="media align-items-center">
+                                                    <div class="media-left">
+                                                        <a  class="btn btn-success">Save Changes</a>
+                                                    </div>
+                                                    <div class="media-body pl-1">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input id="subscribe" type="checkbox" name="subscribe" class="custom-control-input" checked>
+                                                            <label for="subscribe" class="custom-control-label">Subscribe to Newsletter</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit"class="btn btn-primary">Save Changes</button>
+                                    </form>
+                                </div>
+
+                                <div class="tab-pane" id="second">
+                                    <form action="./student_account_edit"   class="form-horizontal">
+                                    {% csrf_token %}
+                                        {% comment %} <div class="form-group row">
+                                            <label for="name_on_invoice" class="col-sm-3 col-form-label form-label">Name on Invoice</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <input id="student_name" type="text" name="student_name" class="form-control" value="{{std.fisrt_name}}| {{std.last_name}}" disabled>
+                                            </div>
+                                        </div> {% endcomment %}
+                                        
+                                        <div class="form-group row">
+                                            <label for="billing_address" class="col-sm-3 col-form-label form-label">Address</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <input id="student_address" type="text" class="form-control" name="student_address" placeholder="Enter you Address">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="city" class="col-sm-3 col-form-label form-label">City</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <input id="student_city" type="text" class="form-control" name="student_city"  placeholder="Enter you City">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="state" class="col-sm-3 col-form-label form-label">state</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <input id="student_state" type="text" class="form-control" name="student_state"  placeholder="Enter you State">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="billing_country" class="col-sm-3 col-form-label form-label">Country</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <select id="student_country" name="student_country" class="custom-control custom-select form-control">
+                                                    <option value="1" >USA</option>
+                                                    <option value="2" selected>India</option>
+                                                    <option value="3">United Kingdom</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 col-md-4 offset-sm-3">
+                                                <a href="#" class="btn btn-success"> Update Billing</a>
+                                            </div>
+                                        </div>
+                                         <button name = "Update_Billing"type="submit"class="btn btn-primary">Update Billing</button>
+                                    </form>
+                                    <div class="card mt-2">
+                                        <div class="card-header">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <h4 class="card-title">Payment Info</h4>
+                                                </div>
+                                                <div class="media-right">
+                                                    <a href="#" class="btn btn-sm btn-outline-primary"><i class="material-icons">add</i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="card-footer p-0 list-group list-group-fit">
+                                            <li class="list-group-item active">
+                                                <div class="media align-items-center">
+                                                    <div class="media-left">
+                                                        <span class="btn btn-primary btn-circle"><i class="material-icons">credit_card</i></span>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <p class="mb-0">**** **** **** 2422</p>
+                                                        <small>Updated on 12/02/2016</small>
+                                                    </div>
+                                                    <div class="media-right">
+                                                        <a href="#" class="btn btn-primary btn-sm">
+                                                            <i class="material-icons btn__icon--left">edit</i> EDIT
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="media align-items-center">
+                                                    <div class="media-left">
+                                                        <span class="btn btn-white btn-circle"><i class="material-icons">credit_card</i></span>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <p class="mb-0">**** **** **** 6321</p>
+                                                        <small class="text-muted">Updated on 11/01/2016</small>
+                                                    </div>
+                                                    <div class="media-right">
+                                                        <a href="#" class="btn btn-white btn-sm">
+                                                            <i class="material-icons btn__icon--left">edit</i> EDIT
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+{% endblock body %}

@@ -1,0 +1,124 @@
+{% extends './lms_base.html' %}
+ {% load static %}
+
+{% block title %}
+    <title>Student Profile Posts</title>
+{% endblock title %}
+
+{% block body %}
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page pt-0">
+
+                    <div class="bg-primary mdk-box js-mdk-box mb-0" style="height: 192px;" data-effects="parallax-background blend-background">
+                        <div class="mdk-box__bg">
+                            <div class="mdk-box__bg-front" style="background-image: url({% static 'student_lms/assets/images/1280_rsz_aman-dhakal-205796-unsplash.jpg' %}); background-position: center;"></div>
+                        </div>
+                    </div>
+                    <div class="container-fluid page__container d-flex align-items-end position-relative mb-4">
+                        <div class="avatar avatar-xxl position-absolute bottom-0 left-0 right-0">
+                            <img src="{% static 'student_lms/assets/images/256_rsz_clem-onojeghuo-150467-unsplash.jpg' %}" alt="avatar" class="avatar-img rounded-circle border-3">
+                        </div>
+                        <ul class="nav nav-tabs-links flex" style="margin-left: 265px;">
+                            <li class="nav-item">
+                                <a href="student_profile" class="nav-link">Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link active">Posts</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="container-fluid page__container mb-3">
+                        <div class="row flex-sm-nowrap">
+                            <div class="col-sm-auto mb-3 mb-sm-0" style="width: 265px;">
+                                <h1 class="h2 mb-1">Laza Bogdan</h1>
+                                <p class="d-flex align-items-center mb-4">
+                                    <a href="" class="btn btn-sm btn-success mr-2">Follow @LazaBogdan</a>
+                                </p>
+                                <div class="text-muted d-flex align-items-center mb-2">
+                                    <i class="material-icons mr-1">account_box</i>
+                                    <div class="flex">Student since 2012</div>
+                                </div>
+                                <div class="text-muted d-flex align-items-center mb-4">
+                                    <i class="material-icons mr-1">location_on</i>
+                                    <div class="flex">Romania, Europe</div>
+                                </div>
+
+                                <h4>About me</h4>
+                                <p class="text-black-70 measure-paragraph">Fueled by my passion for understanding the nuances of cross-cultural advertising, I consider myself a forever student, eager to both build on my academic foundations in psychology and sociology and stay in tune with the latest digital marketing strategies through continued coursework.</p>
+
+                                <h4>Connect</h4>
+                                <p class="text-black-70 measure-paragraph">I’m currently working as a freelance marketing director and always interested in a challenge. Here’s how to reach out and connect.</p>
+                            </div>
+                            <div class="col-sm">
+
+
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex mb-1">
+                                            <div class="avatar avatar-sm mr-3">
+                                                <img src="{% static 'student_lms/assets/images/people/50/guy-2.jpg' %} " alt="Avatar" class="avatar-img rounded-circle">
+                                            </div>
+                                            <div class="flex">
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <strong class="text-15pt">Jimmy Carter</strong>
+                                                    <small class="ml-auto text-muted">3 days ago</small>
+                                                </div>
+                                                <div>
+                                                    <p>Thanks for contributing to the release of LearnPlus - Learning Management Template <a href="">https://www.frontendmatter.com/themes/learnpl...</a> 🔥</p>
+                                                    <p><a href="">#themeforest</a> <a href="">#EnvatoMarket</a></p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <a href="" class="text-muted d-flex align-items-center text-decoration-0"><i class="material-icons mr-1" style="font-size: inherit;">favorite_border</i> 26</a>
+                                            <a href="" class="text-muted d-flex align-items-center text-decoration-0 ml-3"><i class="material-icons mr-1" style="font-size: inherit;">thumb_up</i> 123</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex mb-1">
+                                            <div class="avatar avatar-sm mr-3">
+                                                <img src="{% static 'student_lms/assets/images/people/50/woman-5.jpg' %}" alt="Avatar" class="avatar-img rounded-circle">
+                                            </div>
+                                            <div class="flex">
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <strong class="text-15pt">Michelle Smith</strong>
+                                                    <small class="ml-auto text-muted">4 days ago</small>
+                                                </div>
+                                                <div>
+                                                    <p>Checkout our new JVC camera course on <a href="">https://t.co/Wh7jE0yz4h</a> 😉
+                                                </div>
+
+                                                <a href="" class="card my-3 text-body text-decoration-0">
+                                                    <img src="{% static 'student_lms/assets/images/stories/256_rsz_phil-hearing-769014-unsplash.jpg' %}" alt="image" class="card-img-top">
+                                                    <span class="card-footer d-flex flex-column">
+                                                        <strong>Learn How To Operate a JVC Camera</strong>
+                                                        <span class="text-black-70">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                                                        <span class="text-muted">frontendmatter.com</span>
+                                                    </span>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <a href="" class="text-muted d-flex align-items-center text-decoration-0"><i class="material-icons mr-1" style="font-size: inherit;">favorite_border</i> 156</a>
+                                            <a href="" class="text-muted d-flex align-items-center text-decoration-0 ml-3"><i class="material-icons mr-1" style="font-size: inherit;">thumb_up</i> 351</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+{% endblock body %}
