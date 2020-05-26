@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import user_logged_in
 from ckeditor_uploader.fields import RichTextUploadingField
 from instructor_lms.models import Staffs
+from accounts.models import Students
 from django.urls import reverse
 from django.shortcuts import redirect
 
@@ -90,4 +91,15 @@ class Course_Session(models.Model):
     def __str__(self):
         return self.module.module + self.session_name
 
+
+class viewed(models.Model):
+    id=models.AutoField(primary_key=True)
+    student=models.ForeignKey(Students,on_delete=models.CASCADE)
+    course=models.ForeignKey(Course,on_delete=models.CASCADE)
+    module_position=models.ForeignKey(Course_Modules,on_delete=models.CASCADE)
+    session_position=models.ForeignKey(Course_Session,on_delete=models.CASCADE)
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.student.fisrt_name + self.course.course_name
     

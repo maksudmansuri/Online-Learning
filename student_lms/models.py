@@ -19,10 +19,10 @@ class Orders(models.Model):
     id=models.AutoField(primary_key=True)
     student=models.ForeignKey(Students,on_delete=models.CASCADE)
     course=models.ForeignKey(Course, on_delete=models.CASCADE)
-    discount=models.ForeignKey(Discount,on_delete=models.CASCADE)
+    # discount=models.ForeignKey(Discount,on_delete=models.CASCADE)
     orders_date=models.DateTimeField(auto_now_add=True)
-    student_phone=models.CharField(max_length=50,default=0)
-    student_email=models.EmailField(max_length=254,default="")
+    student_phone=models.CharField(max_length=50,default=0,null=True)
+    student_email=models.EmailField(max_length=254,default="",null=True)
     objects = models.Manager()
 
     def __str__(self):

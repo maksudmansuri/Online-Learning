@@ -5,11 +5,14 @@ from django.contrib.auth import login,authenticate,logout
 from front.models import Course,Course_Session,Course_Modules,CourseCategory,CourseSubCategory
 from .models import Orders,Ratting
 from accounts.models import Students,CustomUser
+from front.models import viewed
 from django.contrib import messages
 from django.contrib.auth.forms import UserChangeForm
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Page,PageNotAnInteger,Paginator
+import moviepy.editor
+
 # Create your views  h ere.
 
 
@@ -129,20 +132,16 @@ def student_browse_courses(request):
 
 @login_required() 
 def student_cart(request,slug):
-    if request.session.has_key('logged in'):
-        if request.user.user_type!="3":
-            messages.error(request,"Invvalid Page :")
-            return redirect("/accounts/dologin")
-        std=Students.objects.get(admin=request.user.id)
-        crs=Course.objects.get(course_slug=slug)
-        if request.method=="POST":
-            user=Students.objects.get(admin=request.user.id)
-            print(user)
-            order=Orders(student_name=request.user, course=crs,student_phone=user.phone,student_email=user.admin.email)
-            order.save()
-            return redirect("/student_lms/student_pay",kwargs={'crs1': crs,'std1':std}) 
-        return render(request,'student_lms/student_cart.html',{'crs1':crs,'std1':std})
-    return redirect("/accounts/dologin") 
+    std=Students.objects.get(admin=request.user.id)
+    crs=Course.objects.get(course_slug=slug)
+    if request.method=="POST":
+        user=Students.objects.get(admin=request.user.id)
+        print(user)
+        order=Orders(student=user, course=crs,student_phone=user.phone,student_email=user.admin.email)
+        order.save()
+        return redirect("/student_lms/student_pay",kwargs={'crs1': crs,'std1':std}) 
+    return render(request,'student_lms/student_cart.html',{'crs1':crs,'std1':std})
+
 
 @login_required() 
 def student_help_center(request):
@@ -168,28 +167,18 @@ def student_messages_2(request):
 
 @login_required()
 def student_my_courses(request):
-    if request.user.is_anonymous:
-       return redirect("/accounts/dologin")
     std=Students.objects.get(admin=request.user.id)
     ord=Orders.objects.filter(student=std)
-    paginator=Paginator(ord,2)
+    paginator=Paginator(ord,6)
     page=request.GET.get('page')
     ord=paginator.get_page(page)           
     return render(request,'student_lms/student_my_courses.html',{'ord1':ord,'std1':std})
 
 @login_required()
 def student_pay(request):
-    if request.session.has_key('logged in'):
-        if request.user.user_type!="3":
-            messages.error(request,"Invvalid Page :")
-            return redirect("/accounts/dologin")
-        else:
-            std=Students.objects.get(admin=request.user.id)
-            return render(request,'student_lms/student_pay.html',{'std1':std})
-    else:
-        return redirect("/accounts/dologin")
-
-
+    std=Students.objects.get(admin=request.user.id)
+    return render(request,'student_lms/student_pay.html',{'std1':std})
+    
 def student_quiz_results(request):
     if request.session.has_key('logged in'):
         if request.user.user_type!="3":
@@ -198,12 +187,50 @@ def student_quiz_results(request):
         return render(request,'student_lms/student_quiz_results.html')
     return redirect("/accounts/dologin")
 
+def convert(seconds):
+    hours = seconds // 3600
+    seconds %= 3600
+    mins = seconds // 60
+    seconds %= 60
+    return hours, mins, seconds
+
+@login_required()
+def session(request,course_slug,slug):
+    std=Students.objects.get(admin=request.user.id)
+    crs=Course.objects.get(course_slug=course_slug,)
+    allml=Course_Modules.objects.filter(course=crs)
+    ml=Course_Modules.objects.get(slug=slug,course=crs)
+    allssn=Course_Session.objects.filter(module=ml)
+    # view=viewed.objects.get(student=std)
+    # if view.positon == None or view.position == null or view.position == 0:
+    crssn2=Course_Session.objects.filter(module=ml).first()
+    # else:
+    #     crssn2=Course_Session.objects.filter(module=ml,course_slug=view.slug)
+    # crssn2=Course_Session.objects.get(course_slug=sslug,module=ml)
+    # crssn=[]        
+    # allml=Course_Modules.objects.filter(course=crs)
+    # for ml in allml:
+    #     mlcrssn=Course_Session.objects.filter(module=ml)
+    #     n=len(mlcrssn)
+    #     crssn.append([mlcrssn,ml])
+
+    param={'crs':crs,'allssn':allssn,'ssn':crssn2,'std1':std,'ml':ml}
+    return render(request,'student_lms/session.html',param)
+    # return redirect("/accounts/dologin")
+
+@login_required()
+def session_view(request,course_slug,slug,sslug):
+    std=Students.objects.get(admin=request.user.id)
+    crs=Course.objects.get(course_slug=course_slug,)
+    allml=Course_Modules.objects.filter(course=crs)
+    ml=Course_Modules.objects.get(slug=slug,course=crs)
+    allssn=Course_Session.objects.filter(module=ml)
+    crssn2=Course_Session.objects.get(course_slug=sslug,module=ml)
+    param={'crs':crs,'allssn':allssn,'ssn':crssn2,'std1':std,'ml':ml}
+    return render(request,'student_lms/session_view.html',param)
+
 @login_required()
 def student_take_course_session(request,course_slug,slug,sslug):
-    # if request.session.has_key('logged in'):
-    #     if request.user.user_type!="3":
-    #         messages.error(request,"Invvalid Page :")
-    #         return redirect("/accounts/dologin")
     std=Students.objects.get(admin=request.user.id)
     crs=Course.objects.get(course_slug=course_slug)
     allml=Course_Modules.objects.filter(course=crs)
@@ -233,6 +260,20 @@ def student_take_course_session_view(request,slug,sslug):
         param={'crs1':crs[0],'crssn1':crssn,'crssn2':crssn2,'std1':std}
         return render(request,'student_lms/student_take_course_session.html',param)
     return redirect("/accounts/dologin")
+
+@login_required() 
+def modules(request,slug):
+    crssn=[]
+    std=Students.objects.get(admin=request.user.id)
+    crs=Course.objects.get(course_slug=slug)
+    mdl=Course_Modules.objects.filter(course=crs)
+    for ml in mdl:
+        mlcrssn=Course_Session.objects.filter(module=ml)
+        n=len(mlcrssn)
+        crssn.append([mlcrssn,ml,n])
+        print(crssn)
+    param={'crs1':crs,'crssn1':crssn,'std1':std}
+    return render(request,'student_lms/modules.html',param)
 
 @login_required() 
 def student_take_course(request,slug):

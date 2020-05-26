@@ -33,7 +33,7 @@
                         {% for i in crs %}
                             <div class="card">
                                 <div class="card-header text-center">
-                                    <h4 class="card-title mb-0"><a href="student_take_course/{{i.course_slug}}">{{i.course_name|slice:"0:30"}}</a></h4>
+                                    <h4 class="card-title mb-0"><a href="/student_lms/modules/{{i.course_slug}}">{{i.course_name|slice:"0:30"}}</a></h4>
                                     <div class="rating">
                                         <i class="material-icons">star</i>
                                         <i class="material-icons">star</i>
@@ -42,7 +42,7 @@
                                         <i class="material-icons">star_border</i>
                                     </div>
                                 </div>
-                                <a href="student_take_course/{{i.course_slug}}">
+                                <a href="/student_lms/modules/{{i.course_slug}}">
                                     <img src="{{i.course_image}}" alt="Card image cap" style="width:100%;">
                                 </a>
                                 <div class="card-body">

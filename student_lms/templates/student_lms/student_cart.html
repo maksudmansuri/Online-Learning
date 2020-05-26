@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-    <title>Student - Cart{{crs1.course_slug}}</title>
+    <title>Student - Cart - {{crs1.course_slug}}</title>
 {% endblock title %}
 
 {% block body %}
@@ -38,7 +38,7 @@ q
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <a href="student_view_course" class="avatar avatar-4by3 avatar-sm mr-3">
-                                                    <img src="/media/{{crs1.course_image}} " alt="Learn Vue.js Fundamentals" class="avatar-img rounded">
+                                                    <img src="{{crs1.course_image}} " alt="Learn Vue.js Fundamentals" class="avatar-img rounded">
                                                 </a>
                                                 <div class="media-body">
                                                     <a href="#" class="text-body"><strong>{{crs1.course_name}}</strong></a>

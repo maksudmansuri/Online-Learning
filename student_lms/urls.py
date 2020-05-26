@@ -31,4 +31,7 @@ urlpatterns = [
     path('student_profile_posts', views.student_profile_posts,name='student_profile_posts'),
     path('student_logout', views.student_logout,name='student_logout'),   
     path('lms_base', views.lms_base,name='lms_base'),   
+    path('modules/<slug>', views.modules,name='modules'),   
+    path('session/<course_slug>/<slug>', views.session,name='session'),   
+    path('session_view/<course_slug>/<slug>/<sslug>', views.session_view,name='session_view'),   
 ]

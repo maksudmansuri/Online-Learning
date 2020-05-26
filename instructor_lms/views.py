@@ -374,7 +374,9 @@ def instructor_module_edit_save(request,slug):
     allmdl=Course_Modules.objects.filter(course=fcrs)
     return render(request,'instructor_lms/instructor_module_add.html',{'fcrs':fcrs,'crssn':allmdl})
     return redirect("/accounts/dologin")
-       
+
+from moviepy.video.io.VideoFileClip import VideoFileClip
+
 @login_required
 def instructor_lesson_add(request,slug,sslug):
     bool=True
@@ -418,6 +420,8 @@ def instructor_lesson_add(request,slug,sslug):
                 video_link_url=fs.url(filename)
             else:
                 video_link_url=None
+            # clip = VideoFileClip("video_link_url")
+            # print(clip.duration)
             a=1
             if a==1:
                 session=Course_Session(module=module,session_desc=session_desc,session_duration=session_duration,course_slug=course_slug)
