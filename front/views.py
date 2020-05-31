@@ -5,9 +5,9 @@ from django.contrib.auth import login,authenticate,logout
 from front.models import Course,Course_Session,CourseCategory,CourseSubCategory,Course_Modules
 from math import ceil
 from accounts.EmailBackEnd import EmailBackEnd
+from django.db.models import Q
 from django.core.paginator import Page,PageNotAnInteger,Paginator
 # Create your vie ws here.v
-
 
 def index(request):
     allcourse=[]
@@ -29,19 +29,43 @@ def index(request):
 def home_two(request):
     return render(request,'home_two.html')
 
+
+def search_list(query=None):
+    queryset = []
+    queries = query.split(" ")
+    for q in queries:
+        courses = Course.objects.filter(
+            (Q(course_name__icontains = q) | Q(course_desc__icontains = q)) & Q(is_verified=True) 
+            ).distinct()
+
+        for course in courses:
+            queryset.append(course)
+    
+    return list(set(queryset)) 
+
 def course_list(request):
-    # allcourse=[]
-    courses=Course.objects.all()
-    allcat=CourseCategory.objects.all()
+    courses=[]
+    allcats=[]
+    catcourse=Course.objects.values('course_category','id')
+    cats={item['course_category'] for item in catcourse}
+    for cat in cats:
+        allcat=CourseCategory.objects.get(id=cat)
+        # crs=Course.objects.filter(course_category=cat,is_verified=True)
+        crscnt=Course.objects.filter(course_category=cat).count()
+        # nSlides=n/4+ceil((n/4)-(n//4))
+        # courses.append(crs)
+        allcats.append([allcat,crscnt])
+
+    courses=Course.objects.filter(is_verified=True)
+    cnt=Course.objects.filter().count()
+    # allcat=CourseCategory.objects.all()
     allsubcat=CourseSubCategory.objects.all()
-    paginator=Paginator(courses,3)
+    paginator=Paginator(courses,6)
     page=request.GET.get('page')
     courses=paginator.get_page(page)
-    param={'allcat':allcat,'allsubcat':allsubcat,'courses1':courses}
+    param={'allcat':allcats,'allsubcat':allsubcat,'courses1':courses,'cnt':cnt}
     return render(request,'course_list.html',param)
 
-def search_list(request):
-    pass
 
 def testing_file(request):
     allcourse=[]

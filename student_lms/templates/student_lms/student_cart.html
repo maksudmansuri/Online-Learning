@@ -22,6 +22,26 @@ q
                     <form method="POST" action="/student_lms/student_cart/{{crs1.course_slug}}">
                     {% csrf_token %}
                         <input type="hidden" name="course_json" id="course_json">
+                         {% if messages %}
+                            {% for message in messages %}
+                                {% if message.tags == 'error' %}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>{{message}}</strong> 
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                </div>
+                                
+                                {% elif message.tags == 'success' %}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>{{message}}</strong> 
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
                         <div class="card table-responsive">
                             <table class="table table-nowrap mb-0 table--elevated">
                                 <thead class="thead-light">
@@ -110,8 +130,8 @@ q
                                 </tfoot>
                             </table>
                             <div class="card-footer d-flex align-items-center">
-                                <a href="student_browse_courses" class="btn btn-white">Back to Courses</a>
-                                <a href="/student_lms/student_pay" class="ml-auto">
+                                <a href="#" class="btn btn-white">Back to Courses</a>
+                                {% comment %} <a href="/student_lms/student_pay" class="ml-auto"> {% endcomment %}
                                 <button type="submit" class="btn btn-success" >pay<i class="material-icons btn__icon--right">payment</i></button></a>
                                 {% comment %}  class="btn btn-success ml-auto"> Pay<i class="material-icons btn__icon--right">payment</i>     </a> {% endcomment %}
 

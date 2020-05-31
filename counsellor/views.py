@@ -48,7 +48,7 @@ def manage_staff(request):
     page=request.GET.get('page')
     stf=paginator.get_page(page)
     return render(request,'counsellor/manage_staff.html',{'stf':stf})
-
+ 
 def staff_activate(request,id):
     stf=Staffs.objects.filter((Q(is_appiled=True) | Q(is_verified=True)) & Q(admin__is_active=True) &  Q(admin__user_type=2))
     astf=Staffs.objects.get(admin_id=id)
@@ -102,6 +102,35 @@ def student_deactivate(request,id):
     page=request.GET.get('page')
     std=paginator.get_page(page)
     return render(request,'counsellor/manage_student.html',{'std':std})
+
+def course_category(request):
+    if request.method == "POST":
+        category=request.POST['category']
+        cat=CourseCategory(category=category)
+        cat.save()
+    crscats=CourseCategory.objects.all()
+    return render(request,'counsellor/course_category.html',{'crscats':crscats}) 
+
+def course_category_delete(request,id):
+    detcrscats=CourseCategory.objects.get(id=id).delete()
+    crscats=CourseCategory.objects.all()
+    return render(request,'counsellor/course_category.html',{'crscats':crscats}) 
+
+def course_subcategory(request,id):
+    crscats=CourseCategory.objects.get(id=id)
+    if request.method == "POST":
+        category=crscats
+        subcategory=request.POST['subcategory']
+        cat=CourseSubCategory(category=category,subcategory=subcategory)
+        cat.save()
+    crssbcats=CourseSubCategory.objects.filter(category=crscats.id)
+    return render(request,'counsellor/course_subcategory.html',{'crssbcats':crssbcats,'crscats':crscats}) 
+
+def course_subcategory_delete(request,sid,id):
+    crscats=CourseCategory.objects.get(id=sid)
+    detcrssbcats=CourseSubCategory.objects.get(id=id).delete()
+    crssbcats=CourseSubCategory.objects.filter(category=crscats.id)
+    return render(request,'counsellor/course_subcategory.html',{'crssbcats':crssbcats,'crscats':crscats}) 
 
 def manage_course(request):
     allcrs=Course.objects.filter(Q(is_appiled =True) | Q(is_verified=True))

@@ -10,7 +10,7 @@
         	 <div class="hvrbox-layer_top">
                 <div class="container">
                     <div class="overlay-text text-center">						
-                        <h3><b>2,579</b> Online Course & Video Tutorials!</h3>
+                        <h3><b>{{cnt}}</b> Online Course & Video Tutorials!</h3>
                         <div class="col-md-8 offset-md-2">
 							<div class="input-group">
 							  <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Enter Your Search Here">
@@ -46,11 +46,14 @@
 									<div class="category">				
 										<ul>
 											<li><a href="#"><img src="{% static 'front/images/arrow-right.png' %}" alt="Image"> All Categories <span>45</span></a></li>
-										{% for i in allcat  %}
-											<li><a href="#"><img src="{% static 'front/images/arrow-right.png' %}" alt="Image">{{i}} <span>45</span></a></li>
-											{% for j in allsubcat  %}
 											
-											{% endfor %}
+										{% for allcat,crscnt in allcat  %}
+										
+											<li><a href="#"><img src="{% static 'front/images/arrow-right.png' %}" alt="Image">{{allcat}} <span>{{crscnt}}</span></a></li>
+											
+											{% comment %} {% for j in allsubcat  %}
+											
+											{% endfor %} {% endcomment %}
 										{% endfor %}
 
 											
@@ -146,8 +149,9 @@
 								  <p>Sort by : </p>	
 								  <select class="form-control styleSelect">
 								    <option selected="">All Categories</option>
-								  {% for i in allcat %}
-								    <option value="{{i}}">{{i}}</option>
+									
+								  {% for allcat,crscnt in allcat %}
+								    <option value="{{allcat}}">{{allcat}}</option>
 								  {% endfor %}
 								    
 								  </select>
@@ -175,6 +179,7 @@
 								<div class="all-course-list">
 								
 								{% for i in courses1 %}
+								
 									<div class="media {{i.course_category}}">
 										<div class="media-left-image">
 											<div class="hvrbox">
@@ -205,6 +210,7 @@
 									{% comment %} {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
 									<div class="media">
 									{% endif %} {% endcomment %}
+									
 								{%endfor%}
 									
 								</div>	

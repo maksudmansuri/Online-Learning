@@ -17,6 +17,11 @@ urlpatterns = [
     path('check_course_session_activate/<slug>/<sslug>/<ssslug>', views.check_course_session_activate,name='check_course_session_activate'),
     path('check_course_session_deactivate/<slug>/<sslug>/<ssslug>', views.check_course_session_deactivate,name='check_course_session_deactivate'),
     
+    path('course_category', views.course_category,name='course_category'),
+    path('course_subcategory/<id>', views.course_subcategory,name='course_subcategory'),
+    path('course_category_delete/<id>', views.course_category_delete,name='course_category_delete'),
+    path('course_subcategory_delete/<sid>/<id>', views.course_subcategory_delete,name='course_subcategory_delete'),
+
     path('check_course_details/<slug>', views.check_course_details,name='check_course_details'),
     path('check_course_session/<slug>/<sslug>/<ssslug>', views.check_course_session,name='check_course_session'),
 

@@ -6,6 +6,9 @@
 {% endblock title %}
 
 {% block body %}
+<style>
+
+</style>
         <!-- Header Layout Content -->
         <div class="mdk-header-layout__content">
 
@@ -28,6 +31,52 @@
                                 </div>
                             </div>
                         </div>
+                        {% comment %} <div class="card card-body border-left-3 border-left-primary navbar-shadow mb-4">
+                            <form action="/student_lms/student_browse_courses" method="get">
+                                <div class="d-flex flex-wrap2 align-items-center mb-headings">
+                                    <div class="dropdown">
+                                        <a href="#" data-toggle="dropdown" class="btn btn-white"><i class="material-icons mr-sm-2">tune</i> <span class="d-none d-sm-block">Filters</span></a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-item d-flex flex-column">
+                                                <div class="form-group">
+                                                    <label for="custom-select" class="form-label">Category</label><br>
+                                                    <select id="custom-select" class="form-control custom-select" style="width: 200px;">
+                                                        <option selected>All categories</option>
+                                                        <option value="1">Vue.js</option>
+                                                        <option value="2">Node.js</option>
+                                                        <option value="3">GitHub</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="published01" class="form-label">Published</label><br>
+                                                    <select id="published01" class="form-control custom-select" style="width: 200px;">
+                                                        <option selected>Published courses</option>
+                                                        <option value="1">Draft courses</option>
+                                                        <option value="3">All courses</option>
+                                                    </select>
+                                                </div>
+                                                <a href="#">Clear filters</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex search-form ml-3 search-form--light">
+                                        <input type="text" class="form-control" placeholder="Search courses" id="id_q" name="q" >
+                                        <button class="btn" type="button" role="button"><i class="material-icons">search</i></button>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-column flex-sm-row align-items-sm-center" style="white-space: nowrap;">
+                                    <small class="flex text-muted text-uppercase mr-3 mb-2 mb-sm-0">Displaying 4 out of 10 courses</small>
+                                    <div class="w-auto ml-sm-auto table d-flex align-items-center mb-0">
+                                        <small class="text-muted text-uppercase mr-3 d-none d-sm-block">Sort by</small>
+                                        <a href="#" class="sort desc small text-uppercase">Course</a>
+                                        <a href="#" class="sort small text-uppercase ml-2">Earnings</a>
+                                        <a href="#" class="sort small text-uppercase ml-2">Sales</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> {% endcomment %}
+                        {% if crs %}
                         <div class="clearfix"></div>
                         <div class="card-columns"> 
                         {% for i in crs %}
@@ -54,25 +103,42 @@
                             {%endfor%}
                             
                         </div>
+                        {% else %}
+                        <div class="clearfix"></div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="card m-auto">
+                                    <div class="card-body mt-2 mb-2">
+                                        <h2 class="card-title">
+                                            No results search 
+                                        </h2>
+                                        <p class="card-text">
+                                        There were no results mathing your search: "{{query}}." 
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
 
                         <!-- Pagination -->
-                       <ul class="pagination justify-content-center pagination-sm">
-                            {% if crss.has_previous %}
+                       <ul class="pagination justify-content-center pagination-sm mt-10">
+                            {% if crs.has_previous %}
                             <li class="page-item">
-                                <a class="page-link" href="?page={{crss.previous_page_number}}" aria-label="Previous">
+                                <a class="page-link" href="?page={{crs.previous_page_number}}" aria-label="Previous">
                                     <span aria-hidden="false" class="material-icons">chevron_left</span>
                                     <span>Prev</span>
                                 </a>
                             </li>
                             {% endif %}
-                            {% for num in crss.paginator.page_range %}
-                            {% if crss.number == num %}
+                            {% for num in crs.paginator.page_range %}
+                            {% if crs.number == num %}
                                 <li class="page-item active">
                                 <a class="page-link" href="?page={{num}}" aria-label="1">
                                     <span>{{num}}</span>
                                 </a>
                             </li>
-                             {% elif num > crss.number|add:'-2' and num < crss.number|add:'2' %}
+                             {% elif num > crs.number|add:'-2' and num < crs.number|add:'2' %}
                              <li class="page-item">
                                 <a class="page-link" href="?page={{num}}" aria-label="1">
                                     <span>{{num}}</span>
@@ -81,9 +147,9 @@
                             {% endif %}
                             {% endfor %}
                                                        
-                            {%if crss.has_next %}
+                            {%if crs.has_next %}
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ crss.next_page_number }}" aria-label="Next">
+                                <a class="page-link" href="?page={{ crs.next_page_number }}" aria-label="Next">
                                     <span>Next</span>
                                     <span aria-hidden="false" class="material-icons">chevron_right</span>
                                 </a>
@@ -93,6 +159,8 @@
                     </div>
 
                 </div>
-
+<script type="text/javascript">
+    document.getElementById("id_q").value = "{{query}}"
+</script>
 
 {% endblock body %}      

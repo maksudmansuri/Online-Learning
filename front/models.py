@@ -29,7 +29,7 @@ class CourseSubCategory(models.Model):
     
     def __str__(self):
         return self.subcategory  
-
+ 
 class Course(models.Model):
     id=models.AutoField(primary_key=True)
     course_category=models.ForeignKey(CourseCategory, on_delete=models.CASCADE)
@@ -95,9 +95,11 @@ class Course_Session(models.Model):
 class viewed(models.Model):
     id=models.AutoField(primary_key=True)
     student=models.ForeignKey(Students,on_delete=models.CASCADE)
-    course=models.ForeignKey(Course,on_delete=models.CASCADE)
-    module_position=models.ForeignKey(Course_Modules,on_delete=models.CASCADE)
-    session_position=models.ForeignKey(Course_Session,on_delete=models.CASCADE)
+    course=models.CharField(max_length=50,blank=True,null=True)
+    module_position=models.CharField(max_length=50,blank=True,null=True)
+    session_position=models.CharField(max_length=50,blank=True,null=True)
+    created_date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated_at=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     objects = models.Manager()
 
     def __str__(self):
