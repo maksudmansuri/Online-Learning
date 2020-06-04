@@ -69,6 +69,9 @@ class Course_Modules(models.Model):
     position=models.IntegerField(default=0)
     objects = models.Manager()
 
+    class Meta:
+        ordering = ['position']
+
     def __str__(self):
         return self.module
 
@@ -88,6 +91,9 @@ class Course_Session(models.Model):
     position=models.IntegerField(default=0)
     objects = models.Manager()
 
+    class Meta:
+        ordering = ['position']
+
     def __str__(self):
         return self.module.module + self.session_name
 
@@ -102,6 +108,3 @@ class viewed(models.Model):
     updated_at=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     objects = models.Manager()
 
-    def __str__(self):
-        return self.student.fisrt_name + self.course.course_name
-    

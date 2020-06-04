@@ -34,4 +34,5 @@ urlpatterns = [
     path('modules/<slug>', views.modules,name='modules'),   
     path('session/<course_slug>/<slug>', views.session,name='session'),   
     path('session_view/<course_slug>/<slug>/<sslug>', views.session_view,name='session_view'),   
+    path('session_seen/<course_slug>/<slug>/<sslug>', views.session_seen,name='session_seen'),   
 ]
