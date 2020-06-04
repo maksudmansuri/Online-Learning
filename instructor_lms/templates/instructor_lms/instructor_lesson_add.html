@@ -76,26 +76,31 @@
                                         
                                     </div>
                                     <div class="form-group row">
-                                        <label for="session_duration" class="col-md-3 col-form-label form-label">Seesion Duration</label>
+                                        {% comment %} <label for="session_duration" class="col-md-3 col-form-label form-label">Seesion Duration</label> {% endcomment %}
                                         <div class="col-md-6">
-                                            <input id="session_duration" type="text" class="form-control" placeholder="Write a Duratiion for this session" name="session_duration" value="{{crssn.session_duration}}">
+                                            <input id="session_duration" type="hidden" class="form-control" placeholder="Write a Duratiion for this session" name="session_duration" value="{{session_duration}}">
                                            
                                         </div>
                                         
                                     </div>
-                                   <div class="form-group row">
+                                    <div class="form-group row">
                                         <label for="video_link" class="col-sm-3 col-form-label form-label">Upload Video</label>
                                         <div class="col-sm-9">
-                                        
-                                                <div class="media-body">
-                                                    <div class="custom-file" style="width: 66%  ">
-                                                        <input type="file" id="video_link" class="custom-file-input" name="video_link">
+                                          <div class="media-body">
+                                                <div class="custom-file" style="width: 66%  ">
+                                                    <input type="file" id="video_link" class="custom-file-input" name="video_link">
                                                         <label for="video_link" class="custom-file-label" id="video-video_link_label">Choose file</label>
-                                                    </div>
                                                 </div>
-                                            
+                                            </div>
                                         </div>
                                     </div>
+                                     <div class="form-group row">
+                                        <label for="position" class="col-md-3 col-form-label form-label">Module Position</label>
+                                        <div class="col-md-6">
+                                            <input id="position" type="text" placeholder="Add Position Number" class="form-control" name="position">
+                                        </div>
+                                        
+                                    </div>    
                                             {% comment %} <button onclick="upload('{{request.path}}')" id="upload_btn" class="btn btn-primary" name="upload_video">Upload</bottun>
                                             <button class="btn btn-primary d-none" id="loading_btn" type="button"  disabled>
                                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -132,7 +137,7 @@
                                     <li class="list-group-item">
                                         <div class="media">
                                             <div class="media-left">
-                                                <div class="text-muted">{{forloop.counter}}</div>
+                                                <div class="text-muted">{{i.position}}</div>
                                             </div>
                                             
                                             <div class="media-body">
@@ -189,6 +194,21 @@
     function input_filename(){
        video_link_label.innerText = video_link.files[0].name;
     }
+
+    var duration = 0;
+    // If video metadata is laoded get duration
+    getDuration.call(video_link);
+    document.getElementById("session_duration").innerHTML = duration;
+    //If metadata not loaded, use event to get it
+    video_link.addEventListener('loadedmetadata', getDuration);
+    document.getElementById("session_duration").innerHTML = duration;
+    
+    function getDuration() {
+        duration = video_link.duration;
+        document.getElementById("session_duration").appendChild(new Text(Math.round(duration)+""));
+        console.log("Duration: ", duration);
+    }
+
 
 </script>
 {% comment %}<script>

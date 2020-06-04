@@ -101,6 +101,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label for="position" class="col-md-3 col-form-label form-label">Session Position</label>
+                                        <div class="col-md-6">
+                                            <input id="position" type="text" placeholder="Add Position Number" class="form-control" name="position" value="{{crssn.position}}">
+                                        </div>
+                                    </div>    
+                                    <div class="form-group row">
                                         <label class="col-md-3 col-form-label form-label">Upload Video</label>
                                         <div class="col-md-9">
                                             <div class="row">
@@ -116,7 +122,10 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <div class="embed-responsive embed-responsive-16by9">
-                                                        {{crssn.video_link|safe}}                               
+                                                        <video id="video" controls="true" poster="" autoPictureInPicture>
+                                                    <source src="{{crssn.video_link}}" type="video/mp4">
+                                                        Sorry, your browser doesn't support embedded videos.
+                                                        </video>                               
                                                        </div>
                                                     </div>
                                                 </div>
@@ -125,7 +134,7 @@
                                     </div>
                                 
                             </div>
-                            <button type="submit" class="btn btn-primary">Save course</button>
+                            <button type="submit" class="btn btn-primary">Save session</button>
                             
                             
                         </div>
@@ -149,12 +158,12 @@
                                         <div class="media">
                                             {% if i.id == crssn.id %}
                                             <div class="media-left ">
-                                                <div class="text-white">{{forloop.counter}}</div>
+                                                <div class="text-white">{{i.position}}</div>
                                             </div>
                                             {%endif%}
                                              {% if i.id != crssn.id %}
                                             <div class="media-left ">
-                                                <div class="text-muted">{{forloop.counter}}</div>
+                                                <div class="text-muted">{{i.position}}</div>
                                             </div>
                                             {%endif%}
                                             

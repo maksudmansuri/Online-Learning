@@ -6,7 +6,6 @@ urlpatterns = [
     path('instructor_account_edit_save',views.instructor_account_edit_save,name='instructor_account_edit_save'),
     path('instructor_account_edit',views.instructor_account_edit,name='instructor_account_edit'),
     
-    path('instructor_course_edit_save',views.instructor_course_edit_save,name='instructor_course_edit_save'),
     path('instructor_course_edit/<slug:slug>',views.instructor_course_edit,name='instructor_course_edit'),
     path('instructor_courses',views.instructor_courses,name='instructor_courses'),
     path('instructor_course_add_save',views.instructor_course_add_save,name='instructor_course_add_save'),

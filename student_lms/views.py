@@ -222,9 +222,7 @@ def session(request,course_slug,slug):
     else:
         vd=viewed(student=std,course=crs.id,module_position='1',session_position='1')
         vd.save()
-    crssn2=Course_Session.objects.filter(module=ml).first()
-   
-
+    crssn2=Course_Session.objects.filter(module=ml)
     param={'crs':crs,'allssn':allssn,'ssn':crssn2,'std1':std,'ml':ml,'getvwssn':getvwssn}
     return render(request,'student_lms/session.html',param)
     # return redirect("/accounts/dologin")
@@ -237,21 +235,31 @@ def session_view(request,course_slug,slug,sslug):
     ml=Course_Modules.objects.get(slug=slug,course=crs)
     allssn=Course_Session.objects.filter(module=ml)
     crssn2=Course_Session.objects.get(course_slug=sslug,module=ml)
-    getvwssn='1'
-    # getvwd=viewed.objects.filter(student=std)
+    vwd1=viewed.objects.get(student=std,course=crs.id)
+    getvwssn=int(vwd1.session_position)
     if request.method == "POST":
         course=request.POST['ccrs']
         module=request.POST['cmdl']
-        session=request.POST['cssn']
-        if viewed.objects.filter(student=std,course=crs.id,module_position=ml.position).exists():
-            vwd=viewed.objects.get(student=std,course=crs.id,module_position=ml.position)
-            getcsr=Course.objects.get(id=crs.id)
-            getml=Course_Modules.objects.get(position=int(ml.position),course=crs)
-            getssn=Course_Session.objects.get(position=int(getmls.session_position),module=getml)
-            getvwssn = int(getmls.session_position)
-        else:
-            vwd=viewed(student=std,course=course,module_position=module,session_position=session)
+        session=int(request.POST['cssn'])
+        if viewed.objects.filter(student=std,course=course).exists():
+            vwd=viewed.objects.get(student=std,course=course)
+            this=int(vwd.session_position)
+            if this == getvwssn:
+                this=session+1
+            elif this < getvwssn:
+                this = session
+            else:
+                pass
+            vwd.session_position=this
             vwd.save()
+    # getvwd=viewed.objects.filter(student=std)
+    if viewed.objects.filter(student=std,course=crs.id,module_position=ml.position,session_position=crssn2.position).exists():
+        vwd=viewed.objects.get(student=std,course=crs.id,module_position=ml.position)
+        getcsr=Course.objects.get(id=crs.id)
+        getml=Course_Modules.objects.get(position=int(ml.position),course=crs)
+        getssn=Course_Session.objects.get(position=int(vwd.session_position),module=getml)
+        getvwssn = int(vwd.session_position)
+          
     param={'crs':crs,'allssn':allssn,'ssn':crssn2,'std1':std,'ml':ml,'getvwssn':getvwssn}
     return render(request,'student_lms/session_view.html',param)
 
@@ -294,9 +302,9 @@ def modules(request,slug):
     std=Students.objects.get(admin=request.user.id)
     crs=Course.objects.get(course_slug=slug)
     mdl=Course_Modules.objects.filter(course=crs)
-    getcsr= None
-    getml=None
-    getssn=None
+    getcsr=1
+    getml=1
+    getssn=1
     if viewed.objects.filter(student=std,course=crs.id).exists():
         getmls = viewed.objects.get(student=std,course=crs.id)
         getcsr=Course.objects.get(id=getmls.course)

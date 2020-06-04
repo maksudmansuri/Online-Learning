@@ -25,6 +25,320 @@
                                     <a class="nav-link" href="#second" data-toggle="tab">Professional</a>
                                 </li>
                             </ul> 
+                            {% if stf1.is_appiled == False  %}
+                            <div class="tab-content card-body">
+                                <div class="tab-pane active" id="first">
+                                <form method="post" action="/instructor_lms/instructor_account_edit_save" class="form-horizontal" enctype="multipart/form-data" >
+                                    {% csrf_token %}
+                                        <div class="form-group row">
+                                            {% if messages %}
+                                            {% for message in messages %}
+                                            {% if message.tags == 'error' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% if message.tags == 'success' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="avatar" class="col-sm-3 col-form-label form-label">Avatar</label>
+                                            <div class="col-sm-9">
+                                                <div class="media align-items-center">
+                                                    <div class="media-left">
+                                                        <div class="icon-block rounded">
+                                                        <img src="" style="height:90px" "width:100px"/>
+                                                        {% comment %} <i class="material-icons text-muted-light md-36">photo</i> {% endcomment %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="custom-file" style="width: auto;">
+                                                            <input  id="instructor_photo" name="instructor_photo" type="file" class="custom-file-input">
+                                                            <label for="avatar" class="custom-file-label">Choose file</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="name" class="col-sm-3 col-form-label form-label">Name</label>
+                                            <div class="col-sm-8">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input id="fisrt_name" type="text" class="form-control" placeholder="First Name" name="first_name" >
+                                                    </div> 
+                                                    <div class="col-md-6">
+                                                        <input id="last_name" type="text" class="form-control" placeholder="Last Name" name="last_name">
+                                                   
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="email" class="col-sm-3 col-form-label form-label">Email</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">mail</i>
+                                                        </div>
+                                                    </div>
+                                                    <input  type="email" id="email" name="email" class="form-control" placeholder="Email Address" value={{request.user.email}} disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="date" class="col-sm-3 col-form-label form-label">Date of Birth</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">date_range</i>
+                                                        </div>
+                                                    </div>
+                                                    <input  type="date" id="dob" name="dob" class="form-control" placeholder=" Date of Birth">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="Mobile Number" class="col-sm-3 col-form-label form-label">Mobile Number</label>
+                                            <div class="col-sm-6 col-md-6 ">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">phone</i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="tel" id="student_phone" class="form-control" placeholder="+91" name="mobile">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% comment %} <div class="form-group row">
+                                            <label for="name_on_invoice" class="col-sm-3 col-form-label form-label">Name on Invoice</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <input id="student_name" type="text" name="student_name" class="form-control" value="{{stf.fisrt_name}}| {{stf.last_name}}" disabled>
+                                            </div>
+                                        </div> {% endcomment %}
+                                       
+                                        <div class="form-group row">
+                                            <label for="billing_address" class="col-sm-3 col-form-label form-label">Address</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <input id="address" type="text" class="form-control" name="address" placeholder="Enter you Address" >
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="form-group row">
+                                            <label for="city" class="col-sm-3 col-form-label form-label">City</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <input id="city" type="text" class="form-control" name="city"  placeholder="Enter you City" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="state" class="col-sm-3 col-form-label form-label">state</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <input id="state" type="text" class="form-control" name="state"  placeholder="Enter you State">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="billing_country" class="col-sm-3 col-form-label form-label">Country</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <select id="country" name="country" class="custom-control custom-select form-control">
+                                                    <option value="USA" >USA</option>
+                                                    <option value="India" >India</option>
+                                                    <option value="United Kingdom" >United Kingdom</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="billing_country" class="col-sm-3 col-form-label form-label">Gender</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <select id="gender" name="gender" class="custom-control custom-select form-control">
+                                                <option value="Male" >Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Other">Others</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="Resume" class="col-sm-3 col-form-label form-label">Resume</label>
+                                            <div class="col-sm-9">
+                                                    <div class="media-body">
+                                                        <div class="custom-file" style="width: auto;">
+                                                            <input  id="resume" name="resume" type="file" class="custom-file-input">
+                                                            <label for="resume" class="custom-file-label">Choose Resume file </label>
+                                                        </div>
+                                                         <div class="media align-items-center">
+                                                            <div class="media-left">
+                                                                <div>
+                                                               
+                                                                </div>
+                                                            </div>
+                                                         </div>
+                                                     </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="billing_country" class="col-sm-3 col-form-label form-label">Specialist</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <select id="specialist" name="specialist" class="custom-control custom-select form-control">
+                                                {% for i in allcat %}
+                                                    <option {% if stf1.specialist == i.subcategory %}selected{% endif %} >{{i.subcategory}}</option>
+                                                {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="qualification" class="col-sm-3 col-form-label form-label">Qualification</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">school</i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" id="qualification" name="qualification" class="form-control" placeholder="Ex:-BE/MCA/Diploma">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="Experience" class="col-sm-3 col-form-label form-label">Experience</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <input id="experience" type="text" class="form-control" name="experience" placeholder="Enter your Experience">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="Working" class="col-sm-3 col-form-label form-label">Working</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <input id="working_with" type="text" class="form-control" name="working_with"  placeholder="Enter you Working Detail"}>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="Website" class="col-sm-3 col-form-label form-label">Website</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <input id="website" type="text" class="form-control" name="website"  placeholder="Enter your Website if you have" >
+                                                <input type="hidden" name="stf_id" value="{{stf1.admin.id}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="Linkdin Profile" class="col-sm-3 col-form-label form-label">Linkdin Profile</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <input id="linkdin" type="text" class="form-control" name="linkdin"  placeholder="Enter your Linkdin Profile">
+                                            </div>
+                                        </div>
+                                        {% comment %} <div class="form-group row">
+                                            <label for="password" class="col-sm-3 col-form-label form-label">Change Password</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">lock</i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="password" id="password" class="form-control" placeholder="Enter new password">
+                                                </div>
+                                            </div>
+                                        </div> {% endcomment %}
+                                        <div class="form-group row">
+                                            <div class="col-sm-8 offset-sm-3">
+                                                <div class="media align-items-center">
+                                                <button type="submit"class="btn btn-primary">Save Changes</button>
+                                                    {% comment %} <div class="media-left">
+                                                        <a  class="btn btn-success">Save Changes</a>
+                                                    </div> {% endcomment %}
+                                                    {% comment %} <div class="media-body pl-1">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input id="subscribe" type="checkbox" name="subscribe" class="custom-control-input" checked>
+                                                            <label for="subscribe" class="custom-control-label">Subscribe to Newsletter</label>
+                                                        </div>
+                                                    </div> {% endcomment %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane" id="second">
+                                    <form action="/instructor_lms/instructor_account_tab_two_save"   class="form-horizontal"enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                        <div class="form-group row">
+                                            {% if messages %}
+                                            {% for message in messages %}
+                                            {% if message.tags == 'error' %}
+                                            <div class="alert alert-danger" style="...">{{message}}</div>
+                                            {% endif %}
+                                            {% if message.tags == 'success' %}
+                                            <div class="alert alert-success" style="...">{{message}}</div>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 col-md-4 offset-sm-3">
+                                                <button name = "Update"type="submit"class="btn btn-primary">Update</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="card mt-2">
+                                        <div class="card-header">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <h4 class="card-title">Payment Info</h4>
+                                                </div>
+                                                <div class="media-right">
+                                                    <a href="#" class="btn btn-sm btn-outline-primary"><i class="material-icons">add</i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="card-footer p-0 list-group list-group-fit">
+                                            <li class="list-group-item active">
+                                                <div class="media align-items-center">
+                                                    <div class="media-left">
+                                                        <span class="btn btn-primary btn-circle"><i class="material-icons">credit_card</i></span>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <p class="mb-0">**** **** **** 2422</p>
+                                                        <small>Updated on 12/02/2016</small>
+                                                    </div>
+                                                    <div class="media-right">
+                                                        <a href="#" class="btn btn-primary btn-sm">
+                                                            <i class="material-icons btn__icon--left">edit</i> EDIT
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="media align-items-center">
+                                                    <div class="media-left">
+                                                        <span class="btn btn-white btn-circle"><i class="material-icons">credit_card</i></span>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <p class="mb-0">**** **** **** 6321</p>
+                                                        <small class="text-muted">Updated on 11/01/2016</small>
+                                                    </div>
+                                                    <div class="media-right">
+                                                        <a href="#" class="btn btn-white btn-sm">
+                                                            <i class="material-icons btn__icon--left">edit</i> EDIT
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
                             <div class="tab-content card-body">
                                 <div class="tab-pane active" id="first">
                                   <form method="post" action="/instructor_lms/instructor_account_edit_save" class="form-horizontal" enctype="multipart/form-data" >
@@ -133,7 +447,7 @@
                                         <div class="form-group row">
                                             <label for="billing_address" class="col-sm-3 col-form-label form-label">Address</label>
                                             <div class="col-sm-6 col-md-6">
-                                                <input id="address" type="text" class="form-control" name="address" placeholder="Enter you Address" value={{stf1.address}}>
+                                                <input id="address" type="text" class="form-control" name="address" placeholder="Enter you Address" value={{stf1.address|safe}}>
                                             </div>
                                         </div>
                                        
@@ -207,7 +521,7 @@
                                                         </div>
                                                     </div>
                                                     <input type="text" id="qualification" name="qualification" class="form-control" placeholder="Ex:-BE/MCA/Diploma" value={{stf1.qualification}}>
-                                                    <input type="hidden" name="stf.id" value="{{stf1.admin.id}}">
+                                                    <input type="hidden" name="stf_id" value="{{stf1.admin.id}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -336,6 +650,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
 

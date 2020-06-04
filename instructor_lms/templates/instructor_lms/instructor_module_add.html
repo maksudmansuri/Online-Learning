@@ -54,19 +54,26 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="session_name" class="col-md-3 col-form-label form-label">Seesion Name</label>
+                                        <label for="session_name" class="col-md-3 col-form-label form-label">Module Name</label>
                                         <div class="col-md-6">
                                             <input id="module" type="text" class="form-control" placeholder="Write an awesome session name " name="module" value="{{crssn.module}}">
                                         </div>
 
                                     </div>
                                     <div class="form-group row">
-                                        <label for="module_desc" class="col-md-3 col-form-label form-label">Seesion Description</label>
+                                        <label for="module_desc" class="col-md-3 col-form-label form-label">Module Description</label>
                                         <div class="col-md-6">
                                             <textarea id="module_desc" type="text" class="form-control" placeholder="Write an awesome session Desc" name="module_desc" value="{{crssn.module_desc}}"></textarea>
                                         </div>
                                         
-                                    </div>                               
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="position" class="col-md-3 col-form-label form-label">Module Position</label>
+                                        <div class="col-md-6">
+                                            <input id="position" type="text" placeholder="Add Position Number" class="form-control" name="position" value="{{crssn.position}}">
+                                        </div>
+                                        
+                                    </div>                             
                             </div>
                             <button type="submit" class="btn btn-primary">Save course</button>
                             
@@ -86,7 +93,7 @@
                                     <li class="list-group-item">
                                         <div class="media">
                                             <div class="media-left">
-                                                <div class="text-muted">{{forloop.counter}}</div>
+                                                <div class="text-muted">{{i.position}}</div>
                                             </div>
                                             
                                             <div class="media-body">

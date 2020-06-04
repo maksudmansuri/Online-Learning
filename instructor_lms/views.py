@@ -113,7 +113,7 @@ def instructor_courses(request):
     paginator=Paginator(crss,6)
     page=request.GET.get('page')
     crss=paginator.get_page(page)
-    return render(request,'instructor_lms/instructor_courses.html',{'crss':crss})
+    return render(request,'instructor_lms/instructor_courses.html',{'crss':crss,'stf1':stf})
 
 @login_required
 def instructor_course_publish(request,slug):
@@ -137,15 +137,18 @@ def instructor_course_publish(request,slug):
             fcrs.save()
         else:
             messages.add_message(request,messages.ERROR,"Add atlest one Session first")
+    elif stf.is_appiled == True:
+        messages.add_message(request,messages.ERROR," Wait for verification ")  
     else:
         messages.add_message(request,messages.ERROR," Complete you profile first")        
     paginator=Paginator(crss,6)
     page=request.GET.get('page')
     crss=paginator.get_page(page)
-    return render(request,'instructor_lms/instructor_courses.html',{'crss':crss})
+    return render(request,'instructor_lms/instructor_courses.html',{'crss':crss,'stf1':stf})
 
 @login_required
 def instructor_course_add(request):
+    stf=Staffs.objects.get(admin=request.user)
     form=CreateCourse()
     allcat=CourseCategory.objects.all()
     allsubcat=CourseSubCategory.objects.all()
@@ -187,18 +190,20 @@ def instructor_course_add(request):
             return redirect("/instructor_lms/instructor_courses")
         else:
             form=CreateCourse()
-    return render(request,'instructor_lms/instructor_course_add.html',{'allsubcat1':allsubcat,'form':form})
+    return render(request,'instructor_lms/instructor_course_add.html',{'allsubcat1':allsubcat,'form':form,'stf1':stf})
 
 @login_required
 def instructor_course_add_save(request):
     if request.method=="POST":
+        stf=Staffs.objects.get(admin=request.user)
         crssubcat=CourseSubCategory.objects.filter(subcategory=request.POST['course_subcategory'])
         print(crssubcat.category)
         course_category=request.POST['course_subcategory']
-    return render(request,'instructor_lms/instructor_course_add.html')
+    return render(request,'instructor_lms/instructor_course_add.html',{'stf1':stf})
 
 @login_required
 def instructor_course_edit(request,slug):
+    stf=Staffs.objects.get(admin=request.user)
     fcrs=get_object_or_404(Course,course_slug=slug)
     allcat=CourseCategory.objects.all()
     allsubcat=CourseSubCategory.objects.all()
@@ -246,17 +251,7 @@ def instructor_course_edit(request,slug):
             crs1.is_verified=False
             crs1.save()
             return redirect("/instructor_lms/instructor_courses")    
-    return render(request,'instructor_lms/instructor_course_edit.html',{'crs':fcrs,'allsubcat':allsubcat,'allcat':allcat,'form':form})
-
-@login_required 
-def instructor_course_edit_save(request):
-    if request.session.has_key('logged in'):
-        if request.user.user_type!="2":
-            messages.error(request,"Invvalid Page :")
-            return redirect("/accounts/dologin")
-        else:
-            pass
-        return render(request,'instructor_lms/instructor_course_edit.html')
+    return render(request,'instructor_lms/instructor_course_edit.html',{'crs':fcrs,'allsubcat':allsubcat,'allcat':allcat,'form':form,'stf1':stf})
 
 @login_required
 def instructor_earnings(request):
@@ -287,6 +282,7 @@ def instructor_module_add(request,slug):
     bool=True
     fcrs=get_object_or_404(Course,course_slug=slug)
     mdl=Course_Modules.objects.filter(course=fcrs)
+    stf=Staffs.objects.get(admin=request.user)
     if request.method == "POST":
         course=fcrs
         module=None
@@ -294,18 +290,19 @@ def instructor_module_add(request,slug):
             bool=True
         else:
             for i in mdl:
-                if i.module != request.POST['module']:
+                if i.module != request.POST['module'] and i.position != int(request.POST['position']):
                     bool=True
                 else:
                     bool=False
-                    msg=messages.error(request,"already haiviing same name:")               
+                    msg=messages.error(request,"already haiviing same name or same position number:")               
                     break
         if bool!=False:
             module=request.POST['module']
             module_desc=request.POST['module_desc']
+            position=request.POST['position']
             slug=slugify(request.POST['module'])
             try:
-                module=Course_Modules(course=course,module=module,module_desc=module_desc,slug=slug)
+                module=Course_Modules(course=course,module=module,position=position,module_desc=module_desc,slug=slug)
                 module.save()
                 fcrs.is_verified=False
                 fcrs.is_appiled=False
@@ -316,16 +313,17 @@ def instructor_module_add(request,slug):
                 messages.error(request,"ISSUE WITH MODULE Addded details:")              
         else:
             messages.error(request,msg)
-    return render(request,'instructor_lms/instructor_module_add.html',{'fcrs':fcrs,'crssn':mdl})
+    return render(request,'instructor_lms/instructor_module_add.html',{'fcrs':fcrs,'crssn':mdl,'stf1':stf})
     # return redirect("/accounts/dologin")
 
 @login_required
 def instructor_module_edit(request,slug,sslug):
     bool=True
+    stf=Staffs.objects.get(admin=request.user)
     fcrs=get_object_or_404(Course,course_slug=slug)
     allmdl=Course_Modules.objects.filter(course=fcrs)
     mdl=Course_Modules.objects.get(slug=sslug)
-    return render(request,'instructor_lms/instructor_module_edit.html',{'fcrs':fcrs,'crssn':mdl,'allssn':allmdl})
+    return render(request,'instructor_lms/instructor_module_edit.html',{'fcrs':fcrs,'crssn':mdl,'allssn':allmdl,'stf1':stf})
 
 @login_required
 def instructor_module_edit_save(request,slug):
@@ -334,6 +332,7 @@ def instructor_module_edit_save(request,slug):
     #         messages.error(request,"Invvalid Page :")
     #         return redirect("/accounts/dologin")
     #     else:
+    stf=Staffs.objects.get(admin=request.user)
     fcrs=Course.objects.get(course_slug=slug)
     allmdl=Course_Modules.objects.filter(course=fcrs)
     crssn=Course_Modules.objects.get(id=request.POST['ssnid'])
@@ -344,24 +343,26 @@ def instructor_module_edit_save(request,slug):
             bool=True
         else:
             for i in allmdl:
-                if i.module != request.POST['module']:
+                if i.module != request.POST['module'] and i.position != int(request.POST['position']):
                     bool=True
                 else:
-                    if crssn.module == request.POST['module']:
+                    if crssn.module == request.POST['module'] and crssn.position == int(request.POST['position']):
                         bool=True
                     else:
                         bool=False
-                        msg=messages.error(request,"all ready have same name:")               
+                        msg=messages.error(request,"all ready have same name or position:")               
                         break
         if bool!=False:
             module=request.POST['module']
             module_desc=request.POST['module_desc']
+            position=request.POST['position']
             slug=slugify(request.POST['module'])
             try:
                 crssn.course=course
                 crssn.module=module
                 crssn.module_desc=module_desc
                 crssn.slug=slug
+                crssn.position=position
                 crssn.save()
                 fcrs.is_verified=False
                 fcrs.is_appiled=False
@@ -372,14 +373,14 @@ def instructor_module_edit_save(request,slug):
         else:
             messages.error(request,msg)
     allmdl=Course_Modules.objects.filter(course=fcrs)
-    return render(request,'instructor_lms/instructor_module_add.html',{'fcrs':fcrs,'crssn':allmdl})
-    return redirect("/accounts/dologin")
-
+    return render(request,'instructor_lms/instructor_module_add.html',{'fcrs':fcrs,'crssn':allmdl,'stf1':stf})
+   
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
 @login_required
 def instructor_lesson_add(request,slug,sslug):
     bool=True
+    stf=Staffs.objects.get(admin=request.user)
     fcrs=get_object_or_404(Course,course_slug=slug)
     mdl=Course_Modules.objects.get(slug=sslug)
     crssn=Course_Session.objects.filter(module=mdl)
@@ -393,16 +394,19 @@ def instructor_lesson_add(request,slug,sslug):
             bool=True
         else:
             for i in crssn:
-                if i.session_name != request.POST['session_name']:
+                if i.session_name != request.POST['session_name'] and i.position != int(request.POST['position']):
                     bool=True
+                    print(i.position)
+                    print(request.POST['position'])
                 else:
                     bool=False
-                    msg=messages.error(request,"already haviing same course name:")               
+                    msg=messages.error(request,"already haviing same course name:")
                     break
         if bool!=False:
             session_name=request.POST['session_name']
             session_desc=request.POST['session_desc']
             session_duration=request.POST['session_duration']
+            position=request.POST['position']
             course_slug=slugify(request.POST['session_name'])
             
             if request.FILES.get('course_in_pdf'):
@@ -424,7 +428,7 @@ def instructor_lesson_add(request,slug,sslug):
             # print(clip.duration)
             a=1
             if a==1:
-                session=Course_Session(module=module,session_desc=session_desc,session_duration=session_duration,course_slug=course_slug)
+                session=Course_Session(module=module,session_desc=session_desc,session_duration=session_duration,position=position,course_slug=course_slug)
                 if course_in_pdf_url != None:
                     session.course_in_pdf=course_in_pdf_url
                 if video_link_url != None:
@@ -440,19 +444,21 @@ def instructor_lesson_add(request,slug,sslug):
         else:
             messages.error(request,msg) 
     crssn=Course_Session.objects.filter(module=mdl)           
-    return render(request,'instructor_lms/instructor_lesson_add.html',{'fcrs':fcrs,'crssn':crssn,'mdl':mdl})
+    return render(request,'instructor_lms/instructor_lesson_add.html',{'fcrs':fcrs,'crssn':crssn,'mdl':mdl,'stf1':stf})
     
 @login_required
 def instructor_lesson_edit(request,slug,sslug,ssslug):
+    stf=Staffs.objects.get(admin=request.user)
     fcrs=Course.objects.get(course_slug=slug)
     mdl=Course_Modules.objects.get(slug=sslug,course=fcrs)
     allssn=Course_Session.objects.filter(module=mdl)
     crssn=Course_Session.objects.get(course_slug=ssslug,module=mdl)
             # crssn=get_object_or_404(Course_Session,course_slug=sslug,course_id=fcrs.id)
-    return render(request,'instructor_lms/instructor_lesson_edit.html',{'fcrs':fcrs,'crssn':crssn,'allssn':allssn,'mdl':mdl})
+    return render(request,'instructor_lms/instructor_lesson_edit.html',{'fcrs':fcrs,'crssn':crssn,'allssn':allssn,'mdl':mdl,'stf1':stf})
 
 @login_required
 def instructor_lesson_edit_save(request,slug,sslug):
+    stf=Staffs.objects.get(admin=request.user)
     fcrs=Course.objects.get(course_slug=slug)
     mdl=Course_Modules.objects.get(slug=sslug,course=fcrs)
     allssn=Course_Session.objects.filter(module=mdl)
@@ -463,12 +469,15 @@ def instructor_lesson_edit_save(request,slug,sslug):
         session_name=None
         if allssn == None:
             bool=True
+        elif crssn == None:
+            bool=False
+            msg=messages.error(request,"selsected wrong name:")  
         else:
             for i in allssn:
-                if i.session_name != request.POST['session_name']:
+                if i.session_name != request.POST['session_name']  and int(i.position != request.POST['position']):
                     bool=True
                 else:
-                    if crssn.session_name == request.POST['session_name']:
+                    if crssn.session_name == request.POST['session_name'] and crssn.position != int(request.POST['position']):
                         bool=True
                     else:
                         bool=False
@@ -477,6 +486,7 @@ def instructor_lesson_edit_save(request,slug,sslug):
         if bool!=False:
             session_name=request.POST['session_name']
             session_desc=request.POST['session_desc']
+            position=request.POST['position']
             session_duration=request.POST['session_duration']
             video_link=request.POST['video_link']
             course_slug=slugify(request.POST['session_name'])
@@ -497,6 +507,7 @@ def instructor_lesson_edit_save(request,slug,sslug):
                 crssn.session_duration=session_duration
                 crssn.video_link=video_link
                 crssn.course_slug=course_slug
+                crssn.position=position
                     
                 if course_in_pdf_url != None:
                     crssn.course_in_pdf=course_in_pdf_url
@@ -511,8 +522,7 @@ def instructor_lesson_edit_save(request,slug,sslug):
                 messages.error(request,"Having a Problem with Database connection ")               
         else:
             messages.error(request,msg)
-        return render(request,'instructor_lms/instructor_lesson_add.html',{'fcrs':fcrs,'crssn':allssn,'mdl':mdl})
-    return redirect("/accounts/dologin")
+        return render(request,'instructor_lms/instructor_lesson_add.html',{'fcrs':fcrs,'crssn':allssn,'mdl':mdl,'stf1':stf}) 
 
 @login_required
 def instructor_messages(request):
@@ -582,6 +592,7 @@ def instructor_my_courses(request):
 
 @login_required
 def instructor_view_course(request,slug):
+    stf=Staffs.objects.get(admin=request.user)
     param=[]
     crssn=[]
     # std=Students.objects.get(admin=request.user.id)
@@ -595,7 +606,7 @@ def instructor_view_course(request,slug):
         print(mlcrssn)
         crssn.append([mlcrssn,ml])
     print(crssn)
-    param={'crs1':crs,'crssn1':crssn}
+    param={'crs1':crs,'crssn1':crssn,'stf1':stf}
     return render(request,'instructor_lms/instructor_view_course.html',param)
 
 def check_course_session(request,slug,sslug,ssslug):
@@ -612,7 +623,7 @@ def check_course_session(request,slug,sslug,ssslug):
         n=len(mlcrssn)
         crssn.append([mlcrssn,ml])
     
-    param={'crs1':crs,'crssn1':crssn,'crssn2':crssn2}
+    param={'crs1':crs,'crssn1':crssn,'crssn2':crssn2,'stf1':stf}
     return render(request,'instructor_lms/check_course_session.html',param)
 
 @login_required
@@ -622,6 +633,7 @@ def instructor_logout(request):
 
 @login_required
 def delete_session(request,slug,sslug,ssslug):
+    stf=Staffs.objects.get(admin=request.user)
     try:
         fcrs=Course.objects.get(course_slug=slug)
         mdl=Course_Modules.objects.get(slug=sslug,course=fcrs)
@@ -630,35 +642,22 @@ def delete_session(request,slug,sslug,ssslug):
         messages.success(request," Delete successfully :")
     except:
         messages.error(request,"Not Deleted Try again if you want:")              
-    return render(request,'instructor_lms/instructor_lesson_add.html',{'fcrs':fcrs,'crssn':allssn,'mdl':mdl})
+    return render(request,'instructor_lms/instructor_lesson_add.html',{'fcrs':fcrs,'crssn':allssn,'mdl':mdl,'stf1':stf})
 
 @login_required
 def delete_course(request,slug):
-    if request.session.has_key('logged in'):
-        if request.user.user_type!="2":
-            messages.error(request,"Invvalid Page :")
-            return redirect("/accounts/dologin")
-        else:
-            fcrs=Course.objects.get(course_slug=slug).delete()
-            #  allssn=Course_Session.objects.filter(course_id=fcrs)
-            # crssn=Course_Session.objects.get(course_slug=sslug,course_id=fcrs.id).delete()
-            return redirect("/instructor_lms/instructor_courses")
-    return redirect("/accounts/dologin")
-
+    stf=Staffs.objects.get(admin=request.user)
+    fcrs=Course.objects.get(course_slug=slug).delete()
+    return redirect("/instructor_lms/instructor_courses")
+    
 @login_required
 def delete_module(request,slug,sslug):
-    if request.session.has_key('logged in'):
-        if request.user.user_type!="2":
-            messages.error(request,"Invvalid Page :")
-            return redirect("/accounts/dologin")
-        else:
-            fcrs=Course.objects.get(course_slug=slug)
-            allmdl=Course_Modules.objects.filter(course=fcrs)
-            mdl=Course_Modules.objects.get(slug=sslug,course=fcrs.id).delete()
-            # allssn=Course_Session.objects.filter(course_id=fcrs)
-            # crssn=Course_Session.objects.get(course_slug=sslug,course_id=fcrs.id).delete()
-            return render(request,'instructor_lms/instructor_module_add.html',{'fcrs':fcrs,'crssn':allmdl})
-    return redirect("/accounts/dologin")
+    stf=Staffs.objects.get(admin=request.user)
+    fcrs=Course.objects.get(course_slug=slug)
+    allmdl=Course_Modules.objects.filter(course=fcrs)
+    mdl=Course_Modules.objects.get(slug=sslug,course=fcrs.id).delete()
+    return render(request,'instructor_lms/instructor_module_add.html',{'fcrs':fcrs,'crssn':allmdl,'stf1':stf})
+    
 
 from django.http import JsonResponse
 
