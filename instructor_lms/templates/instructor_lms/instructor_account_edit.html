@@ -124,13 +124,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {% comment %} <div class="form-group row">
-                                            <label for="name_on_invoice" class="col-sm-3 col-form-label form-label">Name on Invoice</label>
-                                            <div class="col-sm-6 col-md-6">
-                                                <input id="student_name" type="text" name="student_name" class="form-control" value="{{stf.fisrt_name}}| {{stf.last_name}}" disabled>
-                                            </div>
-                                        </div> {% endcomment %}
-                                       
+                                                                             
                                         <div class="form-group row">
                                             <label for="billing_address" class="col-sm-3 col-form-label form-label">Address</label>
                                             <div class="col-sm-6 col-md-6">
@@ -235,21 +229,8 @@
                                             <label for="Linkdin Profile" class="col-sm-3 col-form-label form-label">Linkdin Profile</label>
                                             <div class="col-sm-6 col-md-4">
                                                 <input id="linkdin" type="text" class="form-control" name="linkdin"  placeholder="Enter your Linkdin Profile">
-                                            </div>
                                         </div>
-                                        {% comment %} <div class="form-group row">
-                                            <label for="password" class="col-sm-3 col-form-label form-label">Change Password</label>
-                                            <div class="col-sm-6 col-md-4">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <i class="material-icons md-18 text-muted">lock</i>
-                                                        </div>
-                                                    </div>
-                                                    <input type="password" id="password" class="form-control" placeholder="Enter new password">
-                                                </div>
-                                            </div>
-                                        </div> {% endcomment %}
+                                       
                                         <div class="form-group row">
                                             <div class="col-sm-8 offset-sm-3">
                                                 <div class="media align-items-center">
@@ -337,7 +318,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                             {% else %}
                             <div class="tab-content card-body">
                                 <div class="tab-pane active" id="first">
@@ -410,7 +391,7 @@
                                                     <input  type="email" id="email" name="email" class="form-control" placeholder="Email Address" value={{stf1.admin.email}} disabled>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> 
                                         <div class="form-group row">
                                             <label for="date" class="col-sm-3 col-form-label form-label">Date of Birth</label>
                                             <div class="col-sm-6 col-md-6">
@@ -483,7 +464,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
+                                        {% comment %} <div class="form-group row">
                                             <label for="Resume" class="col-sm-3 col-form-label form-label">Resume</label>
                                             <div class="col-sm-9">
                                                     <div class="media-body">
@@ -500,7 +481,7 @@
                                                          </div>
                                                      </div>
                                             </div>
-                                        </div>
+                                        </div> {% endcomment %}
                                         <div class="form-group row">
                                             <label for="billing_country" class="col-sm-3 col-form-label form-label">Specialist</label>
                                             <div class="col-sm-6 col-md-4">
@@ -549,19 +530,8 @@
                                                 <input id="linkdin" type="text" class="form-control" name="linkdin"  placeholder="Enter your Linkdin Profile" value={{stf1.linkdin}}>
                                             </div>
                                         </div>
-                                        {% comment %} <div class="form-group row">
-                                            <label for="password" class="col-sm-3 col-form-label form-label">Change Password</label>
-                                            <div class="col-sm-6 col-md-4">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <i class="material-icons md-18 text-muted">lock</i>
-                                                        </div>
-                                                    </div>
-                                                    <input type="password" id="password" class="form-control" placeholder="Enter new password">
-                                                </div>
-                                            </div>
-                                        </div> {% endcomment %}
+                                        
+                                       
                                         <div class="form-group row">
                                             <div class="col-sm-8 offset-sm-3">
                                                 <div class="media align-items-center">

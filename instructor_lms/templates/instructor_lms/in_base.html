@@ -37,8 +37,8 @@
 
 
     <!-- Summernote WYSIWYG -->
-    <link rel="stylesheet" href="assets/css/summernote.css">
-    <link rel="stylesheet" href="assets/css/summernote.rtl.css">
+    <link rel="stylesheet" href="{% static 'student_lms/assets/css/summernote.css'%}">
+    <link rel="stylesheet" href="{% static 'student_lms/assets/css/summernote.rtl.css'%}">
 
 <!-- Required by summernote -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css">
@@ -71,7 +71,7 @@
                         </button>
 
                         <!-- Brand -->
-                        <a href="./" class="navbar-brand">
+                        <a href="/instructor_lms" class="navbar-brand">
                             <img src="{% static 'student_lms/assets/images/logo/white.svg' %}" class="mr-2" alt="LearnPlus" />
                             <span class="d-none d-xs-md-block">LearnPlus</span>
                         </a>
@@ -225,13 +225,13 @@
                             <li class="nav-item dropdown ml-1 ml-md-3">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"><img src="{{stf1.instructor_photo}}" alt="Avatar" class="rounded-circle" width="40"></a> 
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="instructor_account_edit">
-                                        <i class="material-icons">edit</i> {{stf1.admin.username}}
+                                    <a class="dropdown-item" href = {% url 'password_change' %}>
+                                        <i class="material-icons">security</i>Change Password
                                     </a>
-                                    <a class="dropdown-item" href="instructor_account_edit">
+                                    <a class="dropdown-item" href="/instructor_lms/instructor_account_edit">
                                         <i class="material-icons">edit</i> Edit Account
                                     </a>
-                                    <a class="dropdown-item" href="instructor_profile">
+                                    <a class="dropdown-item" href="/instructor_lms/instructor_account_edit">
                                         <i class="material-icons">person</i> Public Profile
                                     </a>
                                     <a class="dropdown-item" href="/instructor_lms/instructor_logout">

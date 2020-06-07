@@ -25,9 +25,6 @@ class Orders(models.Model):
     student_email=models.EmailField(max_length=254,default="",null=True)
     objects = models.Manager()
 
-    def __str__(self):
-         return self.student_name
-
 class Attendance(models.Model):
     id=models.AutoField(primary_key=True)
     course_id=models.ForeignKey(Course,on_delete=models.DO_NOTHING)

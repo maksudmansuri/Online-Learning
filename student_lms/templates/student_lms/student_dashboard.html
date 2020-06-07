@@ -70,19 +70,19 @@
 
                                     
                                     <ul class="list-group list-group-fit mb-0" style="z-index: initial;">
-
+                                        {% for ord,getcsr,getml,getssn,per,vwdsns,tlssns in allinone %}
                                         <li class="list-group-item" style="z-index: initial;">
                                             <div class="d-flex align-items-center">
                                                 <a href="student_take_course" class="avatar avatar-4by3 avatar-sm mr-3">
-                                                    <img src="{% static 'student_lms/assets/images/gulp.png' %}" alt="course" class="avatar-img rounded">
-                                                </a>
+                                                    <img src="{{ord.course.course_image}}" alt="course" class="avatar-img rounded">
+                                                </a> 
                                                 <div class="flex">
-                                                    <a href="student_take_course" class="text-body"><strong>Learn Vue.js Fundamentals</strong></a>
+                                                    <a href="student_take_course" class="text-body"><strong>{{ord.course.course_name}}</strong></a>
                                                     <div class="d-flex align-items-center">
                                                         <div class="progress" style="width: 100px;">
-                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{per}}%" aria-valuenow="{{vwdsns}}" aria-valuemin="0" aria-valuemax="{{tlssns}}"></div>
                                                         </div>
-                                                        <small class="text-muted ml-2">25%</small>
+                                                        <small class="text-muted ml-2">{{per}}%</small>
                                                     </div>
                                                 </div>
                                                 <div class="dropdown ml-3">
@@ -90,13 +90,13 @@
                                                         <i class="material-icons">more_vert</i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="student_take_course">Continue</a>
+                                                        <a class="dropdown-item" href="/student_lms/session_view/{{getcsr.course_slug}}/{{getml.slug}}/{{getssn.course_slug}}">Continue</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
-
-                                        <li class="list-group-item" style="z-index: initial;">
+                                        {% endfor %}
+                                        {% comment %} <li class="list-group-item" style="z-index: initial;">
                                             <div class="d-flex align-items-center">
                                                 <a href="student_take_course" class="avatar avatar-4by3 avatar-sm mr-3">
                                                     <img src="{% static 'student_lms/assets/images/vuejs.png' %}" alt="course" class="avatar-img rounded">
@@ -144,7 +144,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li>
+                                        </li> {% endcomment %}
 
                                     </ul>
                                 </div>

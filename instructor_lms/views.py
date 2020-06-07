@@ -34,8 +34,9 @@ def instructor_account_edit(request):
     allcat=CourseSubCategory.objects.all()
     return render(request,'instructor_lms/instructor_account_edit.html',{'stf1':stf,'allcat':allcat})
 
-@login_required
+@login_required  
 def instructor_account_edit_save(request):
+    stf=Staffs.objects.get(admin=request.user)
     if request.method == "POST":
         stf_id=request.POST['stf_id']
         first_name=request.POST['first_name']
@@ -53,6 +54,7 @@ def instructor_account_edit_save(request):
         working_with=request.POST['working_with']
         website=request.POST['website']
         linkdin=request.POST['linkdin']
+       
                 
         if request.FILES.get('resume'):
             resume=request.FILES['resume']
@@ -77,12 +79,14 @@ def instructor_account_edit_save(request):
             user.save() 
                 
             std_model=Staffs.objects.get(admin=stf_id)
+            std_model.first_name=first_name
+            std_model.last_name=last_name
             std_model.address=address
             std_model.city=city
             std_model.state=state
             std_model.country=country
             std_model.mobile=mobile
-            std_model.dob=dob
+            std_model.dob=dob 
             if instructor_photo_url!=None:
                 std_model.instructor_photo=instructor_photo_url
             std_model.gender=gender
@@ -92,6 +96,7 @@ def instructor_account_edit_save(request):
             std_model.experience=experience
             std_model.specialist=specialist
             std_model.qualification=qualification
+           
             if resume_url!=None:
                 std_model.resume=resume_url
             std_model.is_appiled=True
@@ -263,7 +268,8 @@ def instructor_earnings(request):
 def instructor_edit_invoice(request):
     if request.user.is_anonymous:
        return redirect("/accounts/dologin")
-    return render(request,'instructor_lms/instructor_edit_invoice.html')
+    stf=Staffs.objects.get(admin=request.user)
+    return render(request,'instructor_lms/instructor_edit_invoice.html',{'stf1':stf})
 
 @login_required
 def instructor_help_center(request):
@@ -275,7 +281,8 @@ def instructor_help_center(request):
 def instructor_invoice(request):
     if request.user.is_anonymous:
        return redirect("/accounts/dologin")
-    return render(request,'instructor_lms/instructor_invoice.html')
+    stf=Staffs.objects.get(admin=request.user)
+    return render(request,'instructor_lms/instructor_invoice.html',{'stf1':stf})
 
 @login_required
 def instructor_module_add(request,slug):
@@ -324,7 +331,7 @@ def instructor_module_edit(request,slug,sslug):
     allmdl=Course_Modules.objects.filter(course=fcrs)
     mdl=Course_Modules.objects.get(slug=sslug)
     return render(request,'instructor_lms/instructor_module_edit.html',{'fcrs':fcrs,'crssn':mdl,'allssn':allmdl,'stf1':stf})
-
+ 
 @login_required
 def instructor_module_edit_save(request,slug):
     # if request.session.has_key('logged in'):
@@ -574,9 +581,10 @@ def instructor_forum_thread(request):
 
 @login_required
 def instructor_profile(request):
-    if request.user.is_anonymous:
-       return redirect("/accounts/dologin")
-    return render(request,'instructor_lms/instructor_profile.html')
+    stf=Staffs.objects.get(admin=request.user)
+    crs=Course.objects.filter(teacher=stf)
+    param = {'crss':crs,'stf1':stf}
+    return render(request,'instructor_lms/instructor_profile.html',param)
 
 @login_required
 def instructor_billing(request):
@@ -597,20 +605,18 @@ def instructor_view_course(request,slug):
     crssn=[]
     # std=Students.objects.get(admin=request.user.id)
     crs=Course.objects.get(course_slug=slug)
-    print(crs)
     mdl=Course_Modules.objects.filter(course=crs)
-    print(mdl)
     for ml in mdl:
         print(ml)
         mlcrssn=Course_Session.objects.filter(module=ml)
         print(mlcrssn)
         crssn.append([mlcrssn,ml])
-    print(crssn)
     param={'crs1':crs,'crssn1':crssn,'stf1':stf}
     return render(request,'instructor_lms/instructor_view_course.html',param)
 
 def check_course_session(request,slug,sslug,ssslug):
     # std=Students.objects.get(admin=request.user.id)
+    stf=Staffs.objects.get(admin=request.user)
     crs=Course.objects.get(course_slug=slug)
     allml=Course_Modules.objects.filter(course=crs)
     ml=Course_Modules.objects.get(slug=sslug,course=crs)

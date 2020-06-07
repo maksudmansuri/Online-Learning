@@ -17,6 +17,8 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                     pass
                 elif modulename == "media.views":
                     pass
+                elif modulename == "django.contrib.auth.views":
+                    pass
                 else:
                     return HttpResponseRedirect(reverse("counsellor_dashboard"))
             elif user.user_type=="2":
@@ -26,6 +28,8 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                     pass
                 elif modulename == "media":
                     pass
+                elif modulename == "django.contrib.auth.views":
+                    pass
                 else:
                     return HttpResponseRedirect(reverse("instructor_dashboard"))
             elif user.user_type=="3":
@@ -34,6 +38,8 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                 elif modulename == "front.views":
                     pass
                 elif modulename == "media":
+                    pass
+                elif modulename == "django.contrib.auth.views":
                     pass
                 else:
                     return HttpResponseRedirect(reverse("student_dashboard"))
@@ -48,9 +54,13 @@ class LoginCheckMiddleWare(MiddlewareMixin):
             #     #     return redirect("/admin")
             #         # return HttpResponseRedirect(reverse("django/contrib/admin"))
             else:
-                return HttpResponseRedirect(reverse("home"))
+                if modulename == "django.contrib.auth.views":
+                    pass
+                if modulename == "front.views":
+                    pass
+                return redirect('admin')
         else:
-            if request.path == reverse("dologin") or modulename == "front.views" or modulename == "accounts.views" or modulename == "django.views.static":
+            if request.path == reverse("dologin") or modulename == "front.views" or modulename == "accounts.views" or modulename == "django.views.static" or modulename == "django.contrib.auth.views":
                 pass
             else:
                 return HttpResponseRedirect(reverse("dologin"))

@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls,name='admin'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', include("front.urls")),
     path('student_lms/', include("student_lms.urls")),

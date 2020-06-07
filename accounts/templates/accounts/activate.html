@@ -1,3 +1,7 @@
+{% extends './acc_base.html' %}
+{% load static %}
+
+{% block body %}
 {% autoescape off %}
     Hi,{{user.username}}
     pleasel  click this link below to Activate you account
@@ -7,3 +11,4 @@
 
 
 {% endautoescape %}
+{% endblock body %}

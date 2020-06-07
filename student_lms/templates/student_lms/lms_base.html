@@ -15,9 +15,6 @@
 
     <!-- Prevent the demo from appearing in search engines (REMOVE THIS) -->
 
-    <!-- Perfect Scrollbar -->
-    <link type="text/css" href="{% static 'student_lms/assets/vendor/perfect-scrollbar.css' %}" rel="stylesheet">
-
     <!-- Material Design Icons -->
     <link type="text/css" href="{% static 'student_lms/assets/css/material-icons.css' %}" rel="stylesheet">
     <link type="text/css" href="{% static 'student_lms/assets/css/material-icons.rtl.css' %}" rel="stylesheet">
@@ -30,12 +27,21 @@
     <link type="text/css" href="{% static 'student_lms/assets/css/app.css' %}" rel="stylesheet">
     <link type="text/css" href="{% static 'student_lms/assets/css/app.rtl.css' %}" rel="stylesheet">
 
-    <!-- Required by summernote -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css">
+    
+    <!-- Flatpickr -->
+    <link type="text/css" href="{% static 'student_lms/assets/css/flatpickr.css' %} " rel="stylesheet">
+    <link type="text/css" href="{% static 'student_lms/assets/css/flatpickr.rtl.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'student_lms/assets/css/flatpickr-airbnb.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'student_lms/assets/css/flatpickr-airbnb.rtl.css' %}" rel="stylesheet">
+
 
     <!-- Summernote WYSIWYG -->
-    <link rel="stylesheet" href="{% static 'student_lms/assets/css/summernote.css' %} ">
-    <link rel="stylesheet" href="{% static 'student_lms/assets/css/summernote.rtl.css' %}">
+    <link rel="stylesheet" href="{% static 'student_lms/assets/css/summernote.css'%}">
+    <link rel="stylesheet" href="{% static 'student_lms/assets/css/summernote.rtl.css'%}">
+
+<!-- Required by summernote -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css">
+
 <style> 
 #status span.status {
   display: none;
@@ -80,7 +86,7 @@ span.status.incomplete {
                         </button>
 
                         <!-- Brand -->
-                        <a href="" class="navbar-brand">
+                        <a href="/student_lms" class="navbar-brand">
                             <img src="{% static 'student_lms/assets/images/logo/white.svg' %}" class="mr-2" alt="LearnPlus" />
                             <span class="d-none d-xs-md-block">LearnPlus</span>
                         </a>

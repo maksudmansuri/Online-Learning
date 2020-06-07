@@ -29,9 +29,201 @@
                                 </li>
                             </ul> 
                             <div class="tab-content card-body">
+                            {% if std1.is_appiled == False  %}
                                 <div class="tab-pane active" id="first">
                                   <form method="post" action="/student_lms/student_account_edit_save" class="form-horizontal" enctype="multipart/form-data" >
                                     {% csrf_token %}
+                                          <div class="form-group row">
+                                            {% if messages %}
+                                            {% for message in messages %}
+                                            {% if message.tags == 'error' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% if message.tags == 'success' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="avatar" class="col-sm-3 col-form-label form-label">Avatar</label>
+                                            <div class="col-sm-9">
+                                                <div class="media align-items-center">
+                                                    <div class="media-left">
+                                                        <div class="icon-block rounded">
+                                                        <img src="{{std1.photo}}" style="height:90px" "width:100px"/>
+                                                        {% comment %} <i class="material-icons text-muted-light md-36">photo</i> {% endcomment %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="custom-file" style="width: auto;">
+                                                            <input  id="photo" name="photo" type="file" class="custom-file-input">
+                                                            <label for="avatar" class="custom-file-label">Choose file</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="name" class="col-sm-3 col-form-label form-label">Full Name</label>
+                                            <div class="col-sm-8">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input id="fisrt_name" type="text" class="form-control" placeholder="First Name" name="fisrt_name" }>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input id="last_name" type="text" class="form-control" placeholder="Last Name" name="last_name" >
+                                                     <input type="hidden" name="std_id" value="{{std1.admin.id}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="form-group row">
+                                            <label for="email" class="col-sm-3 col-form-label form-label">Email</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">mail</i>
+                                                        </div>
+                                                    </div>
+                                                    <input  type="email" id="email" name="email" class="form-control" placeholder="Email Address" value={{std1.admin.email}} disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="date" class="col-sm-3 col-form-label form-label">Date of Birth</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">date_range</i>
+                                                        </div>
+                                                    </div>
+                                                    <input  type="date" id="student_dob" name="student_dob" class="form-control" placeholder=" Date of Birth">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="Mobile Number" class="col-sm-3 col-form-label form-label">Mobile Number</label>
+                                            <div class="col-sm-6 col-md-6 ">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">phone</i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="tel" id="student_phone" class="form-control" placeholder="+91" name="student_phone">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="qualification" class="col-sm-3 col-form-label form-label">Qualification</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="material-icons md-18 text-muted">school</i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" id="student_qualification" name="student_qualification" class="form-control" placeholder="Ex:-BE/MCA/Diploma" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                                                              
+                                        <div class="form-group row">
+                                            <label for="billing_address" class="col-sm-3 col-form-label form-label">Address</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <input id="student_address" type="text" class="form-control" name="student_address" placeholder="Enter you Address" 
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="city" class="col-sm-3 col-form-label form-label">City</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <input id="student_city" type="text" class="form-control" name="student_city"  placeholder="Enter you City">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="state" class="col-sm-3 col-form-label form-label">state</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <input id="student_state" type="text" class="form-control" name="student_state"  placeholder="Enter you State" >
+                                            </div>
+                                        </div> 
+                                         <div class="form-group row">
+                                            <label for="billing_country" class="col-sm-3 col-form-label form-label">Country</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <select id="student_country" name="student_country" class="custom-control custom-select form-control">
+                                                    <option value="USA">USA</option>
+                                                    <option value="India" >India</option>
+                                                    <option value="United Kingdom">United Kingdom</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="billing_country" class="col-sm-3 col-form-label form-label">Gender</label>
+                                            <div class="col-sm-6 col-md-4">
+                                                <select id="gender" name="gender" class="custom-control custom-select form-control">
+                                                <option value="Male" >Male</option>
+                                                    <option value="Female" >Female</option>
+                                                    <option value="Other" >Others</option>
+                                                </select>
+                                            </div>
+                                        </div>                                  
+                                        <div class="form-group row">
+                                            <div class="col-sm-8 offset-sm-3">
+                                                <div class="media align-items-center">
+                                                <button type="submit"class="btn btn-primary">Save Changes</button>
+                                                    {% comment %} <div class="media-left">
+                                                        <a  class="btn btn-success">Save Changes</a>
+                                                    </div> {% endcomment %}
+                                                    {% comment %} <div class="media-body pl-1">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input id="subscribe" type="checkbox" name="subscribe" class="custom-control-input" checked>
+                                                            <label for="subscribe" class="custom-control-label">Subscribe to Newsletter</label>
+                                                        </div>
+                                                    </div> {% endcomment %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            {% else %}
+                                <div class="tab-pane active" id="first">
+                                  <form method="post" action="/student_lms/student_account_edit_save" class="form-horizontal" enctype="multipart/form-data" >
+                                    {% csrf_token %}
+                                        <div class="form-group row">
+                                            {% if messages %}
+                                            {% for message in messages %}
+                                            {% if message.tags == 'error' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% if message.tags == 'success' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
                                         <div class="form-group row">
                                             <label for="avatar" class="col-sm-3 col-form-label form-label">Avatar</label>
                                             <div class="col-sm-9">
@@ -64,8 +256,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                       
+                                        </div>                                       
                                         <div class="form-group row">
                                             <label for="email" class="col-sm-3 col-form-label form-label">Email</label>
                                             <div class="col-sm-6 col-md-6">
@@ -117,14 +308,7 @@
                                                     <input type="text" id="student_qualification" name="student_qualification" class="form-control" placeholder="Ex:-BE/MCA/Diploma" value={{std1.qualification}}>
                                                 </div>
                                             </div>
-                                        </div>
-                                        {% comment %} <div class="form-group row">
-                                            <label for="name_on_invoice" class="col-sm-3 col-form-label form-label">Name on Invoice</label>
-                                            <div class="col-sm-6 col-md-6">
-                                                <input id="student_name" type="text" name="student_name" class="form-control" value="{{std.fisrt_name}}| {{std.last_name}}" disabled>
-                                            </div>
-                                        </div> {% endcomment %}
-                                        
+                                        </div>                   
                                         <div class="form-group row">
                                             <label for="billing_address" class="col-sm-3 col-form-label form-label">Address</label>
                                             <div class="col-sm-6 col-md-6">
@@ -146,10 +330,10 @@
                                         <div class="form-group row">
                                             <label for="billing_country" class="col-sm-3 col-form-label form-label">Country</label>
                                             <div class="col-sm-6 col-md-4">
-                                                <select id="student_country" name="student_country" class="custom-control custom-select form-control" value={{std1.country}}>
-                                                    <option value="1" selected>USA</option>
-                                                    <option value="2" >India</option>
-                                                    <option value="3">United Kingdom</option>
+                                                <select id="student_country" name="student_country" class="custom-control custom-select form-control">
+                                                    <option value="USA" {% if std1.country == 'USA' %}selected{% endif %}>USA</option>
+                                                    <option value="India" {% if std1.country == 'India' %}selected{% endif %} >India</option>
+                                                    <option value="United Kingdom" {% if std1.country == 'United Kingdom' %}selected{% endif %}>United Kingdom</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -157,37 +341,14 @@
                                             <label for="billing_country" class="col-sm-3 col-form-label form-label">Gender</label>
                                             <div class="col-sm-6 col-md-4">
                                                 <select id="gender" name="gender" class="custom-control custom-select form-control">
-                                                    <option value="1" >Female</option>
-                                                    <option value="2" selected>Male</option>
-                                                    <option value="3">Others</option>
+                                                <option value="Male" {% if std1.gender == 'Male' %}selected{% endif %} >Male</option>
+                                                    <option value="Female" {% if std1.gender == 'Female' %}selected{% endif %}>Female</option>
+                                                    <option value="Others" {% if std1.gender == 'Others' %}selected{% endif %}>Others</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        {% comment %} <div class="form-group row">
-                                            <label for="password" class="col-sm-3 col-form-label form-label">Change Password</label>
-                                            <div class="col-sm-6 col-md-4">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <i class="material-icons md-18 text-muted">lock</i>
-                                                        </div>
-                                                    </div>
-                                                    <input type="password" id="password" class="form-control" placeholder="Enter new password">
-                                                </div>
-                                            </div>
-                                        </div> {% endcomment %}
-                                        <div class="form-group row">
-                                            {% if messages %}
-                                            {% for message in messages %}
-                                            {% if message.tags == 'error' %}
-                                            <div class="alert alert-danger" style="...">{{message}}</div>
-                                            {% endif %}
-                                            {% if message.tags == 'success' %}
-                                            <div class="alert alert-success" style="...">{{message}}</div>
-                                            {% endif %}
-                                            {% endfor %}
-                                            {% endif %}
-                                        </div>
+                                        
+                                        
                                         <div class="form-group row">
                                             <div class="col-sm-8 offset-sm-3">
                                                 <div class="media align-items-center">
@@ -208,7 +369,7 @@
                                         
                                     </form>
                                 </div>
-
+                            {% endif %}
                                 <div class="tab-pane" id="second">
                                     <form action="/student_lms/student_account_edit_save"   class="form-horizontal">
                                     {% csrf_token %}

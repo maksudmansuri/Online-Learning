@@ -11,4 +11,7 @@ urlpatterns = [
     # path('instructor_singup', views.instructor_singup,name='instructor_singup'),
     path('instructor_logout', views.instructor_logout,name='instructor_logout'),
     path('logout', views.dologout,name='dologout'),
+    path('about_us', views.about_us,name='about_us'),
+    path('career', views.career,name='career'),
+    path('contact_us', views.contact_us,name='contact_us'),
 ]

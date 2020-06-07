@@ -74,27 +74,15 @@
 						  
 							<ul class="navbar-nav ml-auto main-menu-nav">
 
-							  <li class="nav-item dropdown active">
-									<a class="nav-link" href="/" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Home <span class="sr-only">(current)</span>
-									</a>
-									<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-										<li><a class="dropdown-item" href="/" target="_blank">Home One</a></li>
-										<li><a class="dropdown-item" href="home_two" target="_blank">Home Two</a></li>
-									</ul>
-							  </li>
-
-							  <li class="nav-item">
-								<a class="nav-link" href="/about_us">About Us</a>
-							  </li>
+							 
 
 							  <li class="nav-item dropdown">
 									<a class="nav-link" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Pages
+										Courses
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                                         
-										<li><a class="dropdown-item" href="learning-path.html">Learning Path</a></li>
+										
                                         <li><a class="dropdown-item dropdown-toggle" href="course_list">Course</a>
 											<ul class="dropdown-menu">
 												<li><a class="dropdown-item" href="course_list">All Course</a></li>
@@ -111,15 +99,29 @@
 										</li>                                    
                                         <li><a class="dropdown-item dropdown-toggle" href="our-team.html">Events </a>
 											<ul class="dropdown-menu">
-												<li><a class="dropdown-item" href="events.html"> Events</a></li>
+												<li><a class="dropdown-item-left" href="events.html"> Events</a></li>
 												<li><a class="dropdown-item" href="events-details.html">Events Details </a></li>
 											</ul>
 										</li>
-                                        <li><a class="dropdown-item" href="404.html">404 Page</a></li>
+                                        {% comment %} <li><a class="dropdown-item" href="404.html">404 Page</a></li>
                                         <li><a class="dropdown-item" href="comming-soon.html">Comming Soon</a></li>
-										<li><a class="dropdown-item" href="components.html">Components</a></li>                                        
+										<li><a class="dropdown-item" href="components.html">Components</a></li>                                         {% endcomment %}
 									</ul>
 							  </li>	
+							  {% comment %} 
+							  <li class="nav-item dropdown active">
+									<a class="nav-link" href="/" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Home <span class="sr-only">(current)</span>
+									</a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+										<li><a class="dropdown-item" href="/" target="_blank">Home One</a></li>
+										<li><a class="dropdown-item" href="home_two" target="_blank">Home Two</a></li>
+									</ul>
+							  </li>
+
+							  <li class="nav-item">
+								<a class="nav-link" href="/about_us">About Us</a>
+							  </li>
 
 							  <li class="nav-item dropdown">
 									<a class="nav-link" href="blog.html" id="navbarDropdownMenuLink4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -134,23 +136,31 @@
 
 							  <li class="nav-item">
 								<a class="nav-link" href="contact-us.html">Contact Us</a>
-							  </li>
+							  </li> {% endcomment %}
 							<!-- User is Authenticated or not-->
 							{% if request.user.is_authenticated %}
-								<li class="nav-item sign-in">
-								<a class="nav-link" href="/logout">Logout</a>
-							  </li>	
-							   <li class="nav-item">
-								<a class="btn-small" href="/accounts/dologin">{{request.user}}</a>
+								
+							    <li class="nav-item  sign-in dropdown">
+									<a class="btn-small" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										{{request.user}}
+									</a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+										<li class="nav-item">
+											<a class="nav-link" href="/student_lms">Dashboard</a>
+							  			</li>
+										<li class="nav-item">
+											<a class="nav-link" href="/logout">Logout</a>
+							  			</li>
+										
+									</ul>
+									
 							  </li>	
 							{% else %}
-
-							  <li class="nav-item sign-in">
-								<a class="nav-link" href="/accounts/dologin">Sign in</a>
+							  	
+							  <li class="nav-item  sign-in">
+								<a class="btn-small" href="/accounts/dologin">Sign in</a>
 							  </li>	
-							  <li class="nav-item">
-								<a class="btn-small" href="#">Get Started</a>
-							  </li>	
+							  
 							{% endif %}
 
 							</ul>					
@@ -166,6 +176,21 @@
 
 
 {% endblock body %}
+	<div class="cta-1x">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="cta-content">
+						<h3>Ready to Begin?</h3>
+						<p>Find subjects you're passionate about by browsing our online course categories. Start <br> learning with top courses Built With Industry Experts.</p>
+						<a href="#" class="btn-small">Start Teaching</a>
+						<a href="#" class="btn-small">Start Learning</a>
+					</div>
+				</div>					
+			</div>
+		</div>
+	</div>
+
 	<footer class="footer-section-1x">
 		<div class="container">
 			<div class="row">
@@ -200,10 +225,10 @@
 											<div class="single-link">
 												<h3>Company</h3>	
 												<ul>
-													<li><a href="#">  About Company </a></li>
-													<li><a href="#">  Feature Course </a></li>
-													<li><a href="#">  Careers </a></li>
-													<li><a href="#">  Contact Us </a></li>							
+													<li><a href={% url 'about_us' %}>  About Company </a></li>
+													<li><a href={% url 'course_list' %}>  Feature Course </a></li>
+													<li><a href={% url 'career' %}>  Careers </a></li>
+													<li><a href={% url 'contact_us' %}>  Contact Us </a></li>							
 												</ul>
 											</div>	
 										</div>
@@ -223,17 +248,16 @@
 											<div class="single-link">
 												<h3>Course</h3>
 												<ul>
-													<li><a href="#">  Wordpress Development </a></li>
-													<li><a href="#">  Design & Photography </a></li>
-													<li><a href="#">  Learning English </a></li>
-													<li><a href="#">  Javascript Essential </a></li>								
+												{% for crs in allcrs %}
+													<li><a href="#"> {{crs.course_name}}</a></li>
+												{% endfor %}									
 												</ul>
 											</div>	
 										</div>
 										<div class="col-md-8 offset-md-4">
 											<div class="footer-subscriber">
 												<div class="input-group">
-												  <input type="text" class="form-control" placeholder="Enter Your Email" aria-label="Recipient's username">
+												  <input type="email" class="form-control" placeholder="Enter Your Email" aria-label="Recipient's username">
 												  <div class="input-group-append">
 												    <button class="btn btn-subscriber" type="button"> <i class="far fa-paper-plane"></i> </button>
 												  </div>
@@ -301,7 +325,7 @@
 	<!-- Color switcher js -->
 	<script src="{% static 'front/js/color-switcher.js' %}"></script> 
     <!-- Color-switcher-active -->  
-    <script src="{% static 'front/js/color-switcher-active.js' %}"></script>
+    {% comment %} <script src="{% static 'front/js/color-switcher-active.js' %}"></script> {% endcomment %}
 	<!-- Custom script -->
     <script src="{% static 'front/js/custom.js' %}"></script>
 	

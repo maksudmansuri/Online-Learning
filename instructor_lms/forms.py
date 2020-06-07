@@ -1,10 +1,15 @@
 from django.forms import ModelForm
 from front.models import Course,Course_Session
-
+from accounts.models import Staffs
 class CreateCourse(ModelForm):
     class Meta:
       model=Course
       fields = ["course_requirement","course_desc","course_why_take"]
+
+class CreateAbout(ModelForm):
+  class Meta:
+    model=Staffs
+    fields = ["about"]
 
 
 class CreateSession(ModelForm):

@@ -14,15 +14,15 @@
 
                     <div class="container-fluid page__container">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="./">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/instructor_lms">Home</a></li>
                             <li class="breadcrumb-item active">Profile</li>
                         </ol>
 
                         <div class="text-center">
-                            <a href="#"><img src="{% static 'student_lms/assets/images/people/110/guy-8.jpg' %} " alt="" class="rounded-circle"></a>
-                            <h1 class="h2 mb-0 mt-1">Adrian Demian</h1>
-                            <p class="lead text-muted mb-0">Florida, USA</p>
-                            <div class="badge badge-primary ">INSTRUCTOR</div>
+                            <a href="#"><img src={{stf1.instructor_photo}} alt="" class="rounded-circle"></a>
+                            <h1 class="h2 mb-0 mt-1">{{stf1.first_name}} {{stf1.last_nam}}</h1>
+                            <p class="lead text-muted mb-0">{{stf1.address}}</p>
+                            <div class="badge badge-primary ">{{stf1.specialist}}</div>
                             <hr>
                             <h5 class="text-muted mb-1">Instructor Rating</h5>
                             <div class="rating">
@@ -36,16 +36,17 @@
                         <hr>
                         <h4>Courses by Adrian</h4>
                         <div class="card-columns">
+                            {% for crs in crss  %}
                             <div class="card">
                                 <div class="card-header">
                                     <div class="media align-items-center">
                                         <div class="media-left">
-                                            <a href="/student_lms/student_take_course">
-                                                <img src="{% static 'student_lms/assets/images/vuejs.png'%} " alt="Card image cap" width="100" class="rounded">
+                                            <a href="/instructor_lms/instructor_view_course/{{crs.course_slug}}">
+                                                <img src="{{crs.course_image}}" alt="Card image cap" width="100" class="rounded">
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                            <h4 class="card-title mb-0"><a href="/student_lms/student_take_course">Learn VueJs</a></h4>
+                                            <h4 class="card-title mb-0"><a href="/instructor_lms/instructor_view_course/{{crs.course_slug}}">{{crs.course_name}}</a></h4>
                                             <div class="rating">
                                                 <i class="material-icons">star</i>
                                                 <i class="material-icons">star</i>
@@ -57,70 +58,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="media align-items-center">
-                                        <div class="media-left">
-                                            <a href="/student_lms/student_take_course">
-                                                <img src="{% static 'student_lms/assets/images/nodejs.png' %}" alt="Card image cap" width="100" class="rounded">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="card-title mb-0"><a href="/student_lms/student_take_course">Npm &amp; Gulp Advanced Workflow</a></h4>
-                                            <div class="rating">
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star_border</i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="media align-items-center">
-                                        <div class="media-left">
-                                            <a href="/student_lms/student_take_course">
-                                                <img src="{% static 'student_lms/assets/images/github.png' %}" alt="Card image cap" width="100" class="rounded">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="card-title mb-0"><a href="/student_lms/student_take_course">Github Webhooks for Beginners</a></h4>
-                                            <div class="rating">
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star_border</i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="media align-items-center">
-                                        <div class="media-left">
-                                            <a href="instructor_take_course">
-                                                <img src="{% static 'student_lms/assets/images/gulp.png' %}" alt="Card image cap" width="100" class="rounded">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="card-title mb-0"><a href="instructor_take_course">Gulp &amp; Slush Workflows</a></h4>
-                                            <div class="rating">
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star_border</i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
+                           
                         </div>
                     </div>
 
