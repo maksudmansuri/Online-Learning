@@ -5,7 +5,7 @@ from django.contrib.auth import login,authenticate,logout
 from front.models import Course,Course_Session,Course_Modules,CourseCategory,CourseSubCategory
 from .models import Orders,Ratting
 from accounts.models import Students,CustomUser
-from front.models import viewed
+from front.models import viewed,SessionComments
 from django.contrib import messages
 from django.contrib.auth.forms import UserChangeForm
 from django.core.files.storage import FileSystemStorage
@@ -153,12 +153,12 @@ def student_browse_courses(request):
     crs=paginator.get_page(page)
     return render(request,'student_lms/student_browse_courses.html',{'crs':crs,'std1':std})
 
-@login_required() 
+@login_required()
 def student_cart(request,slug):
     std=Students.objects.get(admin=request.user.id)
     crs=Course.objects.get(course_slug=slug)
     if Orders.objects.filter(course=crs.id).exists():
-        messages.add_message(request,ERROR.messages,"Course already purchased")
+        messages.add_message(request,messages.ERROR,"Course already purchased")
         return render(request,'student_lms/student_cart.html',{'crs1':crs,'std1':std})
     if request.method=="POST":
         user=Students.objects.get(admin=request.user.id)
@@ -270,27 +270,36 @@ def session(request,course_slug,slug):
 @login_required()
 def session_seen(request,course_slug,slug,sslug):
     std=Students.objects.get(admin=request.user.id)
-    crs=Course.objects.get(course_slug=course_slug,)
+    crs=Course.objects.get(course_slug=course_slug)
     allml=Course_Modules.objects.filter(course=crs)
     ml=Course_Modules.objects.get(slug=slug,course=crs)
     allssn=Course_Session.objects.filter(module=ml)
     crssn2=Course_Session.objects.get(course_slug=sslug,module=ml)
-    param={'crs':crs,'allssn':allssn,'ssn':crssn2,'std1':std,'ml':ml}
+    cmmnts=SessionComments.objects.filter(session=crssn2)
+    param={'crs':crs,'allssn':allssn,'ssn':crssn2,'std1':std,'ml':ml,'cmmnts':cmmnts}
     return render(request,'student_lms/session_seen.html',param)
 
 @login_required()
 def session_view(request,course_slug,slug,sslug):
-    std=Students.objects.get(admin=request.user.id)
+    std=Students.objects.get(admin=request.user)
     crs=Course.objects.get(course_slug=course_slug)
     allml=Course_Modules.objects.filter(course=crs)
     ml=Course_Modules.objects.get(slug=slug,course=crs)
     allssn=Course_Session.objects.filter(module=ml)
     lastssn=Course_Session.objects.filter(module=ml).last()
     lastml=Course_Modules.objects.filter(course=crs).last()
-    crssn2=Course_Session.objects.filter(course_slug=sslug,module=ml)
+    crssn2=Course_Session.objects.get(course_slug=sslug,module=ml)
+    cmmnts=SessionComments.objects.filter(session=crssn2)
+    print(crs)
+    print(std)
+    print(ml)
+    print(lastssn)
+    print(lastml)
     print(crssn2)
     vwd1=viewed.objects.get(student=std,course=crs.id)
+    print(vwd1)
     getvwssn=int(vwd1.session_position)
+    getvwml=int(vwd1.module_position)
     if request.method == "POST":
         course=request.POST['ccrs']
         module=request.POST['cmdl']
@@ -323,9 +332,42 @@ def session_view(request,course_slug,slug,sslug):
         getml=Course_Modules.objects.get(position=int(ml.position),course=getcsr)
         getssn=Course_Session.objects.get(position=int(vwd.session_position),module=getml)
         getvwssn = int(vwd.session_position)
+
                   
-    param={'crs':crs,'allssn':allssn,'ssn':crssn2,'std1':std,'ml':ml,'getvwssn':getvwssn}
+    param={'crs':crs,'allssn':allssn,'ssn':crssn2,'std1':std,'ml':ml,'getvwssn':getvwssn,'cmmnts':cmmnts,'getvwml':getvwml}
     return render(request,'student_lms/session_view.html',param)
+
+def sessionComment_view(request,course_slug,slug,sslug):
+    crs=Course.objects.get(course_slug=course_slug)
+    crs=Course.objects.get(course_slug=course_slug)
+    ml=Course_Modules.objects.get(slug=slug,course=crs)
+    ssn=Course_Session.objects.get(module=ml,course_slug=sslug)
+    if request.method=="POST":
+        user = request.user
+        session = ssn
+        comment = request.POST.get("comment")
+
+        cmmnt=SessionComments(user=user,session=session,comment=comment)
+        cmmnt.save()
+        messages.add_message(request,messages.SUCCESS,"Comment Posted Successfuly")
+
+    return redirect(f"/student_lms/session_view/{crs.course_slug}/{ml.slug}/{ssn.course_slug}") 
+
+def sessionComment(request,course_slug,slug,sslug):
+    crs=Course.objects.get(course_slug=course_slug)
+    crs=Course.objects.get(course_slug=course_slug)
+    ml=Course_Modules.objects.get(slug=slug,course=crs)
+    ssn=Course_Session.objects.get(module=ml,course_slug=sslug)
+    if request.method=="POST":
+        user = request.user
+        session = ssn
+        comment = request.POST.get("comment")
+
+        cmmnt=SessionComments(user=user,session=session,comment=comment)
+        cmmnt.save()
+        messages.add_message(request,messages.SUCCESS,"Comment Posted Successfuly")
+
+    return redirect(f"/student_lms/session_seen/{crs.course_slug}/{ml.slug}/{ssn.course_slug}")
 
 @login_required() 
 def modules(request,slug):

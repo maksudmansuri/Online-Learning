@@ -27,6 +27,8 @@ urlpatterns = [
     path('student_forum', views.student_forum,name='student_forum'),
     path('student_forum_ask', views.student_forum_ask,name='student_forum_ask'),
     path('student_forum_thread', views.student_forum_thread,name='student_forum_thread'),
+    path('sessionComment/<course_slug>/<slug>/<sslug>', views.sessionComment,name='sessionComment'),
+    path('sessionComment_view/<course_slug>/<slug>/<sslug>', views.sessionComment_view,name='sessionComment_view'),
     path('student_profile', views.student_profile,name='student_profile'),
     path('student_profile_posts', views.student_profile_posts,name='student_profile_posts'),
     path('student_logout', views.student_logout,name='student_logout'),   
@@ -34,5 +36,6 @@ urlpatterns = [
     path('modules/<slug>', views.modules,name='modules'),   
     path('session/<course_slug>/<slug>', views.session,name='session'),   
     path('session_view/<course_slug>/<slug>/<sslug>', views.session_view,name='session_view'),   
-    path('session_seen/<course_slug>/<slug>/<sslug>', views.session_seen,name='session_seen'),   
+    path('session_seen/<course_slug>/<slug>/<sslug>', views.session_seen,name='session_seen'),
+
 ]

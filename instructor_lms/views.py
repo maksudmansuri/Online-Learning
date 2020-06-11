@@ -143,13 +143,13 @@ def instructor_course_publish(request,slug):
         else:
             messages.add_message(request,messages.ERROR,"Add atlest one Session first")
     elif stf.is_appiled == True:
-        messages.add_message(request,messages.ERROR," Wait for verification ")  
+        messages.add_message(request,messages.ERROR," Wait for account verification ")  
     else:
         messages.add_message(request,messages.ERROR," Complete you profile first")        
     paginator=Paginator(crss,6)
     page=request.GET.get('page')
     crss=paginator.get_page(page)
-    return render(request,'instructor_lms/instructor_courses.html',{'crss':crss,'stf1':stf})
+    return render(request,'/instructor_lms/instructor_courses.html',{'crss':crss,'stf1':stf})
 
 @login_required
 def instructor_course_add(request):

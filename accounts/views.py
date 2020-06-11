@@ -82,6 +82,9 @@ def instructor_singup(request):
                 'token':generate_token.make_token(user)
             }
             )
+            print(urlsafe_base64_encode(force_bytes(user.pk)),)
+            print(generate_token.make_token(user))
+            print(current_site.domain)
             email_message=EmailMessage(
                 email_subject,
                 message,
@@ -133,6 +136,7 @@ def student_singup(request):
                 'token':generate_token.make_token(user)
             }
             )
+            print(message)
             email_message=EmailMessage(
                 email_subject,
                 message,
@@ -196,8 +200,9 @@ def selection(request):
 def activate(request,uidb64,token):
     try:
         uid=force_text(urlsafe_base64_decode(uidb64))
+        print(uid)
         user=CustomUser.objects.get(pk=uid) 
-    except Exception as identifier:
+    except:
         user=None
     if user is not None and generate_token.check_token(user,token):
         user.is_active=True

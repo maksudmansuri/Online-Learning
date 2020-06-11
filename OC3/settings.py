@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'accounts',
     'simple_email_confirmation',
     'moviepy',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -196,3 +197,9 @@ EMAIL_HOST_PASSWORD = 'Aot567@lk'
 EMAIL_PORT = 587
 
 django_heroku.settings(locals())
+
+#Payu Setup
+PAYU_MERCHANT_KEY = "hACIXuc1",
+PAYU_MERCHANT_SALT = "9yduiHrY25",
+# Change the PAYU_MODE to 'LIVE' for production.
+PAYU_MODE = "TEST"

@@ -26,7 +26,6 @@ urlpatterns = [
     path('student_lms/', include("student_lms.urls")),
     path('instructor_lms/', include("instructor_lms.urls")),
     path('counsellor/', include("counsellor.urls")),
-    path('social-auth/',include('social_django.urls', namespace='social')),
     path('accounts/', include("accounts.urls")),
     path('accounts/', include("django.contrib.auth.urls")),
     #password reset and change
