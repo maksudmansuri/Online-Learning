@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'simple_email_confirmation',
     'moviepy',
     'django.contrib.humanize',
+    'channels',
+    'chat'
 ]
 
 MIDDLEWARE = [
@@ -111,6 +113,17 @@ AUTH_USER_MODEL="accounts.CustomUser"
 AUTHENTICATION_BACKENDS=['accounts.EmailBackEnd.EmailBackEnd']
 
 WSGI_APPLICATION = 'OC3.wsgi.application'
+
+ASGI_APPLICATION = 'OC3.routing.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 LOGIN_URL="/accounts/student_singup"
 

@@ -3,7 +3,7 @@ from .forms import RegisterForm
 from django.contrib.auth import login,authenticate,logout
 #from django.contrib.auth.models import User
 from front.models import Course,Course_Session,Course_Modules,CourseCategory,CourseSubCategory
-from .models import Orders,Ratting
+from .models import Orders,Ratting,paytm_payment
 from accounts.models import Students,CustomUser
 from front.models import viewed,SessionComments
 from django.contrib import messages
@@ -13,8 +13,10 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Page,PageNotAnInteger,Paginator
 import moviepy.editor
 from front.views import search_list
-
+from django.views.decorators.csrf import csrf_exempt
+from .paytm import Checksum
 # Create your views  h ere.
+MERCHANT_KEY = 'bBzG2&6OfWiZzlT0'
 
 def student_logout(request):
     logout(request)
@@ -165,7 +167,7 @@ def student_cart(request,slug):
         print(std.admin)
         order=Orders(student=user,course=crs,student_phone=user.phone,student_email=user.admin.email)
         order.save()
-        return redirect("/student_lms/student_pay",kwargs={'crs1': crs,'std1':std}) 
+        return redirect(f"/student_lms/student_pay/{crs.course_slug}",kwargs={'crs1': crs,'std1':std}) 
     return render(request,'student_lms/student_cart.html',{'crs1':crs,'std1':std})
 
 @login_required() 
@@ -175,14 +177,19 @@ def student_help_center(request):
     return render(request,'student_lms/student_help_center.html')
 
 @login_required()
-def student_invoice(request):
-    if request.user.is_anonymous:
-       return redirect("/accounts/dologin")
-    return render(request,'student_lms/student_invoice.html')
+def student_fail(request):    
+    return render(request,'student_lms/student_fail.html')
+
+@login_required()
+def student_invoice(request,id):
+    cnf_ord=paytm_payment.objects.get(ORDERID=id)
+    ord=Orders.objects.get(id=id)
+    std=Students.objects.get(admin=request.user.id)
+    return render(request,'student_lms/student_invoice.html',{'cnf_ord':cnf_ord,'std1':std,'ord':ord})
 
 def student_messages(request):
-    if request.user.is_anonymous:
-       return redirect("/accounts/dologin")
+    std=Students.objects.get(admin=request.user)
+
     return render(request,'student_lms/student_messages.html')
 
 def student_messages_2(request):
@@ -233,11 +240,67 @@ def student_my_courses(request):
     param={'allinone':allinone,'std1':std}      
     return render(request,'student_lms/student_my_courses.html',param)
 
-@login_required()
-def student_pay(request):
+def student_pay(request,slug):
     std=Students.objects.get(admin=request.user.id)
-    return render(request,'student_lms/student_pay.html',{'std1':std})
-    
+    crs=Course.objects.get(course_slug=slug)
+    ords=Orders.objects.get(course=crs.id)
+    param_dict = {
+            'MID':'VCqddy35812500980656',
+            'ORDER_ID':str(ords.id),
+            'TXN_AMOUNT':str(5000),
+            'CUST_ID':request.user.email,
+            'INDUSTRY_TYPE_ID':'Retail',
+            'WEBSITE':'WEBSTAGING',
+            'CHANNEL_ID':'WEB',
+	        'CALLBACK_URL':'http://127.0.0.1:8000/student_lms/handlerequest',
+    }
+    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, MERCHANT_KEY)
+    return render(request,'student_lms/paytm.html',{'param_dict':param_dict,'std1':std})
+
+    # return render(request,'student_lms/student_pay.html',{'std1':std})
+
+@csrf_exempt
+def handlerequest(request):
+    form=request.POST
+    response_dict = {}
+    for i in form.keys():
+        response_dict[i] = form[i]
+        if i == 'CHECKSUMHASH':
+            checksum = form[i]
+    verify = Checksum.verify_checksum(response_dict, MERCHANT_KEY, checksum)
+    print(response_dict)    
+    CURRENCY = request.POST['CURRENCY']
+    GATEWAYNAME = request.POST['GATEWAYNAME']
+    RESPMSG = request.POST['RESPMSG']
+    BANKNAME = request.POST['BANKNAME']
+    PAYMENTMODE = request.POST['PAYMENTMODE']
+    RESPCODE = request.POST['RESPCODE']
+    TXNID = request.POST['TXNID']
+    TXNAMOUNT = request.POST['TXNAMOUNT']
+    ORDERID = request.POST['ORDERID']
+    STATUS = request.POST['STATUS']
+    BANKTXNID = request.POST['BANKTXNID']
+    TXNDATE = request.POST['TXNDATE']
+    ord_cmf=paytm_payment(CURRENCY=CURRENCY,
+    GATEWAYNAME=GATEWAYNAME,
+    RESPMSG=RESPMSG,
+    BANKNAME=BANKNAME,
+    PAYMENTMODE=PAYMENTMODE,
+    RESPCODE=RESPCODE,
+    TXNID=TXNID,
+    TXNAMOUNT=TXNAMOUNT,
+    ORDERID=ORDERID,
+    STATUS=STATUS,
+    BANKTXNID=BANKTXNID,
+    TXNDATE=TXNDATE)
+    ord_cmf.save()
+    if verify:
+        if response_dict['RESPCODE'] == '01':
+            print('order Successful')
+        else:
+            print('order was not successful because' + response_dict['RESPMSG'])
+    return render(request,'student_lms/paytm_status.html',{'response':response_dict})
+             
 def student_quiz_results(request):
     if request.session.has_key('logged in'):
         if request.user.user_type!="3":
@@ -494,3 +557,4 @@ def student_profile_posts(request):
     if request.user.is_anonymous:
        return redirect("/accounts/dologin")
     return render(request,'student_lms/student_profile_posts.html')
+

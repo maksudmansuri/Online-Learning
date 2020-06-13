@@ -16,7 +16,7 @@
                         <div class="row m-0">
                             <div class="col-lg container-fluid page__container">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="./">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="/student_lms">Home</a></li>
                                     <li class="breadcrumb-item active">Edit Account</li>
                                 </ol>
 
@@ -25,7 +25,7 @@
                                         <div class="card-header media align-items-center">
                                             <div class="media-body">
                                                 <h1 class="card-title h2">Invoice</h1>
-                                                <div class="card-subtitle">Document 10003578 / 12 Jan 2019</div>
+                                                <div class="card-subtitle">Document 10003578 / {{cnf_ord.TXNDATE}}</div>
                                             </div>
                                             <div class="media-right d-flex align-items-center">
                                                 <a href="javascript:window.print()" class="btn btn-flush text-muted d-print-none mr-3"><i class="material-icons font-size-24pt">print</i></a>
@@ -38,10 +38,13 @@
                                             <div class="row">
                                                 <div class="col-6">
                                                     <p class="text-black-70 m-0"><strong>Prepared for</strong></p>
-                                                    <h2>Alexander Watson</h2>
+                                                    <h2>{{std1.fisrt_name }} {{ std1.last_name}} </h2>
                                                     <div class="text-black-50">
-                                                        640 Joy Bypass Suite 448 <br>
-                                                        Germany
+                                                       {{std1.address}} <br>
+                                                       {{std.city}}<br>
+                                                       {{std1.state}}<br>
+                                                       {{std1.country}}
+
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -74,12 +77,12 @@
                                                         </a>
                                                         <div class="flex">
                                                             <a href="student_view_course" class="text-body">
-                                                                <strong>Learn Angular Fundamentals</strong>
+                                                                <strong>{{ord.course.course_name}}</strong>
                                                             </a>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="text-right"><strong>&dollar;89.00 USD</strong></td>
+                                                <td class="text-right"><strong>&dollar;{{ord.course.course_fee}} USD</strong></td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -99,11 +102,11 @@
                                         <tfoot>
                                             <tr>
                                                 <td class="text-right text-black-70"><strong>Subtotal</strong></td>
-                                                <td style="width: 120px;" class="text-right"><strong>&dollar;89.00 USD</strong></td>
+                                                <td style="width: 120px;" class="text-right"><strong>&dollar;{{ord.course.course_fee}} USD</strong></td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right text-black-70"><strong>Total</strong></td>
-                                                <td style="width: 120px;" class="text-right"><strong>&dollar;89.00 USD</strong></td>
+                                                <td style="width: 120px;" class="text-right"><strong>&dollar;{{ord.course.course_fee}} USD</strong></td>
                                             </tr>
                                         </tfoot>
                                     </table>

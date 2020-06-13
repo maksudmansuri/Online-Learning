@@ -19,6 +19,8 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                     pass
                 elif modulename == "django.contrib.auth.views":
                     pass
+                elif  modulename == "chat.views":
+                    pass
                 else:
                     return HttpResponseRedirect(reverse("counsellor_dashboard"))
             elif user.user_type=="2":
@@ -30,6 +32,8 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                     pass
                 elif modulename == "django.contrib.auth.views":
                     pass
+                elif  modulename == "chat.views":
+                    pass
                 else:
                     return HttpResponseRedirect(reverse("instructor_dashboard"))
             elif user.user_type=="3":
@@ -40,6 +44,8 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                 elif modulename == "media":
                     pass
                 elif modulename == "django.contrib.auth.views":
+                    pass
+                elif  modulename == "chat.views":
                     pass
                 else:
                     return HttpResponseRedirect(reverse("student_dashboard"))
@@ -60,7 +66,7 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                     pass
                 return redirect('admin')
         else:
-            if request.path == reverse("dologin") or modulename == "front.views" or modulename == "accounts.views" or modulename == "django.views.static" or modulename == "django.contrib.auth.views":
+            if request.path == reverse("dologin") or modulename == "front.views" or modulename == "accounts.views" or modulename == "django.views.static" or modulename == "django.contrib.auth.views" or modulename == "chat.views":
                 pass
             else:
                 return HttpResponseRedirect(reverse("dologin"))
