@@ -14,6 +14,8 @@
 <title>{{request.user}} - Dashboard</title>{% endblock title %} 
 
     <!-- Prevent the demo from appearing in search engines (REMOVE THIS) -->
+     <!-- Perfect Scrollbar -->
+    <link type="text/css" href=" {% static 'student_lms/assets/vendor/perfect-scrollbar.css' %} " rel="stylesheet">
 
     <!-- Material Design Icons -->
     <link type="text/css" href="{% static 'student_lms/assets/css/material-icons.css' %}" rel="stylesheet">
@@ -502,12 +504,12 @@ span.status.incomplete {
                                                 </a>
                                             </li>
                                             <!-- <li class="sidebar-menu-item">
-        <a class="sidebar-menu-button" href="ui-modals.html">
-          <span class="sidebar-menu-text">- Modals</span>
-        </a>
-      </li> -->
-                                            <li class="sidebar-menu-item">
-                                                <a class="sidebar-menu-button" href="ui-progress.html">
+                                        <a class="sidebar-menu-button" href="ui-modals.html">
+                                        <span class="sidebar-menu-text">- Modals</span>
+                                        </a>
+                                    </li> -->
+                                                                            <li class="sidebar-menu-item">
+                                                                                <a class="sidebar-menu-button" href="ui-progress.html">
                                                     <span class="sidebar-menu-text">Progress Bars</span>
                                                 </a>
                                             </li>
@@ -584,6 +586,12 @@ span.status.incomplete {
                 </div>
 
             </div>
+               <div id="app-settings">
+                            <app-settings layout-active="default" :layout-location="{
+                'fixed': 'fixed-instructor-messages.html',
+                'default': 'instructor-messages.html'
+                }" sidebar-variant="bg-transparent border-0"></app-settings>
+            </div>
 
         </div>
     </div>
@@ -596,6 +604,7 @@ span.status.incomplete {
     <!-- Bootstrap -->
     <script src="{% static 'student_lms/assets/vendor/popper.min.js' %}"></script>
     <script src="{% static 'student_lms/assets/vendor/bootstrap.min.js' %}"></script>
+    
 
     <!-- Perfect Scrollbar -->
     <script src="{% static 'student_lms/assets/vendor/perfect-scrollbar.min.js' %}"></script>
@@ -647,8 +656,11 @@ span.status.incomplete {
 
     <!-- Init -->
     <script src="{% static 'student_lms/assets/js/countdown.js' %}"></script>
+{% block script %}
 
+{% endblock script %}
   
 </body>
+
 
 </html>
