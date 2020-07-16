@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
-class CustomUser(AbstractUser):
+class CustomUser(AbstractUser): 
     user_type_data=((1,"HOD"),(2,"Staff"),(3,"Student"))
     user_type=models.CharField(choices=user_type_data,max_length=10)
 

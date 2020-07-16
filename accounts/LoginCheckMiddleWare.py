@@ -66,7 +66,7 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                     pass
                 return redirect('admin')
         else:
-            if request.path == reverse("dologin") or modulename == "front.views" or modulename == "accounts.views" or modulename == "django.views.static" or modulename == "django.contrib.auth.views" or modulename == "chat.views":
+            if request.path == reverse("dologin") or modulename == "front.views" or modulename == "accounts.views" or modulename == "django.views.static" or modulename == "django.contrib.auth.views" or modulename == "chat.views" or modulename == "accounts.api.views" or modulename == "front.api.views":
                 pass
             else:
                 return HttpResponseRedirect(reverse("dologin"))

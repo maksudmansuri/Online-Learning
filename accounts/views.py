@@ -14,8 +14,16 @@ from django.utils.encoding import force_bytes,force_text,DjangoUnicodeDecodeErro
 from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
+from rest_framework import viewsets
+
+#API for Apps
+# class CustomUserViewSet(viewsets.ModelViewSet):
+#     queryset = CustomUser.objects.all().order_by('username')
+#     serializer_class = CustomUserSerializer
+ 
 
 # Create your views here .gg
+
 
 def dologin(request):
     # print(request.user)

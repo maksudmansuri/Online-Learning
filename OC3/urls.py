@@ -18,6 +18,7 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls,name='admin'),
@@ -29,6 +30,12 @@ urlpatterns = [
     path('counsellor/', include("counsellor.urls")),
     path('accounts/', include("accounts.urls")),
     path('accounts/', include("django.contrib.auth.urls")),
+
+    #Rest Framework Urls
+    path('api/front/',include("front.api.urls")),
+    path('api/accounts/',include("accounts.api.urls")),
+
+
     #password reset and change
     path('password_change/done',auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'),name='password_change_done'),
 
@@ -42,6 +49,7 @@ urlpatterns = [
 
     path('reset/done',auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),name='password_reset_complete'),
     
+    # url(r'^api/v1/account/', include(('rest_accounts.urls', 'restprofile'), namespace='rest_accounts')),
     
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 

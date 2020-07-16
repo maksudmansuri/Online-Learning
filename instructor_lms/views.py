@@ -30,7 +30,8 @@ def instructor_dashboard(request):
 
 @login_required
 def instructor_account_edit(request):
-    stf=Staffs.objects.get(admin=request.user.id)
+    stf=Staffs.objects.get(admin=request.user)
+    print(stf)
     allcat=CourseSubCategory.objects.all()
     return render(request,'instructor_lms/instructor_account_edit.html',{'stf1':stf,'allcat':allcat})
 
