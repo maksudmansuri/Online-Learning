@@ -1,0 +1,238 @@
+{% extends './lms_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Student - Messages</title>
+{% endblock title %}
+
+{% block body %}    
+
+            <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div data-push data-responsive-width="768px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                        <div class="mdk-drawer-layout__content">
+
+
+                            <div class="app-messages__container d-flex flex-column h-100 pb-4">
+                                <div class="navbar navbar-light bg-white navbar-expand-sm navbar-shadow z-1">
+                                    <div class="container-fluid flex-wrap px-sm-0">
+                                        <div class="nav py-2">
+                                            <div class="nav-item align-items-center mr-3">
+                                                <div class="mr-3">
+                                                    <div class="avatar avatar-online avatar-sm">
+                                                        <img src="{% static 'student_lms/assets/images/woman-5.jpg' %}" alt="people" class="avatar-img rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-column" style="max-width: 200px; font-size: 15px">
+                                                    <strong class="text-body">Michelle Smith</strong>
+                                                    <span class="text-muted text-ellipsis">Personal Development Teacher since 2014</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="py-2 flex d-flex align-items-center">
+                                            <div class="flex search-form form-control-rounded search-form--light" style="min-width: 200px;">
+                                                <input type="text" class="form-control" placeholder="Search messages" id="searchSample02">
+                                                <button class="btn pr-3" type="button" role="button"><i class="material-icons">search</i></button>
+                                            </div>
+                                            <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0" data-toggle="sidebar" type="button">
+                                                <i class="material-icons">people_outline</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex pt-4" style="position: relative;" data-perfect-scrollbar>
+                                    <div class="container-fluid page__container">
+                                        <div class="jumbotron">
+                                            <div class="d-flex align-items-center">
+                                                <div class="mr-3">
+                                                    <div class="avatar avatar-xl">
+                                                        <img src="assets/images/people/110/woman-5.jpg" alt="people" class="avatar-img rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="flex">
+                                                    <h4 class="mb-0">Michelle Smith</h4>
+                                                    <p class="text-muted mb-0">Personal Development Teacher since 2014</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="messages">
+                                            <ul id="chat-log">
+                                            {% comment %} <li class="sent">
+                                                <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                                                <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
+                                            </li>
+                                            <li class="replies">
+                                                <img src="{{http://emilcarlsson.se/assets/harveyspecter.png}}" alt="" />
+                                                <p>When you're backed against the wall, break the god damn thing down.</p>
+                                            </li> {% endcomment %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid page__container">
+                                        <div class="input-group input-group-merge">
+                                            <input id="chat-message-input" type="text" class="form-control form-control-appended" autofocus="" required="" placeholder="Type message">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text pr-2">
+                                                    <button id="chat-message-submit" class="btn btn-flush" type="button">
+                                                    {% comment %} <i class="material-icons">tag_faces</i> {% endcomment %}
+                                                    <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                                </div>
+                                                <div class="input-group-text pl-0">
+                                                    <div class="custom-file custom-file-naked d-flex" style="width: 24px; overflow: hidden;">
+                                                        <input type="file" class="custom-file-input" id="customFile">
+                                                        <label class="custom-file-label" style="color: inherit;" for="customFile">
+                                                            <i class="material-icons">attach_file</i>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                 
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="mdk-drawer js-mdk-drawer" data-align="end" id="messages-drawer">
+                            <div class="mdk-drawer__content top-0">
+                                <div class="sidebar sidebar-right sidebar-light bg-white o-hidden">
+                                    <div class="d-flex flex-column h-100">
+                                        <div class="d-flex flex-column justify-content-center navbar-height">
+                                            <div class="px-3 form-group mb-0">
+                                                <div class="input-group input-group-merge input-group-rounded flex-nowrap">
+                                                    <input type="text" class="form-control form-control-prepended" placeholder="Filter members">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="material-icons">filter_list</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex" data-perfect-scrollbar>
+                                            <div class="sidebar-heading">Online</div>
+                                            <ul class="list-group list-group-fit mb-3">
+                                                <li class="list-group-item px-4 py-3">
+                                                    <a href="#" class="d-flex align-items-center position-relative">
+                                                        <span class="avatar avatar-sm avatar-online mr-3 flex-shrink-0">
+
+                                                            <span class="avatar-title rounded-circle">AD</span>
+
+                                                        </span>
+                                                        <span class="flex d-flex flex-column" style="max-width: 175px;">
+                                                            <strong class="text-body">Andrew Brain</strong>
+
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                               
+
+
+                                            </ul>
+                                            <div class="sidebar-heading d-flex">
+                                                <div class="flex text-muted">21 OFFLINE</div>
+                                                <a href="#" class="text-primary">Hide offline</a>
+                                            </div>
+                                            <ul class="list-group list-group-fit mb-3">
+
+
+                                                <li class="list-group-item px-4 py-3">
+                                                    <a href="#" class="d-flex align-items-center position-relative">
+                                                        <span class="avatar avatar-sm avatar-offline mr-3 flex-shrink-0">
+
+                                                            <span class="avatar-title rounded-circle">XD</span>
+
+                                                        </span>
+                                                        <span class="flex d-flex flex-column" style="max-width: 175px;">
+                                                            <strong class="text-body">Xander Dale</strong>
+
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+<script src="{% static 'main.js' %}"></script>
+<script src="{% static 'reconnecting-websocket.js' %}"></script>
+<script>
+    var roomName = {{ room_name_json }};
+    var username = {{ username }};
+
+    var chatSocket = new ReconnectingWebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/');
+
+    chatSocket.onopen = function(e) {
+      fetchMessages();
+    }
+
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        if (data['command'] === 'messages') {
+          for (let i=0; i<data['messages'].length; i++) {
+            createMessage(data['messages'][i]);
+          }
+        } else if (data['command'] === 'new_message'){
+          createMessage(data['message']);
+        }
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#chat-message-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        var messageInputDom = document.getElementById('chat-message-input');
+        var message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'command': 'new_message',
+            'message': message,
+            'from': username
+        }));
+
+        messageInputDom.value = '';
+    };
+
+    function fetchMessages() {
+      chatSocket.send(JSON.stringify({'command': 'fetch_messages' }));
+    }
+
+    function createMessage(data) {
+      var user = data['user'];
+      var msgListTag = document.createElement('li');
+      var imgTag = document.createElement('img');
+      var pTag = document.createElement('p');
+      pTag.textContent = data.content;
+      imgTag.src = data['user.admin.photo'];
+      
+      if (user === username) {
+        msgListTag.className = 'sent';
+      } else {
+        msgListTag.className = 'replies';
+      }
+      msgListTag.appendChild(imgTag);
+      msgListTag.appendChild(pTag);
+      document.querySelector('#chat-log').appendChild(msgListTag);
+    }
+
+</script>
+{% endblock body%} 

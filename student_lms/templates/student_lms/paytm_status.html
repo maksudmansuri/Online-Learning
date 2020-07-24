@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paytm Merchant payment page</title>
+</head>
+<body>
+    <h1>payment Status regarding your orders</h1>
+    
+    {% if response.RESPCODE == '01' %}
+        <h2>payment successfull Done</h2>  
+        <h2>Generating invoice for you...... </h2>
+        <h2>Please Do not Refresh YOur page</h2>
+        <script>
+            window.location.href = '/student_lms/student_invoice/{{response.ORDERID}}';
+        </script>
+        {% comment %} <form action="/student_lms/student_invoice/{{response.ORDERID}}" method="post" name="done">
+            
+        </form>
+        <script>
+            document.done.submit()
+        </script> {% endcomment %}
+    {% else %}
+     <h2>Payment Fail</h2> 
+      <script>
+            window.location.href = '/student_lms/student_fail/{{response.ORDERID}}';
+        </script>
+      {% comment %} <form action="/student_lms/student_fail/{{response.ORDERID}}" method="post" name="fail">
+
+      </form> 
+      <script>
+            document.fail.submit()
+      </script> {% endcomment %}
+    {% endif %}
+
+   
+</body>
+{% comment %} <script>
+if(response.RESPCODE == '01'){
+    document.done.submit()
+    }
+else{
+   document.fail.submit()
+    } 
+    
+</script>{% endcomment %}
+</html>

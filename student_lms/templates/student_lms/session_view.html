@@ -1,0 +1,268 @@
+{% extends './lms_base.html' %}
+ {% load static %}
+
+{% block title %}
+    <title>Student - View course</title>
+{% endblock title %}
+
+{% block body %}
+{% load humanize %}
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css">
+   
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid ">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/student_lms">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/student_lms/student_browse_courses">Courses</a></li>
+                            <li class="breadcrumb-item"><a href="/student_lms/modules/{{crs.course_slug}}">{{crs.course_name}}</a></li>
+                            <li class="breadcrumb-item active">{{ml.module}}</li>
+                        </ol>
+                        <h1 class="h2">{{ml.module}}</h1>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="card">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                    <video id="video" controls="true" poster="" width="620" autoPictureInPicture>
+                                    <source src="{{ssn.video_link}}" type="video/mp4">
+                                            Sorry, your browser doesn't support embedded videos.
+                                    </video>
+                                         {% comment %} <iframe class="embed-responsive-item" src="{{ssn.video_link}}" allowfullscreen=""></iframe> {% endcomment %}
+                                    </div> 
+                                   
+                                        {% if ssn.position < getvwssn %}
+                                            <div id="status" class="complete">
+                                        {% else %}
+                                            <div id="status" class="incomplete">
+                                        {% endif %}
+                                        <span>Play status : </span>
+                                        <span class="status complete">COMPLETED LESSON</span> 
+                                        {% if ssn.position == getvwssn %}
+                                        <form  id="form" method="post">
+                                        {% csrf_token %} 
+                                        <input type="hidden" class="status complete" name="cssn" value={{ssn.position}}>
+                                        <input type="hidden" class="status complete" name="cmdl" value={{ml.position}}>
+                                        <input type="hidden" class="status complete" name="ccrs" value={{crs.id}}>
+                                        
+                                        </form>
+                                        
+                                        {% endif %}
+                                        <span class="status incomplete">INCOMPLETE LESSON</span>
+                                    </br></div>
+                                    <div>
+                                    <span id="played">0</span> second out of 
+                                    <spna id="duration"></span>seconds.(only update when video pauses)</div>
+                                    <div class="card-body">
+                                         {{ssn.session_desc}}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-3">
+                            <ul class="card list-group list-group-fit">
+                                {% for i in allssn %}
+                                {% if i.position < getvwssn %}
+                                     {% if i == ssn %}
+                                    <li class="list-group-item active">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="text-white">{{i.position}}</div>
+                                            </div>
+                                            <div class="media-body">
+                                                <a  class="text-white" href="/student_lms/session_view/{{crs.course_slug}}/{{ml.slug}}/{{i.course_slug}}">{{i.session_name}}</a>
+                                            </div>
+                                            <div class="media-right">
+                                                <small class="text-muted-white">{{i.session_duration}}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% else %}
+                                    <li class="list-group-item">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="text-muted">{{i.position}}</div>
+                                            </div>
+                                            <div class="media-body">
+                                                <a href="/student_lms/session_view/{{crs.course_slug}}/{{ml.slug}}/{{i.course_slug}}">{{i.session_name}}</a>
+                                            </div>
+                                            <div class="media-right">
+                                                <small class="text-muted-light">{{i.session_duration}}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endif %}                               
+                                {% elif  i.position == getvwssn %}
+                                    {% if i == ssn %}
+                                    <li class="list-group-item active">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="text-white">{{i.position}}</div>
+                                            </div>
+                                            <div class="media-body">
+                                                <a  class="text-white" href="/student_lms/session_view/{{crs.course_slug}}/{{ml.slug}}/{{i.course_slug}}">{{i.session_name}}</a>
+                                            </div>
+                                            <div class="media-right">
+                                                <small class="text-muted-white">{{i.session_duration}}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% else %}
+                                    <li class="list-group-item">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="text-muted">{{i.position}}</div>
+                                            </div>
+                                            <div class="media-body">
+                                                <a href="/student_lms/session_view/{{crs.course_slug}}/{{ml.slug}}/{{i.course_slug}}">{{i.session_name}}</a>
+                                            </div>
+                                            <div class="media-right">
+                                                <small class="text-muted-light">{{i.session_duration}}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endif %}
+                                {% else %}
+                                    {% if i == ssn %}
+                                    <li class="list-group-item active">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="text-white">{{i.position}}</div>
+                                            </div>
+                                            <div class="media-body">
+                                                <a  class="text-white" href="/student_lms/session_view/{{crs.course_slug}}/{{ml.slug}}/{{i.course_slug}}">{{i.session_name}}</a>
+                                            </div>
+                                            <div class="media-right">
+                                                <small class="text-muted-white">{{i.session_duration}}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% else %}
+                                    <li class="list-group-item">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="text-muted">{{i.position}}</div>
+                                            </div>
+                                            <div class="media-body">
+                                                {{i.session_name}}
+                                            </div>
+                                            <div class="media-right">
+                                                <small class="text-muted-light">{{i.session_duration}}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                </ul>
+                            </div>                            
+                        </div>
+                        <!--For comments -->
+                        <div class="container-fluid"> 
+                            <form action="/student_lms/sessionComment_view/{{crs.course_slug}}/{{ml.slug}}/{{ssn.course_slug}}" method="post">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                            {% if messages %}
+                                            {% for message in messages %}
+                                            {% if message.tags == 'error' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% if message.tags == 'success' %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>{{message}}</strong> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endif %}
+                                </div>
+                                <h2>Comments ({{cmmnts.count}})</h2>
+                                <div class="row">
+                                <div class="col-9">
+                                <div class="form-group my-2">
+                                    <input type="text" class="form-control" name="comment" id="comment" placeholder="Enter Your Comment">                                                   
+                                </div> </div>       </div>  
+                                                  
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                
+                            </form>
+                            
+                            {% for cmnt in cmmnts %}
+                            <div class="row my-3">
+                               <div class="col-md-1">
+                               <a class="nav-link" href="student_profile" role="button"><img src="{{cmnt.user.photo}}" alt="Avatar" class="rounded-circle" width="40"></a></div>
+                               <div class="col-md-11"><b>{{cmnt.user.username }}</b> <span class="badge badge-secondary"> {{cmnt.created_date|naturaltime}}</span>
+                               
+                               <div>
+                               {{cmnt.comment}}</div></div>
+                            </div>
+                            {% endfor %}
+                           
+                        </div>
+                    </div>
+
+
+                </div>
+<script>
+var video = document.getElementById("video");
+
+var timeStarted = 0;
+var timePlayed = 0;
+var duration = 0;
+// If video metadata is laoded get duration
+if(video.readyState > 0)
+  getDuration.call(video);
+//If metadata not loaded, use event to get it
+else
+{
+  video.addEventListener('loadedmetadata', getDuration);
+}
+// remember time user started the video
+function videoStartedPlaying() {
+  timeStarted = new Date().getTime()/1000;
+}
+function videoStoppedPlaying(event) {
+  // Start time less then zero means stop event was fired vidout start event
+  if(timeStarted>0) {
+    var playedFor = new Date().getTime()/1000 - timeStarted;
+    timeStarted = -1;
+    // add the new ammount of seconds played
+    timePlayed+=playedFor;
+  }
+  document.getElementById("played").innerHTML = Math.round(timePlayed)+"";
+  // Count as complete only if end of video was reached
+  if(timePlayed >= duration | event.type == "ended") {
+    document.getElementById("status").className="complete";
+     showValues();
+  }
+}
+function getDuration() {
+  duration = video.duration;
+  document.getElementById("duration").appendChild(new Text(Math.round(duration)+""));
+  console.log("Duration: ", duration);
+}
+
+video.addEventListener("play", videoStartedPlaying);
+video.addEventListener("playing", videoStartedPlaying);
+
+video.addEventListener("ended", videoStoppedPlaying);
+video.addEventListener("pause", videoStoppedPlaying);
+
+function showValues(){
+     $('#form').submit();
+}
+
+</script>
+
+{% endblock body %}
