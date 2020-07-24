@@ -1,0 +1,115 @@
+{% extends 'counsellor/cnslr_base.html' %}
+{% load static %}
+
+{% block title %}
+        <title>Manage Course</title>
+{% endblock title %}
+
+
+{% block body %}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page ">
+
+                    <div class="container-fluid page__container">
+                        <ol class="breadcrumb d-print-none">
+                            <li class="breadcrumb-item"><a href="/counsellor">Home</a></li>
+                            <li class="breadcrumb-item active">Course Category</li>
+                        </ol>
+                        <h1 class="h2">Category : {{crscats}}</h1>
+                        <form action="/counsellor/course_subcategory/{{crscats.id}}" method="post" class="form mt-3">
+                        {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="category" class="col-sm-2 col-form-label form-label">Add Category</label>
+                                <div class="col-sm-6 col-md-10">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="material-icons md-18 text-muted">category</i>
+                                            </div>
+                                        </div>
+                                        <input  type="text" id="category" name="subcategory" class="form-control" placeholder="Add Sub Category of {{crscats}}" >
+                                         <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">Add</button>
+                            </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            
+                            </form>
+                        <div class="card">
+                            {% comment %} <div class="card-header form-inline">
+                                <div class="form-group ml-auto">
+                                    <label for="flatpickrSample02" class="form-label mr-3">Date</label>
+                                    <input id="flatpickrSample02" type="text" class="form-control" placeholder="Select dates" data-toggle="flatpickr" data-flatpickr-mode="range" data-flatpickr-alt-input="false" value="2018-10-07 to 2018-10-15">
+                                </div>
+                            </div> {% endcomment %}
+                            
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Sr no</th>
+                                    <th scope="col">Category</th>
+                                   
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for sbcat in crssbcats %}
+                                    <tr>
+                                    <th scope="row">{{forloop.counter}}</th>
+                                    <td><a href="/counsellor/course_subcategory/{{sbcat.id}}" class="">{{sbcat.subcategory}}</td>
+                                    <td></td>
+                                    {% comment %} <td><a href="" class="btn btn-outline-success"> Edit</button</td> {% endcomment %}
+                                    <td><a href="/counsellor/course_subcategory_delete/{{crscats.id}}/{{sbcat.id}}" class="btn btn-outline-secondary">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                {% endfor %}
+                                </tbody>
+                                </table>
+
+                        </div>
+                        <!-- Pagination -->
+                        <ul class="pagination justify-content-center pagination-sm">
+                            {% if crs1.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{crs1.previous_page_number}}" aria-label="Previous">
+                                    <span aria-hidden="false" class="material-icons">chevron_left</span>
+                                    <span>Prev</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% for num in crs1.paginator.page_range %}
+                            {% if crs1.number == num %}
+                                <li class="page-item active">
+                                <a class="page-link" href="?page={{num}}" aria-label="1">
+                                    <span>{{num}}</span>
+                                </a>
+                            </li>
+                             {% elif num > crs1.number|add:'-2' and num < crs1.number|add:'2' %}
+                             <li class="page-item">
+                                <a class="page-link" href="?page={{num}}" aria-label="1">
+                                    <span>{{num}}</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                                                         
+                            {%if crs1.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ crs1.next_page_number }}" aria-label="Next">
+                                    <span>Next</span>
+                                    <span aria-hidden="false" class="material-icons">chevron_right</span>
+                                </a>
+                            </li>
+                            {%endif%}
+                        </ul>
+
+                    </div>
+
+                </div>
+
+{% endblock body %}
