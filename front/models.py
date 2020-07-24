@@ -5,7 +5,9 @@ from instructor_lms.models import Staffs
 from accounts.models import Students,CustomUser
 from django.urls import reverse
 from django.shortcuts import redirect
-
+from django.db.models.signals import post_delete, pre_save
+from django.dispatch import receiver
+from django.utils.text import slugify
 
 # Create your models  .
 
@@ -43,7 +45,7 @@ class Course(models.Model):
     course_requirement=RichTextUploadingField(blank=True,null=True) 
     course_level=models.CharField(max_length=150,blank=True,null=True)
     course_desc=RichTextUploadingField(blank=True,null=True)
-    course_slug=models.CharField(max_length=150,blank=True,null=True)
+    course_slug=models.CharField(max_length=150,blank=True,null=True,unique=True)
     course_why_take=RichTextUploadingField(blank=True,null=True)
     is_appiled=models.NullBooleanField(blank=True,null=True,default=False)
     is_verified=models.NullBooleanField(blank=True,null=True,default=False)
@@ -54,9 +56,22 @@ class Course(models.Model):
 
     def __str__(self):
         return self.course_name
-   
+    
     def get_absolute_url(self):
         return redirect('instructor_lesson_add', kwargs={'slug': self.course_slug})
+
+@receiver(post_delete, sender=Course)
+def submission_delete(sender, instance, **kwargs):
+	instance.image.delete(False)
+
+def pre_save_course_post_receiever(sender, instance, *args, **kwargs):
+    if not instance.course_slug:
+        instance.course_slug = slugify(instance.teacher.admin.username + "-" + instance.course_name)
+
+pre_save.connect(pre_save_course_post_receiever, sender=Course)
+
+
+
 
 class Course_Modules(models.Model):
     id=models.AutoField(primary_key=True)
@@ -74,6 +89,12 @@ class Course_Modules(models.Model):
 
     def __str__(self):
         return self.module
+
+def pre_save_module_post_receiever(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = slugify(instance.course + "-" + instance.module)
+
+pre_save.connect(pre_save_module_post_receiever, sender=Course_Modules)
 
 class Course_Session(models.Model):
     id=models.AutoField(primary_key=True)
@@ -96,6 +117,13 @@ class Course_Session(models.Model):
 
     def __str__(self):
         return self.module.module + self.session_name
+
+
+def pre_save_session_post_receiever(sender, instance, *args, **kwargs):
+    if not instance.course_slug:
+        instance.course_slug = slugify(instance.module.course + "-" + instance.module + "-" + instance.session_name)
+
+pre_save.connect(pre_save_session_post_receiever, sender=Course_Session)
 
 class SessionComments(models.Model):
     id = models.AutoField(primary_key=True)

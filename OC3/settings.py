@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'chat',
     'rest_framework',
     'rest_framework.authtoken',
+  
 
 ]
 
@@ -111,15 +112,19 @@ CKEDITOR_CONFIGS = {
 }
 
 REST_FRAMEWORK = {
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     # 'rest_framework.permissions.IsAuthenticatedOrReadOnly'
-    #      'rest_framework.permissions.IsAdminUser'
-    # ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly'
+        'rest_framework.permissions.IsAuthenticated'
+        #  'rest_framework.permissions.IsAdminUser'
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'accounts.EmailBackEnd.EmailBackEnd',
         # 'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.BasicAuthentication',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE':10,
    
 }
 CORS_ORIGIN_WHITELIST = (
@@ -131,7 +136,10 @@ CORS_ORIGIN_WHITELIST = (
 # AUTH_USER_MODEL='account.Account'
 AUTH_USER_MODEL="accounts.CustomUser"
 
-AUTHENTICATION_BACKENDS=['accounts.EmailBackEnd.EmailBackEnd']
+AUTHENTICATION_BACKENDS=(
+    'accounts.EmailBackEnd.EmailBackEnd',
+    # 'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 WSGI_APPLICATION = 'OC3.wsgi.application'
 
@@ -215,6 +223,7 @@ CRISPY_TEMPLATE_PACK="bootstrap4"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL =  '/media/'
+TEMP = os.path.join(BASE_DIR, "temp")
 
 from datetime import timedelta
 
