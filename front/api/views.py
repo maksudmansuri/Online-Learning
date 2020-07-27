@@ -93,7 +93,6 @@ def api_is_teacher_of_course(request, slug):
 	return Response(data=data)
 
 
-
 @api_view(['DELETE',])
 @permission_classes((IsAuthenticated,))
 def api_delete_course_view(request,slug):
