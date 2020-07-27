@@ -148,8 +148,8 @@ def api_create_course_view(request):
 			return Response(data=data)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET',])
-@permission_classes((IsAuthenticated,))
+# @api_view(['GET',])
+# @permission_classes((IsAuthenticated,))
 class ApiCourseListView(ListAPIView):
 	queryset = Course.objects.all()
 	serializer_class = CourseDatailSerializer

@@ -24,7 +24,7 @@ from front.utils import is_image_size_valid
 class CourseDatailSerializer(serializers.ModelSerializer):
 
     username = serializers.SerializerMethodField('get_username_from_staffs')
-    course_image 	 = serializers.SerializerMethodField('validate_course_image_url')
+    # course_image = serializers.SerializerMethodField('validate_course_image_url')
 
     class Meta: 
         model = Course 
@@ -35,10 +35,10 @@ class CourseDatailSerializer(serializers.ModelSerializer):
         return username
 
     def validate_course_image_url(self, Course):
-        course_image = Course.course_image
-        new_url = course_image.url
+        crs_imge = Course.course_image
+        new_url = crs_imge.url
         if "?" in new_url:
-            new_url = course_image.url[:course_image.url.rfind("?")]
+            new_url = crs_imge.url[:crs_imge.url.rfind("?")]
         return new_url
 
 
