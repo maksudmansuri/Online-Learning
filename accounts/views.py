@@ -119,11 +119,11 @@ def student_singup(request):
         e=CustomUser.objects.filter(email=email)
         if e.count():
             # if e.user_type==3:
-            msg=messages.error(request,"Email Already Exits")
-            return HttpResponseRedirect(reverse("dologin"))
-            # else:
-            #     msg=messages.error(request,"Register With different Role")
+            #     msg=messages.error(request,"Email Already Exits")
             #     return HttpResponseRedirect(reverse("student_singup"))
+            else:
+                msg=messages.error(request,"Register With different Role")
+                return HttpResponseRedirect(reverse("student_singup"))
 
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
@@ -132,27 +132,27 @@ def student_singup(request):
             return HttpResponseRedirect(reverse("student_singup"))
         try:
             user=CustomUser.objects.create_user(username=username,password=password1,email=email,user_type=3)
-            user.is_active=True
+            user.is_active=False
             user.save()
-            # current_site=get_current_site(request)
-            # email_subject='Active your Account',
-            # message=render_to_string('accounts/activate.html',
-            # {
-            #     'user':user,
-            #     'domain':current_site.domain,
-            #     'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-            #     'token':generate_token.make_token(user)
-            # }
-            # )
-            # print(message)
-            # email_message=EmailMessage(
-            #     email_subject,
-            #     message,
-            #     settings.EMAIL_HOST_USER,
-            #     [email]
-            # )
-            # email_message.send()
-            # msg=messages.success(request,"Sucessfully Singup check you emial for verification")
+            current_site=get_current_site(request)
+            email_subject='Active your Account',
+            message=render_to_string('accounts/activate.html',
+            {
+                'user':user,
+                'domain':current_site.domain,
+                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+                'token':generate_token.make_token(user)
+            }
+            )
+            print(message)
+            email_message=EmailMessage(
+                email_subject,
+                message,
+                settings.EMAIL_HOST_USER,
+                [email]
+            )
+            email_message.send()
+            msg=messages.success(request,"Sucessfully Singup check you emial for verification")
             return HttpResponseRedirect(reverse("dologin"))
         except:
             msg=messages.error(request,"Connection Error Try Again")
