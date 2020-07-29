@@ -132,6 +132,7 @@ def student_singup(request):
             return HttpResponseRedirect(reverse("student_singup"))
         try:
             user=CustomUser.objects.create_user(username=username,password=password1,email=email,user_type=3)
+            user.is_active=True
             user.save()
             # current_site=get_current_site(request)
             # email_subject='Active your Account',
@@ -152,7 +153,7 @@ def student_singup(request):
             # )
             # email_message.send()
             # msg=messages.success(request,"Sucessfully Singup check you emial for verification")
-            # return HttpResponseRedirect(reverse("dologin"))
+            return HttpResponseRedirect(reverse("dologin"))
         except:
             msg=messages.error(request,"Connection Error Try Again")
             return HttpResponseRedirect(reverse("student_singup"))
