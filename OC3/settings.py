@@ -239,6 +239,7 @@ EMAIL_HOST_USER = 'intellecttec@gmail.com'
 EMAIL_HOST_PASSWORD = 'Aot567@lk'
 EMAIL_PORT = 587
 
+
 django_heroku.settings(locals())
 
 #Payu Setup
