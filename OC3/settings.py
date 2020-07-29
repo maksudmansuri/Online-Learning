@@ -33,7 +33,7 @@ DEBUG = True
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aptechlearning.herokuapp.com']
 
 
 # Application definition
