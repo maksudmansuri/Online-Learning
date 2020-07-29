@@ -121,9 +121,9 @@ def student_singup(request):
             # if e.user_type==3:
             #     msg=messages.error(request,"Email Already Exits")
             #     return HttpResponseRedirect(reverse("student_singup"))
-            else:
-                msg=messages.error(request,"Register With different Role")
-                return HttpResponseRedirect(reverse("student_singup"))
+            # else:
+            msg=messages.error(request,"Register With different Role")
+            return HttpResponseRedirect(reverse("student_singup"))
 
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
