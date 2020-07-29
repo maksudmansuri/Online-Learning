@@ -26,12 +26,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'tchv)$j0)3m9_xcro$jr1kvqp5^^2rrd&r5d3s&9hsepz-8)^$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
 DEBUG = False
+# config('DEBUG', default=False, cast=bool)
 # DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 # #only for training/testing 
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# else:
 
 ALLOWED_HOSTS = []
 
@@ -236,8 +238,9 @@ SIMPLE_EMAIL_CONFIRMATION_PERIOD = timedelta(days=EMAIL_CONFIRMATION_PERIOD_DAYS
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'intellecttec@gmail.com'
-EMAIL_HOST_PASSWORD = 'Aot567@lk'
+EMAIL_HOST_PASSWORD = 'wiadobctirrpgkdu'
 EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'uniQue uPgrade Team<noreply@uniqueupgrade.in>'
 
 django_heroku.settings(locals())
 
