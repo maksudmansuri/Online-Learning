@@ -31,6 +31,7 @@ def dologin(request):
     #check user is authenticate or not
         user=EmailBackEnd.authenticate(request,username=request.POST.get("email"),password=request.POST.get("password"))
         if user is not None:
+            user.is_active=True
             if user.is_active == True:
                 login(request,user)
                 # request.session['logged in']=True

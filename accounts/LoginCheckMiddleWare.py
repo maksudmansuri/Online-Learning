@@ -47,6 +47,8 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                     pass
                 elif  modulename == "chat.views":
                     pass
+                elif  modulename == "front.api.views":
+                    pass
                 else:
                     return HttpResponseRedirect(reverse("student_dashboard"))
             # elif user.user_type=="4":
