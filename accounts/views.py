@@ -110,20 +110,20 @@ def instructor_singup(request):
 def student_singup(request): 
     if request.method=="POST":
         username=request.POST.get('username')
-        r=CustomUser.objects.filter(username=username)
-        if r.count():
-            msg=messages.error(request,"Username  Already Exits")
-            return HttpResponseRedirect(reverse("student_singup"))
+        # r=CustomUser.objects.filter(username=username)
+        # if r.count():
+        #     msg=messages.error(request,"Username  Already Exits")
+        #     return HttpResponseRedirect(reverse("student_singup"))
 
         email = request.POST.get('email')
-        e=CustomUser.objects.filter(email=email)
-        if e.count():
-            if e.user_type==3:
-                msg=messages.error(request,"Email Already Exits")
-                return HttpResponseRedirect(reverse("student_singup"))
-            else:
-                msg=messages.error(request,"Register With different Role")
-                return HttpResponseRedirect(reverse("student_singup"))
+        # e=CustomUser.objects.filter(email=email)
+        # if e.count():
+        #     if e.user_type==3:
+        #         msg=messages.error(request,"Email Already Exits")
+        #         return HttpResponseRedirect(reverse("student_singup"))
+        #     else:
+        #         msg=messages.error(request,"Register With different Role")
+        #         return HttpResponseRedirect(reverse("student_singup"))
 
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
@@ -132,7 +132,7 @@ def student_singup(request):
             return HttpResponseRedirect(reverse("student_singup"))
         try:
             user=CustomUser.objects.create_user(username=username,password=password1,email=email,user_type=3)
-            user.is_active=False
+            # user.is_active=False
             user.save()
             current_site=get_current_site(request)
             email_subject='Active your Account',
