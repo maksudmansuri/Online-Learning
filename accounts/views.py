@@ -132,7 +132,7 @@ def student_singup(request):
             return HttpResponseRedirect(reverse("student_singup"))
         try:
             user=CustomUser.objects.create_user(username=username,password=password1,email=email,user_type=3)
-            user.is_active=False
+            user.is_active=True
             user.save()
             current_site=get_current_site(request)
             email_subject='Active your Account',
