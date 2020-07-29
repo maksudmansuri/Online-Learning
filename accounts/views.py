@@ -31,23 +31,23 @@ def dologin(request):
     #check user is authenticate or not
         user=EmailBackEnd.authenticate(request,username=request.POST.get("email"),password=request.POST.get("password"))
         if user is not None:
-            if user.is_active == True:
-                login(request,user)
-                # request.session['logged in']=True
-                if user.user_type=="1":
-                    return redirect("/counsellor")
-                elif user.user_type=="2":
-                    return redirect("/instructor_lms")
-                elif user.user_type=="3":
-                    if 'next' in request.POST:
-                        return redirect(request.POST.get('next'))
-                    else:
-                        return redirect("/student_lms")
+            # if user.is_active == True:
+            login(request,user)
+            # request.session['logged in']=True
+            if user.user_type=="1":
+                return redirect("/counsellor")
+            elif user.user_type=="2":
+                return redirect("/instructor_lms")
+            elif user.user_type=="3":
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
                 else:
-                    return redirect("/admin")
+                    return redirect("/student_lms")
             else:
-                messages.add_message(request,messages.ERROR,"Please Verify Your Account First")
-                return redirect('/accounts/dologin')
+                return redirect("/admin")
+            # else:
+            #     messages.add_message(request,messages.ERROR,"Please Verify Your Account First")
+            #     return redirect('/accounts/dologin')
         else:
             messages.add_message(request,messages.ERROR,"User Not Found Register First")
             return redirect("dologin")
@@ -132,7 +132,7 @@ def student_singup(request):
             return HttpResponseRedirect(reverse("student_singup"))
         try:
             user=CustomUser.objects.create_user(username=username,password=password1,email=email,user_type=3)
-            user.is_active=False
+            # user.is_active=False
             user.save()
             current_site=get_current_site(request)
             email_subject='Active your Account',
