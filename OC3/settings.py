@@ -239,7 +239,7 @@ SIMPLE_EMAIL_CONFIRMATION_PERIOD = timedelta(days=EMAIL_CONFIRMATION_PERIOD_DAYS
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'intellecttec@gmail.com'
-EMAIL_HOST_PASSWORD = 'wiadobctirrpgkdu'
+EMAIL_HOST_PASSWORD = 'Aot567@lk'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = 'uniQue uPgrade Team<noreply@uniqueupgrade.in>'
 
