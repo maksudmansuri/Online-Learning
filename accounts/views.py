@@ -118,12 +118,12 @@ def student_singup(request):
         email = request.POST.get('email')
         e=CustomUser.objects.filter(email=email)
         if e.count():
-            if e.user_type==3:
-                msg=messages.error(request,"Email Already Exits")
-                return HttpResponseRedirect(reverse("student_singup"))
-            else:
-                msg=messages.error(request,"Register With different Role")
-                return HttpResponseRedirect(reverse("student_singup"))
+            # if e.user_type==3:
+            msg=messages.error(request,"Email Already Exits")
+            return HttpResponseRedirect(reverse("dologin"))
+            # else:
+            #     msg=messages.error(request,"Register With different Role")
+            #     return HttpResponseRedirect(reverse("student_singup"))
 
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
