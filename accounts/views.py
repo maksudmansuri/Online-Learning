@@ -31,7 +31,6 @@ def dologin(request):
     #check user is authenticate or not
         user=EmailBackEnd.authenticate(request,username=request.POST.get("email"),password=request.POST.get("password"))
         if user is not None:
-            user.is_active=True
             if user.is_active == True:
                 login(request,user)
                 # request.session['logged in']=True
@@ -133,7 +132,7 @@ def student_singup(request):
             return HttpResponseRedirect(reverse("student_singup"))
         try:
             user=CustomUser.objects.create_user(username=username,password=password1,email=email,user_type=3)
-            # user.is_active=False
+            user.is_active=False
             user.save()
             current_site=get_current_site(request)
             email_subject='Active your Account',
@@ -156,7 +155,7 @@ def student_singup(request):
             msg=messages.success(request,"Sucessfully Singup check you emial for verification")
             return HttpResponseRedirect(reverse("dologin"))
         except:
-            msg=messages.error(request,"Connection Error Try Again 2")
+            msg=messages.error(request,"Connection Error Try Again")
             return HttpResponseRedirect(reverse("student_singup"))
     return render(request,"accounts/student_singup.html")
 
