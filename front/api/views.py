@@ -123,7 +123,7 @@ def api_create_course_view(request):
 		data = request.data
 		data['teacher'] = Staffs.objects.get(admin=request.user).pk
 		data['course_category'] = CourseCategory.objects.get(id=1).pk
-		data['course_subcategory'] = CourseSubCategory.objects.get(id=2).pk
+		data['course_subcategory'] = CourseSubCategory.objects.get(id=1).pk
 		print(data)
 		serializer = CourseDetailCreateSerializer(data=data)
 
