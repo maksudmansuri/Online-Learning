@@ -29,7 +29,7 @@ urlpatterns = [
     path('instructor_lms/', include("instructor_lms.urls")),
     path('counsellor/', include("counsellor.urls")),
     path('accounts/', include("accounts.urls")),
-    path('accounts/', include("django.contrib.auth.urls")),
+    path('account/', include("django.contrib.auth.urls")),
 
     #Rest Framework Urls
     path('api/front/',include("front.api.urls")),

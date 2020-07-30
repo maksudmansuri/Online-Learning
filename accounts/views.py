@@ -160,23 +160,13 @@ def student_singup(request):
     return render(request,"accounts/student_singup.html")
 
 def counsellor_singup(request):
-    # if request.session.has_key('logged in'):
-    #     if request.user.user_type=="1":
-    #         return redirect("/counsellor")
-    #     elif request.user.user_type=="2":
-    #         return redirect("/instructor_lms")
-    #     elif request.user.user_type=="3":
-    #         return redirect("/student_lms")
-    #     elif request.user.user_type=="4":
-    #         return redirect("/admin")
-    # else: 
     if request.method=="POST":
         username=request.POST.get('username')
         email=request.POST.get('email')
         password=request.POST.get('password1')
         try: 
             user=CustomUser.objects.create_user(username=username,password=password,email=email,user_type=1)
-            user.is_active=False
+            user.is_active=True
             user.save()
             current_site=get_current_site(request)
             email_subject='Active your Account',
@@ -199,7 +189,7 @@ def counsellor_singup(request):
             return HttpResponseRedirect(reverse("dologin"))
         except:
             msg=messages.error(request,"Connection Error Try Again")
-            return HttpResponseRedirect(reverse("student_singup"))
+            return HttpResponseRedirect(reverse("counsellor_singup"))
     return render(request,"accounts/counsellor_singup.html")
 
 def selection(request):
