@@ -74,7 +74,7 @@ def api_update_course_view(request,slug):
 			data['username'] = crs.teacher.admin.username
 			return Response(data=data)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+ 
 
 @api_view(['GET',])
 @permission_classes((IsAuthenticated,))

@@ -28,7 +28,7 @@ class CourseDatailSerializer(serializers.ModelSerializer):
 
     class Meta: 
         model = Course 
-        fields = ['course_name','course_fee','course_duration','course_level','course_slug','username','course_image',]
+        fields = ['pk','course_name','course_category','course_subcategory','course_video','course_requirement','course_desc','course_why_take','course_slug','course_level','course_image','course_duration','course_duration','course_fee','teacher']
 
     def get_username_from_staffs(self,Course):
         username = Course.teacher.admin.username
@@ -40,7 +40,7 @@ class CourseDatailSerializer(serializers.ModelSerializer):
         if "?" in new_url:
             new_url = crs_imge.url[:crs_imge.url.rfind("?")]
         return new_url
-
+  
 
 class CourseDetailUpdateSerializer(serializers.ModelSerializer):
 
