@@ -28,7 +28,7 @@ class CourseDatailSerializer(serializers.ModelSerializer):
 
     class Meta: 
         model = Course 
-        fields = ['pk','course_name','course_category','course_subcategory','course_video','course_requirement','course_desc','course_why_take','course_slug','course_level','course_image','course_duration','course_duration','course_fee','teacher']
+        fields = ['pk','course_name','course_category','course_subcategory','course_video','course_requirement','course_desc','course_why_take','course_slug','course_level','course_image','course_duration','course_duration','course_fee','username']
 
     def get_username_from_staffs(self,Course):
         username = Course.teacher.admin.username
