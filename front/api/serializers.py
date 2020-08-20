@@ -42,6 +42,26 @@ class CourseDatailSerializer(serializers.ModelSerializer):
         return new_url
   
 
+class CourseModuleDatailSerializer(serializers.ModelSerializer):
+    # username = serializers.SerializerMethodField('get_username_from_staffs')
+    # # course_image = serializers.SerializerMethodField('validate_course_image_url')
+    class Meta: 
+        model = Course_Modules
+        fields = ['pk','course','module','module_desc','slug','position','created_date']
+		
+
+    # def get_username_from_staffs(self,Course):
+    #     username = Course.teacher.admin.username
+    #     return username
+
+    # def validate_course_image_url(self, Course):
+    #     crs_imge = Course.course_image
+    #     new_url = crs_imge.url
+    #     if "?" in new_url:
+    #         new_url = crs_imge.url[:crs_imge.url.rfind("?")]
+    #     return new_url
+  
+
 class CourseDetailUpdateSerializer(serializers.ModelSerializer):
 
 	class Meta:
@@ -88,7 +108,7 @@ class CourseDetailCreateSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Course
 		fields = ['course_name','course_fee','course_duration','course_level','course_desc','teacher','course_image','course_category','course_subcategory']
-
+                                                                                                                                         
 	def save(self):
 		
 		try:

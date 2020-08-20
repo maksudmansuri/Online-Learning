@@ -12,13 +12,14 @@ from rest_framework.response import Response
 
 from accounts.models import CustomUser,AdminHOD,Staffs,Students
 from front.models import Course,Course_Modules,Course_Session,CourseCategory,CourseSubCategory,viewed
-from front.api.serializers import CourseDatailSerializer,CourseDetailUpdateSerializer,CourseDetailCreateSerializer
+from front.api.serializers import CourseDatailSerializer,CourseDetailUpdateSerializer,CourseDetailCreateSerializer,CourseModuleDatailSerializer
 
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authentication import SessionAuthentication
 
 from rest_framework.filters import SearchFilter,OrderingFilter
 
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 # from rest_framework.permissions import (
 # 	AllowAny,
@@ -158,3 +159,25 @@ class ApiCourseListView(ListAPIView):
 	pagination_class = PageNumberPagination
 	filter_backends = (SearchFilter,OrderingFilter)
 	search_fields = ('course_name','course_fee','course_level','teacher__admin__username')
+
+class ApiCourseModuleListView(generics.ListAPIView):
+	queryset = Course_Modules.objects.all()
+	serializer_class = CourseModuleDatailSerializer
+
+	def get(self,request,*args,**kwargs):
+		# try:
+		crs_id = Course.objects.get(id=self.kwargs.get('id'))
+		mdl = self.queryset.filter(course=crs_id)
+		response_data = self.get_serializer(mdl,many=True)
+		return Response(
+			{
+				"data" : response_data.data
+			}
+		)
+		# except Course.DoesNotExist:
+		# 	raise serializers.V ValidationError(_("Course Does not Exist"))
+	authentication_classes = (TokenAuthentication,)
+	permission_classes = (IsAuthenticated,)
+	pagination_class = PageNumberPagination
+	
+
