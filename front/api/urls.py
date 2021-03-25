@@ -6,6 +6,7 @@ from rest_framework.authtoken import views as authviews
 
 urlpatterns = [
     path('<slug>/',views.api_detail_course_view,name="detail"),
+    path('module/<id>/',views.ApiCourseModuleListView.as_view(),name="moduleslist"),
     path('create',views.api_create_course_view,name="create"),
     path('<slug>/delete',views.api_delete_course_view,name="delete"),
     path('<slug>/update',views.api_update_course_view,name="update"),

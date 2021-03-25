@@ -78,7 +78,7 @@ def instructor_singup(request):
 
         try:
             user=CustomUser.objects.create_user(username=username,password=password1,email=email,user_type=2)
-            user.is_active=False
+            user.is_active=True
             user.save()
             current_site=get_current_site(request)
             email_subject='Active your Account',
@@ -110,20 +110,20 @@ def instructor_singup(request):
 def student_singup(request): 
     if request.method=="POST":
         username=request.POST.get('username')
-        # r=CustomUser.objects.filter(username=username)
-        # if r.count():
-        #     msg=messages.error(request,"Username  Already Exits")
-        #     return HttpResponseRedirect(reverse("student_singup"))
+        r=CustomUser.objects.filter(username=username)
+        if r.count():
+            msg=messages.error(request,"Username  Already Exits")
+            return HttpResponseRedirect(reverse("student_singup"))
 
         email = request.POST.get('email')
-        # e=CustomUser.objects.filter(email=email)
-        # if e.count():
-        #     if e.user_type==3:
-        #         msg=messages.error(request,"Email Already Exits")
-        #         return HttpResponseRedirect(reverse("student_singup"))
-        #     else:
-        #         msg=messages.error(request,"Register With different Role")
-        #         return HttpResponseRedirect(reverse("student_singup"))
+        e=CustomUser.objects.filter(email=email)
+        if e.count():
+            if e.user_type==3:
+                msg=messages.error(request,"Email Already Exits")
+                return HttpResponseRedirect(reverse("student_singup"))
+            else:
+                msg=messages.error(request,"Register With different Role")
+                return HttpResponseRedirect(reverse("student_singup"))
 
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
@@ -132,7 +132,7 @@ def student_singup(request):
             return HttpResponseRedirect(reverse("student_singup"))
         try:
             user=CustomUser.objects.create_user(username=username,password=password1,email=email,user_type=3)
-            # user.is_active=False
+            user.is_active=True
             user.save()
             current_site=get_current_site(request)
             email_subject='Active your Account',
@@ -160,23 +160,13 @@ def student_singup(request):
     return render(request,"accounts/student_singup.html")
 
 def counsellor_singup(request):
-    # if request.session.has_key('logged in'):
-    #     if request.user.user_type=="1":
-    #         return redirect("/counsellor")
-    #     elif request.user.user_type=="2":
-    #         return redirect("/instructor_lms")
-    #     elif request.user.user_type=="3":
-    #         return redirect("/student_lms")
-    #     elif request.user.user_type=="4":
-    #         return redirect("/admin")
-    # else: 
     if request.method=="POST":
         username=request.POST.get('username')
         email=request.POST.get('email')
         password=request.POST.get('password1')
         try: 
             user=CustomUser.objects.create_user(username=username,password=password,email=email,user_type=1)
-            user.is_active=False
+            user.is_active=True
             user.save()
             current_site=get_current_site(request)
             email_subject='Active your Account',
@@ -199,7 +189,7 @@ def counsellor_singup(request):
             return HttpResponseRedirect(reverse("dologin"))
         except:
             msg=messages.error(request,"Connection Error Try Again")
-            return HttpResponseRedirect(reverse("student_singup"))
+            return HttpResponseRedirect(reverse("counsellor_singup"))
     return render(request,"accounts/counsellor_singup.html")
 
 def selection(request):

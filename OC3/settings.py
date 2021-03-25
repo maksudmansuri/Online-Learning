@@ -26,14 +26,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'tchv)$j0)3m9_xcro$jr1kvqp5^^2rrd&r5d3s&9hsepz-8)^$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+# DEBUG = False
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 #only for training/testing 
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-ALLOWED_HOSTS = ['aptechlearning.herokuapp.com']
+ALLOWED_HOSTS = ['aptechlearning.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -171,6 +170,8 @@ DATABASES = {
         'PORT':'3306'
     }
 }
+db_frome_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_frome_env)
 
 
 # Password validation
@@ -212,7 +213,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = '/static/'
 
-#Manualy Added
+# Manualy Added
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
