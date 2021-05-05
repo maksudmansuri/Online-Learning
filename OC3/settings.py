@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'simple_email_confirmation',
     'moviepy',
     'django.contrib.humanize',
-    'channels',
+    # 'channels',
     'chat',
     'rest_framework',
     'rest_framework.authtoken',
@@ -163,9 +163,9 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE':'django.db.backends.mysql',
-        'NAME':'online_course',
-        'USER':'online_course',
-        'PASSWORD':'online_course_password',
+        'NAME':'octoecommrce',
+        'USER':'root',
+        'PASSWORD':'Aot567@lk',
         'HOST':'localhost',
         'PORT':'3306'
     }
@@ -241,6 +241,7 @@ EMAIL_HOST_USER = 'intellecttec@gmail.com'
 EMAIL_HOST_PASSWORD = 'Aot567@lk'
 EMAIL_PORT = 587
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_heroku.settings(locals())
 

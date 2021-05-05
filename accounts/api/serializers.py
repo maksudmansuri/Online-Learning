@@ -19,11 +19,11 @@ from django.utils.encoding import force_bytes,force_text,DjangoUnicodeDecodeErro
 
 class RegistrationSerializer(serializers.ModelSerializer):
 
-	password2 				= serializers.CharField(style={'input_type': 'password'}, write_only=True)
+	# password2 				= serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
 	class Meta:
 		model = CustomUser
-		fields = ['email', 'username', 'password', 'password2']
+		fields = ['email', 'username', 'password', 'phone']
 		extra_kwargs = {
 				'password': {'write_only': True},
 		}	
@@ -32,13 +32,13 @@ class RegistrationSerializer(serializers.ModelSerializer):
 	def	save(self,request):
 		username = self.validated_data['username']
 		password = self.validated_data['password']
-		password_2 = self.validated_data['password2']
+		phone = self.validated_data['phone']
 		email = self.validated_data['email']
 		user_type = "3"
-		if password != password_2:
-			raise serializers.ValidationError({'password':'password does not match'})
-		account = CustomUser.objects.create_user(username=username,password=password,email=email,user_type=3)
-		account.is_active = False
+		# if password != password_2:
+		# 	raise serializers.ValidationError({'password':'password does not match'})
+		account = CustomUser.objects.create_user(username=username,password=password,phone=phone,email=email,user_type=3)
+		account.is_active = True
 		account.save()
 		current_site=get_current_site(request)
 		# current_site="127.0.0.1:8000"

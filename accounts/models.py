@@ -5,6 +5,8 @@ from django.dispatch import receiver
 from ckeditor_uploader.fields import RichTextUploadingField
 from rest_framework.authtoken.models import Token
 from django.conf import settings
+from django.core.validators import RegexValidator
+from django.db.models import Q
 # Create your models here.
 
 # class CustomUser(AbstractUser): 
@@ -12,7 +14,7 @@ from django.conf import settings
 #     user_type=models.CharField(choices=user_type_data,max_length=10)
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, email, username,user_type, password=None):
+    def create_user(self, email, username,phone,user_type, password=None):
         if not email:
             raise ValueError("User must have an Email Address")
         if not username:
@@ -21,7 +23,8 @@ class MyAccountManager(BaseUserManager):
         user = self.model(
                 email=self.normalize_email(email),
                 username=username,
-                user_type = user_type
+                user_type = user_type,
+                phone=phone
             )
         user.set_password(password)
         user.save(using=self._db)
@@ -32,6 +35,7 @@ class MyAccountManager(BaseUserManager):
                 email=self.normalize_email(email),
                 password=password,
                 username=username,
+                
             )
         # user.is_admin = True
         user.is_staff = True
@@ -53,8 +57,11 @@ class CustomUser(AbstractBaseUser):
     last_name = models.CharField(max_length=254)
     user_type_data=((1,"HOD"),(2,"Staff"),(3,"Student"))
     user_type=models.CharField(choices=user_type_data,max_length=10)
-
+    phone_regex     = RegexValidator( regex = r'^\+?1?\d{9,10}$', message ="Phone number must be entered in the format +919999999999. Up to 10 digits allowed.")
+    phone           = models.CharField('Phone',validators =[phone_regex], max_length=10, unique = True,null=True)
+    
     USERNAME_FIELD = 'email'
+
     REQUIRED_FIELDS = ['username',]
 
     objects = MyAccountManager()
@@ -67,6 +74,26 @@ class CustomUser(AbstractBaseUser):
 
     def has_module_perms(self,app_label):
         return True    
+
+
+class PhoneOTP(models.Model):
+    
+    # id=models.AutoField(primary_key=True)
+    # admin=models.OneToOneField(CustomUser,on_delete=models.CASCADE)
+    phone_regex     = RegexValidator( regex = r'^\+?1?\d{9,10}$', message ="Phone number must be entered in the format +919999999999. Up to 14 digits allowed.")
+    phone           = models.CharField(validators =[phone_regex], max_length=17, unique = True)
+    otp             = models.CharField(max_length=9, blank = True, null=True)
+    count           = models.IntegerField(default=0, help_text = 'Number of otp_sent')
+    validated       = models.BooleanField(default = False, help_text = 'If it is true, that means user have validate otp correctly in second API')
+    otp_session_id  = models.CharField(max_length=120, null=True, default = "")
+    username        = models.CharField(max_length=20, blank = True, null = True, default = None )
+    email           = models.CharField(max_length=50, null = True, blank = True, default = None) 
+    password        = models.CharField(max_length=100, null = True, blank = True, default = None) 
+
+    
+
+    def __str__(self):
+        return str(self.phone) + ' is sent ' + str(self.otp)   
 
 class AdminHOD(models.Model):
     id=models.AutoField(primary_key=True)
