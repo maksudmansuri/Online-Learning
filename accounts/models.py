@@ -35,9 +35,12 @@ class MyAccountManager(BaseUserManager):
                 email=self.normalize_email(email),
                 password=password,
                 username=username,
+                user_type="0",
+                phone = "7801925101"
                 
             )
-        # user.is_admin = True
+        user.is_active = Tsrue
+        user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)

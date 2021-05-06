@@ -29,7 +29,7 @@ def dologin(request):
     # print(request.user)
     if request.method == "POST":
     #check user is authenticate or not
-        user=EmailBackEnd.authenticate(request,username=request.POST.get("email"),password=request.POST.get("password"))
+        user=EmailBackEnd.authenticate(request,username=request.POST.get("username"),password=request.POST.get("password"))
         if user is not None:
             if user.is_active == True:
                 login(request,user)
